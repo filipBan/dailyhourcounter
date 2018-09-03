@@ -60,7 +60,9 @@ class DailyForm extends Component {
       savingData,
       saveHoursAndBreaksToFirebase,
       today,
-      handleCalendarChange
+      handleCalendarChange,
+      resetDailyData,
+      uid
     } = this.props;
 
     if (!this.props.auth.isLoggedIn) {
@@ -128,6 +130,18 @@ class DailyForm extends Component {
                 />
               </div>
             </div>
+            {/* <div className="save-button-container"> */}
+            <Button
+              secondary={savingData}
+              size="medium"
+              primary
+              onClick={() => resetDailyData({ workStart, uid })}
+              loading={savingData}
+              secondary
+            >
+              RESET
+            </Button>
+            {/* </div> */}
           </Segment>
           <Segment raised size="huge" textAlign="center">
             Total hours:{" "}

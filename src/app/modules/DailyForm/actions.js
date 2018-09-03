@@ -15,6 +15,20 @@ export const ERROR_SAVING_DAY_DATA = "ERROR_SAVING_DAY_DATA";
 
 export const TOGGLE_CALENDAR = "TOGGLE_CALENDAR";
 
+export const RESET_DAY_DATA = "RESET_DAY_DATA";
+
+export const resetDailyData = ({ workStart, uid }) => async dispatch => {
+  const today = moment();
+  const year = workStart ? workStart.format("YYYY") : today.format("YYYY");
+  const month = workStart ? workStart.format("M") : today.format("M");
+  const day = workStart ? workStart.format("D") : today.format("D");
+  const result = await firebase
+    .database()
+    .ref(`dates/${uid}/${year}/${month}/${day}`)
+    .remove();
+  return dispatch({ type: RESET_DAY_DATA });
+};
+
 export const updateHours = (timeType, amount) => ({
   type: UPDATE_HOURS,
   timeType,

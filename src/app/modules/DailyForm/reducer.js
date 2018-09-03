@@ -9,6 +9,7 @@ import {
   SET_TODAY_DATE,
   CLEAR_ALL_TIMES,
   REPLACE_DAY_DATA,
+  RESET_DAY_DATA,
   calculateTimeWorked,
   calculateTotalBreaks
 } from "./actions";
@@ -105,6 +106,9 @@ const today = (state = initialState, action) => {
           ? moment.unix(action.payload.workStart)
           : null
       };
+
+    case RESET_DAY_DATA:
+      return initialState;
     default:
       return state;
   }
