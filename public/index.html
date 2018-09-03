@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#89cff0">
+  <meta name="Description" content="Daily hour counter">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon" sizes="152x152" href="icons/152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="icons/167.png">
+  <link rel="apple-touch-icon" href="icons/180.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-startup-image" href="https://firebasestorage.googleapis.com/v0/b/dailyhourcounter.appspot.com/o/iphone-7.png?alt=media&token=abe217f9-09f4-40f6-b3d0-6fbb13c45241"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <title>Daily Hour Counter</title>
+  <style>
+    body {
+      overscroll-behavior-y: none;
+    }
+
+    .main-app {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    ul,
+    menu,
+    dir {
+      display: block;
+      list-style-type: disc;
+      -webkit-margin-before: 0px;
+      -webkit-margin-after: 0px;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 0px;
+    }
+
+    .login-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #89cff0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+      width: 80%;
+      background: #fff;
+      border-radius: 5px;
+      border: 1px solid #dedede;
+      -webkit-box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+      /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+      -moz-box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+      /* Firefox 3.5 - 3.6 */
+      box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-button {
+      width: 150px;
+      height: 35px;
+      background-color: #555;
+    }
+
+    .login-button-container {
+      background-color: azure;
+      width: 200px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
+</head>
+
+<body>
+  <noscript>
+    <div>This app requires JavaScript</div>
+  </noscript>
+  <div id="root">
+  </div>
+</body>
+
+</html>
