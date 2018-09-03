@@ -9,6 +9,7 @@ import TimePicker from "../../components/TimePicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
 
+// TODO - split this component up, it's too big
 class DailyForm extends Component {
   state = {
     isOpen: false
@@ -130,18 +131,18 @@ class DailyForm extends Component {
                 />
               </div>
             </div>
-            {/* <div className="save-button-container"> */}
-            <Button
-              secondary={savingData}
-              size="medium"
-              primary
-              onClick={() => resetDailyData({ workStart, uid })}
-              loading={savingData}
-              secondary
-            >
-              RESET
-            </Button>
-            {/* </div> */}
+            <div className="reset-button-container">
+              <Button
+                secondary={savingData}
+                size="medium"
+                primary
+                onClick={() => resetDailyData({ workStart, uid })}
+                loading={savingData}
+                secondary
+              >
+                RESET
+              </Button>
+            </div>
           </Segment>
           <Segment raised size="huge" textAlign="center">
             Total hours:{" "}

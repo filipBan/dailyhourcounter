@@ -64,11 +64,15 @@
   justify-content: space-between;
 }
 
+.reset-button-container,
 .save-button-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.save-button-container {
   padding: 10px 10px 0 10px;
 }
 
