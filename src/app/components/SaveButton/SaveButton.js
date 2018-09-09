@@ -14,6 +14,7 @@ function SaveButton(props) {
         onClick={() => props.saveHoursAndBreaksToFirebase()}
         loading={props.savingData}
         toggle
+        disabled={props.disabled}
       >
         SAVE
       </Button>

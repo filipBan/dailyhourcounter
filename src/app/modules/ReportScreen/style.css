@@ -39,8 +39,11 @@
 
 .report-summary {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.report-summary span:first-child {
+  font-size: 18px;
 }

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Button, Segment } from "semantic-ui-react";
+import { Button, Segment, Table } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
-import moment from "moment";
 import "moment/locale/en-gb";
 
 import SaveButton from "../../components/SaveButton";
@@ -35,12 +34,16 @@ class ReportScreen extends Component {
   calculateReportSummary = reportData => {
     if (reportData) {
       const totalHours = reportData
-        .map(day => day.hours)
+        .map(day => (day ? day.hours : 0))
         .reduce((a, b) => a + b, 0);
+
       const totalBreaks = reportData
-        .map(day => day.breaks)
+        .map(day => (day ? day.breaks : 0))
         .reduce((a, b) => a + b, 0);
+
       const hoursPayable = totalHours - totalBreaks;
+      const toBePaid = reportData.map(day => {});
+
       return { totalHours, totalBreaks, hoursPayable };
     }
   };
@@ -88,6 +91,7 @@ class ReportScreen extends Component {
                 color="blue"
                 className="custom-input"
                 onClick={() => this.toggleDatePicker("end")}
+                disabled={!reportStartDate}
               >
                 {reportEndDate ? reportEndDate.format("D/M/YYYY") : "End"}
               </Button>
@@ -97,6 +101,7 @@ class ReportScreen extends Component {
                   inline
                   onChange={date => this.changeDate("end", date)}
                   locale="en-gb"
+                  minDate={reportStartDate}
                 />
               )}
             </div>
@@ -112,19 +117,28 @@ class ReportScreen extends Component {
         </div>
 
         <div className="report-summary-container">
-          {reportData && (
-            <Segment className="report-summary">
-              <span>
-                From {reportStartDate.format("D/MM/YYYY")} until{" "}
-                {reportEndDate.format("D/MM/YYYY")}
-              </span>
-              <span>Hours worked: {reportSummary.totalHours}</span>
-              <span>Breaks: {reportSummary.totalHours}</span>
-              <span>Total hours: {reportSummary.hoursPayable}</span>
-            </Segment>
-          )}
+          <Segment className="report-summary">
+            {reportData && (
+              <Table celled singleLine>
+                <Table.Body>
+                  <Table.Row>
+                    <Table.Cell>Hours worked</Table.Cell>
+                    <Table.Cell>{reportSummary.totalHours}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Breaks</Table.Cell>
+                    <Table.Cell>{reportSummary.totalBreaks}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Total hours</Table.Cell>
+                    <Table.Cell>{reportSummary.hoursPayable}</Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              </Table>
+            )}
+          </Segment>
         </div>
-        <SaveButton />
+        <SaveButton disabled />
       </div>
     );
   }
