@@ -11,7 +11,7 @@ function SaveButton(props) {
         fluid
         size="huge"
         primary
-        onClick={() => props.saveHoursAndBreaksToFirebase()}
+        onClick={() => props.onClick()}
         loading={props.savingData}
         toggle
         disabled={props.disabled}
