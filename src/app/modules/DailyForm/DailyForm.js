@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { Button, Segment, Divider } from "semantic-ui-react";
 
 import TimePicker from "../../components/TimePicker";
+import SaveButton from "../../components/SaveButton";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
@@ -147,23 +148,16 @@ class DailyForm extends Component {
           <Segment raised size="huge" textAlign="center">
             Total hours:{" "}
             {timeWorked > 0 && (
-              <span> {(timeWorked - totalBreaks).toFixed(1)}</span>
+              <span> {(timeWorked - totalBreaks).toFixed(2)}</span>
             )}
           </Segment>
         </div>
-        <div className="save-button-container">
-          <Button
-            secondary={savingData}
-            fluid
-            size="huge"
-            primary
-            onClick={() => saveHoursAndBreaksToFirebase(this.props)}
-            loading={savingData}
-            toggle
-          >
-            SAVE
-          </Button>
-        </div>
+        <SaveButton
+          saveHoursAndBreaksToFirebase={() =>
+            saveHoursAndBreaksToFirebase(this.props)
+          }
+          savingData={savingData}
+        />
       </div>
     );
   }

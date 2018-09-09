@@ -49,10 +49,10 @@ export const calculateTimeWorked = (workStart, workEnd) => {
   if (workEnd && workStart && workEnd.hour() < workStart.hour()) {
     const total = 24 - Math.abs(result);
     console.log("Hours", { total });
-    return parseFloat(total.toFixed(1));
+    return parseFloat(total.toFixed(2));
   } else if (workEnd && workStart && workEnd.hour() > workStart.hour()) {
     console.log("Hours", { result });
-    return parseFloat(result.toFixed(1));
+    return parseFloat(result.toFixed(2));
   }
 };
 

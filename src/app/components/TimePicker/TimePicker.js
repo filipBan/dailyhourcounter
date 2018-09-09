@@ -49,7 +49,7 @@ class TimePicker extends Component {
             onChange={this.handleChange}
             showTimeSelect
             showTimeSelectOnly
-            timeIntervals={30}
+            timeIntervals={15}
             dateFormat="LT"
             timeFormat="HH:mm"
             withPortal
@@ -59,6 +59,7 @@ class TimePicker extends Component {
             maxTime={maxTime || null}
             disabled={disabled}
             openToDate={moment(todayFormat)}
+            locale="en-gb"
           />
         )}
       </div>

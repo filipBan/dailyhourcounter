@@ -1,6 +1,7 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import { Icon } from "semantic-ui-react";
+import "moment/locale/en-gb";
 import "./style.css";
 
 const TopBar = ({
@@ -25,6 +26,7 @@ const TopBar = ({
           withPortal
           inline
           onChange={changeCalendarDate}
+          locale="en-gb"
         />
       )}
     </div>

@@ -2,7 +2,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ReportScreen from "./ReportScreen";
 
-import { changeStartDay, changeEndDay } from "./actions";
+import {
+  changeReportStartDay,
+  changeReportEndDay,
+  fetchDateRangeData
+} from "./actions";
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -10,8 +14,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeStartDay: date => dispatch(changeStartDay(date)),
-  changeEndDay: date => dispatch(changeEndDay(date))
+  changeReportStartDay: date => dispatch(changeReportStartDay(date)),
+  changeReportEndDay: date => dispatch(changeReportEndDay(date)),
+  fetchDateRangeData: (start, end, uid) =>
+    dispatch(fetchDateRangeData(start, end, uid))
 });
 
 export default withRouter(

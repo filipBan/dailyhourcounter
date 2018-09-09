@@ -49,7 +49,7 @@ const auth = (state = initialState, action) => {
     case REPLACE_DAY_DATA:
       return {
         ...state,
-        wages: action.payload.wages
+        wages: action.payload.wages || state.wages
       };
     default:
       return state;
