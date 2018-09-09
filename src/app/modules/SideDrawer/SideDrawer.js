@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import onClickOutside from "react-onclickoutside";
 import { Icon, Menu } from "semantic-ui-react";
-import { Link, Redirect } from "react-router-dom";
-
-import firebase from "../../../firebaseConfig";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 

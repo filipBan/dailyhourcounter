@@ -48,10 +48,8 @@ export const calculateTimeWorked = (workStart, workEnd) => {
 
   if (workEnd && workStart && workEnd.hour() < workStart.hour()) {
     const total = 24 - Math.abs(result);
-    console.log("Hours", { total });
     return parseFloat(total.toFixed(2));
   } else if (workEnd && workStart && workEnd.hour() > workStart.hour()) {
-    console.log("Hours", { result });
     return parseFloat(result.toFixed(2));
   }
 };
@@ -60,7 +58,6 @@ export const calculateTotalBreaks = (breakStart, breakEnd) => {
   if (breakEnd > breakStart) {
     const difference = moment.duration(breakEnd.diff(breakStart));
     const result = (difference.hours() * 60 + difference.minutes()) / 60;
-    console.log("Breaks: ", { result });
     return result;
   }
   return 0;
@@ -104,7 +101,6 @@ export const saveHoursAndBreaksToFirebase = dayData => async dispatch => {
         workEnd: endOfWork,
         workStart: startOfWork
       });
-    console.log(result);
     return dispatch({ type: FINISHED_SAVING_DAY_DATA });
   } catch (error) {
     console.log(error);

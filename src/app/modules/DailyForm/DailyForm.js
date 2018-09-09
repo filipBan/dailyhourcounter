@@ -134,12 +134,10 @@ class DailyForm extends Component {
             </div>
             <div className="reset-button-container">
               <Button
-                secondary={savingData}
+                secondary={!savingData}
                 size="medium"
-                primary
                 onClick={() => resetDailyData({ workStart, uid })}
                 loading={savingData}
-                secondary
               >
                 RESET
               </Button>

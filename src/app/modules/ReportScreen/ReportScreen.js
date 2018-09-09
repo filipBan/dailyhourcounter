@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Button, Segment, Table } from "semantic-ui-react";
+import { Button, Segment } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import "moment/locale/en-gb";
 
@@ -33,6 +33,7 @@ class ReportScreen extends Component {
 
   calculateReportSummary = reportData => {
     if (reportData) {
+      console.log(reportData);
       const totalHours = reportData
         .map(day => (day ? day.hours : 0))
         .reduce((a, b) => a + b, 0);
@@ -42,9 +43,11 @@ class ReportScreen extends Component {
         .reduce((a, b) => a + b, 0);
 
       const hoursPayable = totalHours - totalBreaks;
-      const toBePaid = reportData.map(day => {});
+      const toBePaid = reportData
+        .map(day => (day ? day.wages * hoursPayable : 0))
+        .reduce((a, b) => a + b, 0);
 
-      return { totalHours, totalBreaks, hoursPayable };
+      return { totalHours, totalBreaks, hoursPayable, toBePaid };
     }
   };
 
@@ -57,11 +60,7 @@ class ReportScreen extends Component {
     const { reportStartDate, reportEndDate, reportData } = this.props.reports;
     const { uid } = this.props.auth;
 
-    console.log(reportData);
-
     const reportSummary = this.calculateReportSummary(reportData);
-
-    console.log(reportSummary);
 
     return (
       <div className="report-screen-container">
@@ -119,22 +118,28 @@ class ReportScreen extends Component {
         <div className="report-summary-container">
           <Segment className="report-summary">
             {reportData && (
-              <Table celled singleLine>
-                <Table.Body>
-                  <Table.Row>
-                    <Table.Cell>Hours worked</Table.Cell>
-                    <Table.Cell>{reportSummary.totalHours}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Breaks</Table.Cell>
-                    <Table.Cell>{reportSummary.totalBreaks}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Total hours</Table.Cell>
-                    <Table.Cell>{reportSummary.hoursPayable}</Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              </Table>
+              <div className="table-container">
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <td>Hours worked</td>
+                      <td>{reportSummary.totalHours}</td>
+                    </tr>
+                    <tr>
+                      <td>Breaks</td>
+                      <td>{reportSummary.totalBreaks}</td>
+                    </tr>
+                    <tr>
+                      <td>Total hours</td>
+                      <td>{reportSummary.hoursPayable}</td>
+                    </tr>
+                    <tr>
+                      <td>To be paid</td>
+                      <td>£{reportSummary.toBePaid}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             )}
           </Segment>
         </div>

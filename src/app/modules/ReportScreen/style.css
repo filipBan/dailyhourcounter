@@ -47,3 +47,25 @@
 .report-summary span:first-child {
   font-size: 18px;
 }
+
+.table-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.table {
+  height: 100%;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.table > tbody > tr {
+  border: 1px solid #e8e8e8;
+}
+
+.table > tbody > tr > td {
+  padding-left: 10px;
+}
