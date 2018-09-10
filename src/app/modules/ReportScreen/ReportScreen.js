@@ -134,7 +134,7 @@ class ReportScreen extends Component {
                       <td>{reportSummary.hoursPayable}</td>
                     </tr>
                     <tr>
-                      <td>To be paid</td>
+                      <td>{`To be paid \n 10 asdaijh`}</td>
                       <td>£{reportSummary.toBePaid}</td>
                     </tr>
                   </tbody>

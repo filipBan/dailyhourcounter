@@ -8,8 +8,9 @@ export const updateWages = (wages, uid) => async dispatch => {
   try {
     await firebase
       .database()
-      .ref(`users/${uid}`)
-      .update({ wages: wages });
+      .ref(`users`)
+      .child(uid)
+      .update({ wages });
     dispatch({ type: UPDATE_WAGES, wages });
   } catch (err) {
     console.log(err);
