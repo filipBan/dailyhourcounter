@@ -37,3 +37,13 @@
 .side-menu-icon:focus {
   background-color: blueviolet !important;
 }
+
+.new-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: #1d7aca;
+}

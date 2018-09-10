@@ -151,9 +151,7 @@ class DailyForm extends Component {
           </Segment>
         </div>
         <SaveButton
-          saveHoursAndBreaksToFirebase={() =>
-            saveHoursAndBreaksToFirebase(this.props)
-          }
+          onClick={() => saveHoursAndBreaksToFirebase(this.props)}
           savingData={savingData}
         />
       </div>
