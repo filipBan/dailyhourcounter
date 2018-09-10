@@ -35,24 +35,12 @@ class SideDrawer extends Component {
             <Menu.Item className="side-menu-item">
               <Icon name="chart line" className="side-menu-icon" />
               Reports
-              <Icon
-                circular
-                color="blue"
-                name="exclamation"
-                className="new-icon"
-              />
             </Menu.Item>
           </Link>
           <Link to="/settings" onClick={toggleDrawer}>
             <Menu.Item className="side-menu-item">
               <Icon name="setting" className="side-menu-icon" />
               Settings
-              <Icon
-                circular
-                color="blue"
-                name="exclamation"
-                className="new-icon"
-              />
             </Menu.Item>
           </Link>
           <Menu.Item
