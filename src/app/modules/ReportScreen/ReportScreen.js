@@ -33,7 +33,6 @@ class ReportScreen extends Component {
 
   calculateReportSummary = reportData => {
     if (reportData) {
-      console.log(reportData);
       const totalHours = reportData
         .map(day => (day ? day.hours : 0))
         .reduce((a, b) => a + b, 0);
@@ -42,10 +41,16 @@ class ReportScreen extends Component {
         .map(day => (day ? day.breaks : 0))
         .reduce((a, b) => a + b, 0);
 
-      const hoursPayable = totalHours - totalBreaks;
       const toBePaid = reportData
-        .map(day => (day ? day.wages * hoursPayable : 0))
+        .map(day => {
+          if (day) {
+            return (day.hours - day.breaks) * day.wages;
+          }
+          return 0;
+        })
         .reduce((a, b) => a + b, 0);
+
+      const hoursPayable = totalHours - totalBreaks;
 
       return { totalHours, totalBreaks, hoursPayable, toBePaid };
     }
@@ -134,8 +139,8 @@ class ReportScreen extends Component {
                       <td>{reportSummary.hoursPayable}</td>
                     </tr>
                     <tr>
-                      <td>{`To be paid \n 10 asdaijh`}</td>
-                      <td>£{reportSummary.toBePaid}</td>
+                      <td>To be paid</td>
+                      <td>£{reportSummary.toBePaid.toFixed(2)}</td>
                     </tr>
                   </tbody>
                 </table>

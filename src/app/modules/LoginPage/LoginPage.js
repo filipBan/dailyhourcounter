@@ -16,7 +16,7 @@ class LoginPage extends Component {
 
   render() {
     if (this.props.auth.isLoggedIn) {
-      return <Redirect to="/settings" />;
+      return <Redirect to="/today" />;
     }
 
     const { email, password } = this.props;
