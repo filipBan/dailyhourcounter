@@ -34,8 +34,10 @@
   font-size: 160%;
   margin: 3px 0;
   padding: 20px 0 !important;
-  background-color: #ddd;
-  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #1d7aca;
+  border-radius: 5px;
+  color: #1d7aca;
 }
 
 .react-datepicker__time,

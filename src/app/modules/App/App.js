@@ -1,17 +1,35 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Loadable from "react-loadable";
 
 import SideDrawer from "../SideDrawer";
 import TopBar from "../TopBar";
 
-import DailyForm from "../DailyForm";
-import LoginPage from "../LoginPage";
-import ReportScreen from "../ReportScreen";
-import SettingsScreen from "../SettingsScreen";
 import firebase from "../../../firebaseConfig";
 
 import "./style.css";
 
+const DailyFormAsync = Loadable({
+  loader: () => import("../DailyForm"),
+  loading: () => <div>Loading...</div>
+});
+
+const LoginPageAsync = Loadable({
+  loader: () => import("../LoginPage"),
+  loading: () => <div>Loading...</div>
+});
+
+const ReportScreenAsync = Loadable({
+  loader: () => import("../ReportScreen"),
+  loading: () => <div>Loading...</div>
+});
+
+const SettingsScreenAsync = Loadable({
+  loader: () => import("../SettingsScreen"),
+  loading: () => <div>Loading...</div>
+});
+
+// const TopBarAsync
 class App extends Component {
   constructor() {
     super();
@@ -53,10 +71,10 @@ class App extends Component {
             changeCalendarDate={this.changeCalendarDate}
           />
           <Switch>
-            <Route exact path="/" component={LoginPage} />
-            <Route path="/today" component={DailyForm} />
-            <Route path="/reports" component={ReportScreen} />
-            <Route path="/settings" component={SettingsScreen} />
+            <Route exact path="/" component={LoginPageAsync} />
+            <Route path="/today" component={DailyFormAsync} />
+            <Route path="/reports" component={ReportScreenAsync} />
+            <Route path="/settings" component={SettingsScreenAsync} />
           </Switch>
         </div>
       </Router>
