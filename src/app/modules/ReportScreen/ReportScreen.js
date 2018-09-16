@@ -15,7 +15,6 @@ class ReportScreen extends Component {
   };
 
   toggleDatePicker = period => {
-    console.log("click", period);
     if (period === "start") {
       this.setState(({ isStartOpen }) => ({
         isStartOpen: !this.state.isStartOpen

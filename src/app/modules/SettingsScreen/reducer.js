@@ -14,7 +14,6 @@ const settings = (state = initialState, action) => {
       };
 
     case UPDATE_USER_DATA:
-      console.log(action);
       return {
         ...state,
         wages: action.user.wages

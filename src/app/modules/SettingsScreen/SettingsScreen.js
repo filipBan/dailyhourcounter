@@ -16,7 +16,6 @@ class SettingsScreen extends Component {
     const { uid } = this.props.auth;
     const { wages } = this.props.settings;
     const { updateWages } = this.props;
-    console.log("wages, uid", wages, uid);
     updateWages(wages, uid);
   };
 

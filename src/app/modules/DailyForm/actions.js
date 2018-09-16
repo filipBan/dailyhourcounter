@@ -63,7 +63,10 @@ export const calculateTotalBreaks = (breakStart, breakEnd) => {
   return 0;
 };
 
-export const saveHoursAndBreaksToFirebase = dayData => async dispatch => {
+export const saveHoursAndBreaksToFirebase = dayData => async (
+  dispatch,
+  getState
+) => {
   const {
     today,
     workStart,
@@ -76,6 +79,12 @@ export const saveHoursAndBreaksToFirebase = dayData => async dispatch => {
     uid
   } = dayData;
 
+  if (!workStart || !workEnd) {
+    return;
+  }
+
+  const currentWages = getState().settings.wages;
+
   const year = workStart ? workStart.format("YYYY") : today.format("YYYY");
   const month = workStart ? workStart.format("M") : today.format("M");
   const day = workStart ? workStart.format("D") : today.format("D");
@@ -83,7 +92,7 @@ export const saveHoursAndBreaksToFirebase = dayData => async dispatch => {
   const endOfBreak = breakEnd ? breakEnd.unix() : null;
   const breakTotal = totalBreaks ? totalBreaks : 0;
   const workedTotal = timeWorked ? timeWorked : 0;
-  const wage = wages ? wages : 0;
+  const wage = wages ? wages : currentWages;
   const startOfWork = workStart ? workStart.unix() : today.unix();
   const endOfWork = workEnd ? workEnd.unix() : today.unix();
 

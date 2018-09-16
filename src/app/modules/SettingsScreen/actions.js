@@ -4,7 +4,6 @@ export const UPDATE_WAGES = "UPDATE_WAGES";
 export const UPDATE_WAGES_INPUT = "UPDATE_WAGES_INPUT";
 
 export const updateWages = (wages, uid) => async dispatch => {
-  console.log(wages, uid);
   try {
     await firebase
       .database()

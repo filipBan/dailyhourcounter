@@ -7,6 +7,7 @@ import {
   UPDATE_USER_DATA
 } from "./actions";
 import { REPLACE_DAY_DATA } from "../DailyForm/actions";
+import { UPDATE_WAGES } from "../SettingsScreen/actions";
 
 const initialState = {
   isLoggedIn: false,
@@ -50,6 +51,11 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         wages: action.payload.wages || state.wages
+      };
+    case UPDATE_WAGES:
+      return {
+        ...state,
+        wages: action.wages
       };
     default:
       return state;

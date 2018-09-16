@@ -41,7 +41,6 @@ export const logInWithEmailAndPassword = (
       .auth()
       .signInWithEmailAndPassword(email, password);
     dispatch({ type: AUTH_SUCCESS, payload: user.user });
-    console.log({ user });
     dispatch(fetchUserData(user.user.uid));
   } catch (error) {
     dispatch({ type: AUTH_FAIL, payload: error });
