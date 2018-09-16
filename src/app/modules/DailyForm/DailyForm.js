@@ -78,6 +78,7 @@ class DailyForm extends Component {
         <div className="hours-container">
           <Segment className="today-date" raised size="big" textAlign="center">
             <Button
+              id="day-back"
               basic
               color="blue"
               icon="angle left"
@@ -85,8 +86,9 @@ class DailyForm extends Component {
                 handleCalendarChange(today.clone().subtract(1, "day"))
               }
             />
-            {today.format("ddd Do MMMM YYYY").toString()}
+            <span>{today.format("ddd Do MMMM YYYY").toString()}</span>
             <Button
+              id="day-forward"
               basic
               color="blue"
               icon="angle right"
@@ -134,6 +136,7 @@ class DailyForm extends Component {
             </div>
             <div className="reset-button-container">
               <Button
+                id="reset-button"
                 secondary={!savingData}
                 size="medium"
                 onClick={() => resetDailyData({ workStart, uid })}
