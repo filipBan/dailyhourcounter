@@ -26,8 +26,6 @@ class SettingsScreen extends Component {
 
     const { wages } = this.props.settings;
 
-    // TODO - fix the logic behind handleSaveNewWages - does not actually save in DB
-
     return (
       <div className="settings-screen-container">
         <div className="wages">
