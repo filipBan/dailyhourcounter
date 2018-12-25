@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
-import moment from "moment";
+import { format } from "date-fns";
 
 import { Button } from "semantic-ui-react";
 
@@ -27,7 +27,7 @@ class TimePicker extends Component {
 
   render() {
     const { time, placeholder, minTime, maxTime, disabled, today } = this.props;
-    const todayFormat = today.format("YYYY-MM-DD");
+    const todayFormat = format(today, "YYYY/MM/DD");
 
     return (
       <div className="from-to">
@@ -39,7 +39,7 @@ class TimePicker extends Component {
           disabled={disabled}
           onClick={this.toggleCalendar}
         >
-          {time ? time.format("HH:mm") : placeholder}
+          {time ? format(time, "HH:mm") : placeholder}
         </Button>
         {this.state.isOpen && (
           <DatePicker
@@ -58,7 +58,7 @@ class TimePicker extends Component {
             minTime={minTime || null}
             maxTime={maxTime || null}
             disabled={disabled}
-            openToDate={moment(todayFormat)}
+            openToDate={new Date(todayFormat)}
             locale="en-gb"
           />
         )}

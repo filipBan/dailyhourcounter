@@ -1,4 +1,3 @@
-import moment from "moment";
 import {
   START_SAVING_DAY_DATA,
   FINISHED_SAVING_DAY_DATA,
@@ -15,7 +14,7 @@ import {
 } from "./actions";
 
 const initialState = {
-  today: moment(),
+  today: new Date(),
   workStart: null,
   workEnd: null,
   breakStart: null,
@@ -42,8 +41,8 @@ const today = (state = initialState, action) => {
           action.timeType === "workEnd"
             ? calculateTimeWorked(state.workStart, action.amount)
             : action.timeType === "workStart" && state.workEnd
-              ? calculateTimeWorked(action.amount, state.workEnd)
-              : state.timeWorked
+            ? calculateTimeWorked(action.amount, state.workEnd)
+            : state.timeWorked
       };
     case UPDATE_BREAKS:
       return {
@@ -53,8 +52,8 @@ const today = (state = initialState, action) => {
           action.timeType === "breakEnd"
             ? calculateTotalBreaks(state.breakStart, action.amount)
             : action.timeType === "breakStart" && state.breakEnd
-              ? calculateTotalBreaks(action.amount, state.breakEnd)
-              : state.totalBreaks
+            ? calculateTotalBreaks(action.amount, state.breakEnd)
+            : state.totalBreaks
       };
     case START_SAVING_DAY_DATA:
       return {
@@ -92,18 +91,18 @@ const today = (state = initialState, action) => {
       return {
         ...state,
         breakEnd: action.payload.breakEnd
-          ? moment.unix(action.payload.breakEnd)
+          ? new Date(action.payload.breakEnd)
           : null,
         breakStart: action.payload.breakStart
-          ? moment.unix(action.payload.breakStart)
+          ? new Date(action.payload.breakStart)
           : null,
         totalBreaks: action.payload.breaks ? action.payload.breaks : null,
         timeWorked: action.payload.hours ? action.payload.hours : null,
         workEnd: action.payload.workEnd
-          ? moment.unix(action.payload.workEnd)
+          ? new Date(action.payload.workEnd)
           : null,
         workStart: action.payload.workStart
-          ? moment.unix(action.payload.workStart)
+          ? new Date(action.payload.workStart)
           : null
       };
 

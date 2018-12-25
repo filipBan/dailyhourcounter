@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
+import { format } from "date-fns";
 import "moment/locale/en-gb";
 
 import SaveButton from "../../components/SaveButton";
@@ -78,7 +79,9 @@ class ReportScreen extends Component {
                 className="custom-input"
                 onClick={() => this.toggleDatePicker("start")}
               >
-                {reportStartDate ? reportStartDate.format("D/M/YYYY") : "Start"}
+                {reportStartDate
+                  ? format(reportStartDate, "D/M/YYYY")
+                  : "Start"}
               </Button>
               {this.state.isStartOpen && (
                 <DatePicker
@@ -96,7 +99,7 @@ class ReportScreen extends Component {
                 onClick={() => this.toggleDatePicker("end")}
                 disabled={!reportStartDate}
               >
-                {reportEndDate ? reportEndDate.format("D/M/YYYY") : "End"}
+                {reportEndDate ? format(reportEndDate, "D/M/YYYY") : "End"}
               </Button>
               {this.state.isEndOpen && (
                 <DatePicker
@@ -147,7 +150,7 @@ class ReportScreen extends Component {
             )}
           </Segment>
         </div>
-        <SaveButton disabled />
+        {/* <SaveButton disabled /> */}
       </div>
     );
   }

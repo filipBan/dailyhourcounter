@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import moment from "moment";
+import { addDays, format, subDays } from "date-fns";
+import { endOfToday, subMinutes } from "date-fns";
 import { Redirect } from "react-router-dom";
 
 import { Button, Segment, Divider } from "semantic-ui-react";
@@ -36,11 +37,7 @@ class DailyForm extends Component {
   getBreakMaxTime = () => {
     const { workStart, workEnd } = this.props;
     let newTime = workEnd;
-    return workStart < workEnd
-      ? newTime
-      : moment()
-          .endOf("day")
-          .subtract(59, "minutes");
+    return workStart < workEnd ? newTime : subMinutes(endOfToday(), 59);
   };
 
   changeCalendarDate = date => {
@@ -82,17 +79,15 @@ class DailyForm extends Component {
               basic
               color="blue"
               icon="angle left"
-              onClick={() =>
-                handleCalendarChange(today.clone().subtract(1, "day"))
-              }
+              onClick={() => handleCalendarChange(subDays(today, 1))}
             />
-            <span>{today.format("ddd Do MMMM YYYY").toString()}</span>
+            <span>{format(today, "ddd Do MMMM YYYY").toString()}</span>
             <Button
               id="day-forward"
               basic
               color="blue"
               icon="angle right"
-              onClick={() => handleCalendarChange(today.clone().add(1, "day"))}
+              onClick={() => handleCalendarChange(addDays(today, 1))}
             />
           </Segment>
           <Segment raised size="huge" className="hours-segment">

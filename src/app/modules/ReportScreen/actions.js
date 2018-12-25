@@ -1,5 +1,5 @@
 import firebase from "../../../firebaseConfig";
-import moment from "moment";
+import { addDays, format, differenceInDays } from "date-fns";
 
 export const UPDATE_REPORT_START_DATE = "UPDATE_REPORT_START_DATE";
 export const UPDATE_REPORT_END_DATE = "UPDATE_REPORT_END_DATE";
@@ -16,17 +16,15 @@ export const changeReportEndDay = date => ({
 });
 
 const getReportDates = (startDay, endDay) => {
+  const difference = differenceInDays(endDay, startDay);
   const result = [];
-  for (let i = startDay; i <= endDay; i++) {
-    const year = moment()
-      .dayOfYear(i)
-      .format("YYYY");
-    const month = moment()
-      .dayOfYear(i)
-      .format("M");
-    const day = moment()
-      .dayOfYear(i)
-      .format("D");
+
+  for (let i = 0; i <= difference; i++) {
+    let currentDay = addDays(startDay, i);
+
+    const year = format(currentDay, "YYYY");
+    const month = format(currentDay, "M");
+    const day = format(currentDay, "D");
 
     result.push({ year, month, day });
   }
@@ -35,8 +33,8 @@ const getReportDates = (startDay, endDay) => {
 };
 
 export const fetchDateRangeData = (start, end, uid) => async dispatch => {
-  const startDay = start.dayOfYear();
-  const endDay = end.dayOfYear();
+  const startDay = start;
+  const endDay = end;
 
   const reportDates = getReportDates(startDay, endDay);
 

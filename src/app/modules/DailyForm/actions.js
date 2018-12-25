@@ -1,4 +1,4 @@
-import moment from "moment";
+import { differenceInMilliseconds, getHours, format, getTime } from "date-fns";
 import firebase from "../../../firebaseConfig";
 
 export const SET_TODAY_DATE = "SET_TODAY_DATE";
@@ -18,10 +18,11 @@ export const TOGGLE_CALENDAR = "TOGGLE_CALENDAR";
 export const RESET_DAY_DATA = "RESET_DAY_DATA";
 
 export const resetDailyData = ({ workStart, uid }) => async dispatch => {
-  const today = moment();
-  const year = workStart ? workStart.format("YYYY") : today.format("YYYY");
-  const month = workStart ? workStart.format("M") : today.format("M");
-  const day = workStart ? workStart.format("D") : today.format("D");
+  const today = new Date().toString();
+  const year = workStart ? format(workStart, "YYYY") : format(today, "YYYY");
+  const month = workStart ? format(workStart, "M") : format(today, "M");
+  const day = workStart ? format(workStart, "D") : format(today, "D");
+
   const result = await firebase
     .database()
     .ref(`dates/${uid}/${year}/${month}/${day}`)
@@ -42,22 +43,25 @@ export const updateBreaks = (timeType, amount) => ({
 });
 
 export const calculateTimeWorked = (workStart, workEnd) => {
-  const difference =
-    workStart && workEnd && moment.duration(workEnd.diff(workStart));
-  const result = difference.asMilliseconds() / 1000 / 60 / 60;
+  const result =
+    workStart &&
+    workEnd &&
+    differenceInMilliseconds(workEnd, workStart) / 1000 / 60 / 60;
 
-  if (workEnd && workStart && workEnd.hour() < workStart.hour()) {
+  if (workEnd && workStart && getHours(workEnd) < getHours(workStart)) {
     const total = 24 - Math.abs(result);
     return parseFloat(total.toFixed(2));
-  } else if (workEnd && workStart && workEnd.hour() > workStart.hour()) {
+  } else if (workEnd && workStart && getHours(workEnd) > getHours(workStart)) {
     return parseFloat(result.toFixed(2));
   }
 };
 
 export const calculateTotalBreaks = (breakStart, breakEnd) => {
   if (breakEnd > breakStart) {
-    const difference = moment.duration(breakEnd.diff(breakStart));
-    const result = (difference.hours() * 60 + difference.minutes()) / 60;
+    const result =
+      breakStart &&
+      breakEnd &&
+      differenceInMilliseconds(breakEnd, breakStart) / 1000 / 60 / 60;
     return result;
   }
   return 0;
@@ -85,16 +89,29 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
 
   const currentWages = getState().settings.wages;
 
-  const year = workStart ? workStart.format("YYYY") : today.format("YYYY");
-  const month = workStart ? workStart.format("M") : today.format("M");
-  const day = workStart ? workStart.format("D") : today.format("D");
-  const startOfBreak = breakStart ? breakStart.unix() : null;
-  const endOfBreak = breakEnd ? breakEnd.unix() : null;
+  const year = workStart ? format(workStart, "YYYY") : format(today, "YYYY");
+  const month = workStart ? format(workStart, "M") : format(today, "M");
+  const day = workStart ? format(workStart, "D") : format(today, "D");
+  const startOfBreak = breakStart ? getTime(breakStart) : null;
+  const endOfBreak = breakEnd ? getTime(breakEnd) : null;
   const breakTotal = totalBreaks ? totalBreaks : 0;
   const workedTotal = timeWorked ? timeWorked : 0;
   const wage = wages ? wages : currentWages;
-  const startOfWork = workStart ? workStart.unix() : today.unix();
-  const endOfWork = workEnd ? workEnd.unix() : today.unix();
+  const startOfWork = workStart ? getTime(workStart) : getTime(today);
+  const endOfWork = workEnd ? getTime(workEnd) : getTime(today);
+
+  console.log({
+    year,
+    month,
+    day,
+    startOfBreak,
+    endOfBreak,
+    breakTotal,
+    workedTotal,
+    wage,
+    startOfWork,
+    endOfWork
+  });
 
   try {
     dispatch({ type: START_SAVING_DAY_DATA });
@@ -126,9 +143,9 @@ export const handleCalendarChange = date => dispatch => {
 
 export const fetchDailyData = ({ uid, today }) => async dispatch => {
   try {
-    const year = today.format("YYYY");
-    const month = today.format("M");
-    const day = today.format("D");
+    const year = format(today, "YYYY");
+    const month = format(today, "M");
+    const day = format(today, "D");
     const output = {};
     const result = await firebase
       .database()
