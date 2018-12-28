@@ -24,7 +24,7 @@ const getReportDates = (startDay, endDay) => {
 
     const year = format(currentDay, "yyyy");
     const month = format(currentDay, "M");
-    const day = format(currentDay, "D");
+    const day = format(currentDay, "d");
 
     result.push({ year, month, day });
   }
