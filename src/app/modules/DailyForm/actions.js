@@ -19,7 +19,7 @@ export const RESET_DAY_DATA = "RESET_DAY_DATA";
 
 export const resetDailyData = ({ workStart, uid }) => async dispatch => {
   const today = new Date().toString();
-  const year = workStart ? format(workStart, "YYYY") : format(today, "YYYY");
+  const year = workStart ? format(workStart, "yyyy") : format(today, "yyyy");
   const month = workStart ? format(workStart, "M") : format(today, "M");
   const day = workStart ? format(workStart, "D") : format(today, "D");
 
@@ -89,7 +89,7 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
 
   const currentWages = getState().settings.wages;
 
-  const year = workStart ? format(workStart, "YYYY") : format(today, "YYYY");
+  const year = workStart ? format(workStart, "yyyy") : format(today, "yyyy");
   const month = workStart ? format(workStart, "M") : format(today, "M");
   const day = workStart ? format(workStart, "D") : format(today, "D");
   const startOfBreak = breakStart ? getTime(breakStart) : null;
@@ -143,9 +143,9 @@ export const handleCalendarChange = date => dispatch => {
 
 export const fetchDailyData = ({ uid, today }) => async dispatch => {
   try {
-    const year = format(today, "YYYY");
+    const year = format(today, "yyyy");
     const month = format(today, "M");
-    const day = format(today, "D");
+    const day = format(today, "d");
     const output = {};
     const result = await firebase
       .database()

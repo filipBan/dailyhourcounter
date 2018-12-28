@@ -22,7 +22,7 @@ const getReportDates = (startDay, endDay) => {
   for (let i = 0; i <= difference; i++) {
     let currentDay = addDays(startDay, i);
 
-    const year = format(currentDay, "YYYY");
+    const year = format(currentDay, "yyyy");
     const month = format(currentDay, "M");
     const day = format(currentDay, "D");
 

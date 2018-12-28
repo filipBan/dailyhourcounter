@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { addDays, format, subDays } from "date-fns";
-import { endOfToday, subMinutes } from "date-fns";
+import { addDays, format, subDays, endOfDay, subMinutes } from "date-fns";
 import { Redirect } from "react-router-dom";
 
 import { Button, Segment, Divider } from "semantic-ui-react";
@@ -37,9 +36,9 @@ class DailyForm extends Component {
   };
 
   getBreakMaxTime = () => {
-    const { workStart, workEnd } = this.props;
+    const { workStart, workEnd, today } = this.props;
     let newTime = workEnd;
-    return workStart < workEnd ? newTime : subMinutes(endOfToday(), 59);
+    return workStart < workEnd ? newTime : subMinutes(endOfDay(today), 59);
   };
 
   changeCalendarDate = date => {
@@ -84,7 +83,7 @@ class DailyForm extends Component {
               icon="angle left"
               onClick={() => handleCalendarChange(subDays(today, 1))}
             />
-            <span>{format(today, "ddd Do MMMM YYYY").toString()}</span>
+            <span>{format(today, "EEEE do MMM yyyy").toString()}</span>
             <Button
               id="day-forward"
               basic

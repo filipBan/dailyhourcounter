@@ -80,7 +80,7 @@ class ReportScreen extends Component {
                 onClick={() => this.toggleDatePicker("start")}
               >
                 {reportStartDate
-                  ? format(reportStartDate, "D/M/YYYY")
+                  ? format(reportStartDate, "d/M/yyyy")
                   : "Start"}
               </Button>
               {this.state.isStartOpen && (
@@ -99,7 +99,7 @@ class ReportScreen extends Component {
                 onClick={() => this.toggleDatePicker("end")}
                 disabled={!reportStartDate}
               >
-                {reportEndDate ? format(reportEndDate, "D/M/YYYY") : "End"}
+                {reportEndDate ? format(reportEndDate, "d/M/yyyy") : "End"}
               </Button>
               {this.state.isEndOpen && (
                 <DatePicker

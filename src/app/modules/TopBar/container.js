@@ -5,7 +5,8 @@ import { toggleDrawer } from "../SideDrawer/actions";
 import { handleCalendarChange, toggleCalendar } from "../DailyForm/actions";
 
 const mapStateToProps = state => ({
-  calendarVisible: state.today.calendarVisible
+  calendarVisible: state.today.calendarVisible,
+  today: state.today.today
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -27,7 +27,7 @@ class TimePicker extends Component {
 
   render() {
     const { time, placeholder, minTime, maxTime, disabled, today } = this.props;
-    const todayFormat = format(today, "YYYY/MM/DD");
+    const todayFormat = format(today, "yyyy/MM/dd");
 
     return (
       <div className="from-to">
