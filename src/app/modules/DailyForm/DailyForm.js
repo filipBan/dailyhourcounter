@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 
 import { Button, Segment, Divider } from "semantic-ui-react";
 
+import TopBar from "../TopBar";
+
 import TimePicker from "../../components/TimePicker";
 import SaveButton from "../../components/SaveButton";
 
@@ -72,6 +74,7 @@ class DailyForm extends Component {
 
     return (
       <div className="daily-form">
+        <TopBar />
         <div className="hours-container">
           <Segment className="today-date" raised size="big" textAlign="center">
             <Button

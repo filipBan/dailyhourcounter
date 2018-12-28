@@ -1,4 +1,20 @@
 import { connect } from "react-redux";
 import TopBar from "./TopBar";
 
-export default connect()(TopBar);
+import { toggleDrawer } from "../SideDrawer/actions";
+import { handleCalendarChange, toggleCalendar } from "../DailyForm/actions";
+
+const mapStateToProps = state => ({
+  calendarVisible: state.today.calendarVisible
+});
+
+const mapDispatchToProps = dispatch => ({
+  toggleDrawer: () => dispatch(toggleDrawer()),
+  toggleCalendar: () => dispatch(toggleCalendar()),
+  handleCalendarChange: date => dispatch(handleCalendarChange(date))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TopBar);
