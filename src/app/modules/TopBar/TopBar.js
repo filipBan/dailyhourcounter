@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import { DatePicker } from "material-ui-pickers";
 
@@ -27,7 +27,8 @@ class TopBar extends Component {
   };
 
   render() {
-    const { toggleDrawer, today } = this.props;
+    const { toggleDrawer, today, match } = this.props;
+
     return (
       <Container>
         <AppBar position="static">
@@ -39,23 +40,27 @@ class TopBar extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <IconButton
-              color="inherit"
-              aria-label="Menu"
-              onClick={this.openPicker}
-            >
-              <CalendarToday />
-            </IconButton>
-            <div style={{ display: "none" }}>
-              <DatePicker
-                value={today}
-                onChange={this.changeCalendarDate}
-                animateYearScrolling
-                ref={node => {
-                  this.picker = node;
-                }}
-              />
-            </div>
+            {match.path === "/today" && (
+              <Fragment>
+                <IconButton
+                  color="inherit"
+                  aria-label="Menu"
+                  onClick={this.openPicker}
+                >
+                  <CalendarToday />
+                </IconButton>
+                <div style={{ display: "none" }}>
+                  <DatePicker
+                    value={today}
+                    onChange={this.changeCalendarDate}
+                    animateYearScrolling
+                    ref={node => {
+                      this.picker = node;
+                    }}
+                  />
+                </div>
+              </Fragment>
+            )}
           </Toolbar>
         </AppBar>
       </Container>
