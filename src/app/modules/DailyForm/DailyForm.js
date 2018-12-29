@@ -1,20 +1,23 @@
 import React, { Component } from "react";
-import { endOfDay, subMinutes } from "date-fns";
+import { endOfDay, subMinutes, startOfMinute } from "date-fns";
 import { Redirect } from "react-router-dom";
 
-import { Button, Segment, Divider } from "semantic-ui-react";
+import { Divider } from "semantic-ui-react";
+import Card from "@material-ui/core/Card";
+import Button from "@material-ui/core/Button";
 
 import styled from "styled-components";
 
 import TopBar from "../TopBar";
 
-import TimePicker from "../../components/TimePicker";
+// import TimePicker from "../../components/TimePicker";
 import SaveButton from "../../components/SaveButton";
 
 import TopControls from "./TopControls";
 
 import "react-datepicker/dist/react-datepicker.css";
-import "./style.css";
+
+import { TimePicker } from "material-ui-pickers";
 
 const DailyFormContainer = styled.div`
   height: 100%;
@@ -29,6 +32,10 @@ const DailyFormContainer = styled.div`
 const HoursContainer = styled.div`
   width: 100%;
   padding: 0 1rem;
+`;
+
+const Section = styled(Card)`
+  margin-bottom: 1rem;
 `;
 
 // TODO - split this component up, it's too big
@@ -54,6 +61,15 @@ class DailyForm extends Component {
     const { workStart, workEnd, today } = this.props;
     let newTime = workEnd;
     return workStart < workEnd ? newTime : subMinutes(endOfDay(today), 59);
+  };
+
+  handleDateChange = date => {
+    console.log(startOfMinute(date));
+    this.setState({ selectedDate: date });
+  };
+
+  openPicker = (e, node) => {
+    node.open(e);
   };
 
   render() {
@@ -88,68 +104,115 @@ class DailyForm extends Component {
             handleCalendarChange={handleCalendarChange}
             today={today}
           />
-          <Segment raised size="huge" className="hours-segment">
+          <Section className="hours-segment">
             <div className="work-hours">
-              <h3>Hours</h3>
+              <h4>Hours</h4>
               <div className="from-to-container">
-                <TimePicker
-                  placeholder="Start"
-                  time={workStart}
-                  onChange={date => updateHours("workStart", date)}
-                />
-                <TimePicker
-                  placeholder="End"
+                <Button
+                  variant="contained"
+                  onClick={e => this.openPicker(e, this.hoursStart)}
+                >
+                  Start
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={e => this.openPicker(e, this.hoursEnd)}
                   disabled={!workStart}
-                  time={workEnd}
-                  onChange={date => updateHours("workEnd", date)}
-                />
+                >
+                  End
+                </Button>
+                <div style={{ display: "none" }}>
+                  <TimePicker
+                    clearable
+                    ampm={false}
+                    value={workStart}
+                    onChange={date =>
+                      updateHours("workStart", startOfMinute(date))
+                    }
+                    ref={node => {
+                      this.hoursStart = node;
+                    }}
+                  />
+                  <TimePicker
+                    clearable
+                    ampm={false}
+                    value={workEnd}
+                    onChange={date =>
+                      updateHours("workEnd", startOfMinute(date))
+                    }
+                    ref={node => {
+                      this.hoursEnd = node;
+                    }}
+                  />
+                </div>
               </div>
             </div>
             <Divider />
             <div className="break-hours">
               <h3>Breaks</h3>
               <div className="from-to-container">
-                <TimePicker
-                  placeholder="Start"
+                <Button
+                  variant="contained"
+                  onClick={e => this.openPicker(e, this.breakStart)}
                   disabled={!workEnd}
-                  minTime={workStart}
-                  maxTime={breakMaxTime}
-                  time={breakStart}
-                  onChange={date => updateBreaks("breakStart", date)}
-                />
-                <TimePicker
-                  placeholder="End"
+                >
+                  Start
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={e => this.openPicker(e, this.breakEnd)}
                   disabled={!(workEnd && breakStart)}
-                  minTime={breakStart}
-                  maxTime={breakMaxTime}
-                  time={breakEnd}
-                  onChange={date => updateBreaks("breakEnd", date)}
-                />
+                >
+                  End
+                </Button>
+                <div style={{ display: "none" }}>
+                  <TimePicker
+                    clearable
+                    ampm={false}
+                    value={breakStart}
+                    onChange={date =>
+                      updateBreaks("breakStart", startOfMinute(date))
+                    }
+                    ref={node => {
+                      this.breakStart = node;
+                    }}
+                  />
+                  <TimePicker
+                    clearable
+                    ampm={false}
+                    value={breakEnd}
+                    onChange={date =>
+                      updateBreaks("breakEnd", startOfMinute(date))
+                    }
+                    ref={node => {
+                      this.breakEnd = node;
+                    }}
+                  />
+                </div>
               </div>
             </div>
-            <div className="reset-button-container">
-              <Button
-                id="reset-button"
-                secondary={!savingData}
-                size="medium"
-                onClick={() => resetDailyData({ workStart, uid })}
-                loading={savingData}
-              >
-                RESET
-              </Button>
-            </div>
-          </Segment>
-          <Segment raised size="huge" textAlign="center">
+          </Section>
+          <Section>
             Total hours:{" "}
             {timeWorked > 0 && (
               <span> {(timeWorked - totalBreaks).toFixed(2)}</span>
             )}
-          </Segment>
+          </Section>
         </HoursContainer>
-        <SaveButton
+        <Button
+          variant="contained"
+          onClick={() => resetDailyData({ workStart, uid })}
+          loading={savingData}
+        >
+          RESET
+        </Button>
+        <Button
           onClick={() => saveHoursAndBreaksToFirebase(this.props)}
-          savingData={savingData}
-        />
+          disabled={savingData}
+          variant="contained"
+        >
+          SAVE
+        </Button>
       </DailyFormContainer>
     );
   }

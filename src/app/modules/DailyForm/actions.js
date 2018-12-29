@@ -91,7 +91,7 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
 
   const year = workStart ? format(workStart, "yyyy") : format(today, "yyyy");
   const month = workStart ? format(workStart, "M") : format(today, "M");
-  const day = workStart ? format(workStart, "D") : format(today, "D");
+  const day = workStart ? format(workStart, "d") : format(today, "d");
   const startOfBreak = breakStart ? getTime(breakStart) : null;
   const endOfBreak = breakEnd ? getTime(breakEnd) : null;
   const breakTotal = totalBreaks ? totalBreaks : 0;

@@ -12,6 +12,7 @@ const Container = styled(Card)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 
   span {
     font-size: 1.6rem;
