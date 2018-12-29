@@ -14,6 +14,14 @@ import blue from "@material-ui/core/colors/blue";
 import green from "@material-ui/core/colors/green";
 
 const theme = createMuiTheme({
+  typography: {
+    body1: {
+      fontSize: "1.6rem"
+    },
+    button: {
+      fontSize: "1.6rem"
+    }
+  },
   overrides: {
     MuiPickersToolbar: {
       toolbar: {
@@ -22,13 +30,22 @@ const theme = createMuiTheme({
     },
     MuiPickersDay: {
       day: {
-        color: "#000"
+        color: "#000",
+        fontSize: "1.2rem"
       },
       selected: {
         backgroundColor: blue["500"]
       },
       current: {
         color: blue["500"]
+      }
+    },
+    MuiPickersCalendarHeader: {
+      dayLabel: {
+        fontSize: "1.4rem"
+      },
+      switchHeader: {
+        fontSize: "1.4rem"
       }
     },
     MuiPickersModal: {

@@ -48,7 +48,7 @@ class SideDrawer extends Component {
             </ListItemIcon>
             <ListItemText
               primary={"Today"}
-              primaryTypographyProps={{ variant: "headline" }}
+              primaryTypographyProps={{ variant: "h5" }}
             />
           </ListItem>
 
@@ -62,7 +62,7 @@ class SideDrawer extends Component {
             </ListItemIcon>
             <ListItemText
               primary={"Reports"}
-              primaryTypographyProps={{ variant: "headline" }}
+              primaryTypographyProps={{ variant: "h5" }}
             />
           </ListItem>
 
@@ -76,7 +76,7 @@ class SideDrawer extends Component {
             </ListItemIcon>
             <ListItemText
               primary={"Settings"}
-              primaryTypographyProps={{ variant: "headline" }}
+              primaryTypographyProps={{ variant: "h5" }}
             />
           </ListItem>
 
@@ -90,7 +90,7 @@ class SideDrawer extends Component {
             </ListItemIcon>
             <ListItemText
               primary={"Log out"}
-              primaryTypographyProps={{ variant: "headline" }}
+              primaryTypographyProps={{ variant: "h5" }}
             />
           </ListItem>
         </List>
