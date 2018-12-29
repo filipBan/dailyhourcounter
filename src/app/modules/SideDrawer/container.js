@@ -1,4 +1,6 @@
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 import { toggleDrawer } from "./actions";
 import { logoutUser } from "../LoginPage/actions";
 
@@ -9,11 +11,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleDrawer: () => dispatch(toggleDrawer()),
+  toggleDrawer: value => dispatch(toggleDrawer(value)),
   logoutUser: () => dispatch(logoutUser())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SideDrawer);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SideDrawer)
+);

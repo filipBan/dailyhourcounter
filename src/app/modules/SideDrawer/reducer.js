@@ -8,7 +8,7 @@ const sideDrawer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_DRAWER:
       return {
-        visible: !state.visible
+        visible: action.value
       };
     default:
       return state;

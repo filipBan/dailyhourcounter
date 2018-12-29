@@ -9,14 +9,15 @@ import store from "./app/store";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import "semantic-ui-css/semantic.min.css";
+
 import blue from "@material-ui/core/colors/blue";
+import green from "@material-ui/core/colors/green";
 
 const theme = createMuiTheme({
   overrides: {
     MuiPickersToolbar: {
       toolbar: {
-        backgroundColor: blue["900"]
+        backgroundColor: blue["500"]
       }
     },
     MuiPickersDay: {
@@ -24,17 +25,21 @@ const theme = createMuiTheme({
         color: "#000"
       },
       selected: {
-        backgroundColor: blue["900"]
+        backgroundColor: blue["500"]
       },
       current: {
-        color: blue["900"]
+        color: blue["500"]
       }
     },
     MuiPickersModal: {
       dialogAction: {
-        color: blue["900"]
+        color: blue["500"]
       }
     }
+  },
+  palette: {
+    primary: blue,
+    secondary: green
   }
 });
 

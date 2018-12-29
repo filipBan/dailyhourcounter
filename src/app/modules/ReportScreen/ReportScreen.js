@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import { Button, Segment } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
+import TopBar from "../TopBar";
+
 import "moment/locale/en-gb";
 
 import SaveButton from "../../components/SaveButton";
@@ -69,6 +71,7 @@ class ReportScreen extends Component {
 
     return (
       <div className="report-screen-container">
+        <TopBar />
         <div className="report-dates-container">
           <Segment className="report-dates">
             <div>

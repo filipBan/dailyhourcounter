@@ -1,23 +1,38 @@
 import React, { Component } from "react";
-import { addDays, format, subDays, endOfDay, subMinutes } from "date-fns";
+import { endOfDay, subMinutes } from "date-fns";
 import { Redirect } from "react-router-dom";
 
 import { Button, Segment, Divider } from "semantic-ui-react";
+
+import styled from "styled-components";
 
 import TopBar from "../TopBar";
 
 import TimePicker from "../../components/TimePicker";
 import SaveButton from "../../components/SaveButton";
 
+import TopControls from "./TopControls";
+
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
 
+const DailyFormContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  z-index: 0;
+`;
+
+const HoursContainer = styled.div`
+  width: 100%;
+  padding: 0 1rem;
+`;
+
 // TODO - split this component up, it's too big
 class DailyForm extends Component {
-  state = {
-    isOpen: false
-  };
-
   componentDidMount() {
     const { uid, today, fetchDailyData } = this.props;
     fetchDailyData({ uid, today });
@@ -39,12 +54,6 @@ class DailyForm extends Component {
     const { workStart, workEnd, today } = this.props;
     let newTime = workEnd;
     return workStart < workEnd ? newTime : subMinutes(endOfDay(today), 59);
-  };
-
-  changeCalendarDate = date => {
-    const { toggleCalendar, handleCalendarChange } = this.props;
-    handleCalendarChange(date);
-    toggleCalendar();
   };
 
   render() {
@@ -72,26 +81,13 @@ class DailyForm extends Component {
     const breakMaxTime = this.getBreakMaxTime();
 
     return (
-      <div className="daily-form">
+      <DailyFormContainer>
         <TopBar />
-        <div className="hours-container">
-          <Segment className="today-date" raised size="big" textAlign="center">
-            <Button
-              id="day-back"
-              basic
-              color="blue"
-              icon="angle left"
-              onClick={() => handleCalendarChange(subDays(today, 1))}
-            />
-            <span>{format(today, "EEEE do MMM yyyy").toString()}</span>
-            <Button
-              id="day-forward"
-              basic
-              color="blue"
-              icon="angle right"
-              onClick={() => handleCalendarChange(addDays(today, 1))}
-            />
-          </Segment>
+        <HoursContainer>
+          <TopControls
+            handleCalendarChange={handleCalendarChange}
+            today={today}
+          />
           <Segment raised size="huge" className="hours-segment">
             <div className="work-hours">
               <h3>Hours</h3>
@@ -149,12 +145,12 @@ class DailyForm extends Component {
               <span> {(timeWorked - totalBreaks).toFixed(2)}</span>
             )}
           </Segment>
-        </div>
+        </HoursContainer>
         <SaveButton
           onClick={() => saveHoursAndBreaksToFirebase(this.props)}
           savingData={savingData}
         />
-      </div>
+      </DailyFormContainer>
     );
   }
 }

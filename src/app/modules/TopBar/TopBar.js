@@ -12,6 +12,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
+  margin-bottom: 1rem;
 `;
 
 class TopBar extends Component {
@@ -22,7 +23,6 @@ class TopBar extends Component {
   };
 
   openPicker = e => {
-    // do not pass Event for default pickers
     this.picker.open(e);
   };
 
@@ -35,7 +35,7 @@ class TopBar extends Component {
             <IconButton
               color="inherit"
               aria-label="Menu"
-              onClick={toggleDrawer}
+              onClick={() => toggleDrawer(true)}
             >
               <MenuIcon />
             </IconButton>

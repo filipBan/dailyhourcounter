@@ -1,59 +1,102 @@
 import React, { Component } from "react";
-import onClickOutside from "react-onclickoutside";
-import { Icon, Menu } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 
-import "./style.css";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import TrendingUp from "@material-ui/icons/TrendingUp";
+import Settings from "@material-ui/icons/Settings";
+import Person from "@material-ui/icons/Person";
+
+const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 class SideDrawer extends Component {
-  handleClickOutside = () => {
-    const { toggleDrawer, visible } = this.props;
-    if (visible) {
-      toggleDrawer();
-    }
-  };
-
   handleLogOut = () => {
     const { toggleDrawer, logoutUser } = this.props;
-    toggleDrawer();
+    toggleDrawer(false);
     logoutUser();
   };
 
+  toggleSwipeDrawer = open => () => {
+    this.props.toggleDrawer(open);
+  };
+
+  handleRedirect = page => {
+    this.props.toggleDrawer(false);
+    this.props.history.push(page);
+  };
+
   render() {
-    const { toggleDrawer, visible } = this.props;
-    const left = visible ? { left: 0 } : { left: "-235px" };
+    const { visible } = this.props;
     return (
-      <div className="side-drawer-container" style={left}>
-        <Menu vertical fluid className="side-menu" size="massive">
-          <Link to="/today" onClick={toggleDrawer}>
-            <Menu.Item className="side-menu-item">
-              <Icon name="calendar plus outline" className="side-menu-icon" />
-              Today
-            </Menu.Item>
-          </Link>
-          <Link to="/reports" onClick={toggleDrawer}>
-            <Menu.Item className="side-menu-item">
-              <Icon name="chart line" className="side-menu-icon" />
-              Reports
-            </Menu.Item>
-          </Link>
-          <Link to="/settings" onClick={toggleDrawer}>
-            <Menu.Item className="side-menu-item">
-              <Icon name="setting" className="side-menu-icon" />
-              Settings
-            </Menu.Item>
-          </Link>
-          <Menu.Item
-            className="side-menu-item"
-            onClick={() => this.handleLogOut()}
+      <SwipeableDrawer
+        open={visible}
+        onClose={this.toggleSwipeDrawer(false)}
+        onOpen={this.toggleSwipeDrawer(true)}
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+      >
+        <List>
+          <ListItem
+            button
+            onClick={() => this.handleRedirect("/today")}
+            style={{ padding: "2rem" }}
           >
-            <Icon name="setting" className="side-menu-icon" />
-            Log out
-          </Menu.Item>
-        </Menu>
-      </div>
+            <ListItemIcon>
+              <TrendingUp />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Today"}
+              primaryTypographyProps={{ variant: "headline" }}
+            />
+          </ListItem>
+
+          <ListItem
+            button
+            onClick={() => this.handleRedirect("/reports")}
+            style={{ padding: "2rem" }}
+          >
+            <ListItemIcon>
+              <TrendingUp />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Reports"}
+              primaryTypographyProps={{ variant: "headline" }}
+            />
+          </ListItem>
+
+          <ListItem
+            button
+            onClick={() => this.handleRedirect("/settings")}
+            style={{ padding: "2rem" }}
+          >
+            <ListItemIcon>
+              <Settings />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Settings"}
+              primaryTypographyProps={{ variant: "headline" }}
+            />
+          </ListItem>
+
+          <ListItem
+            button
+            onClick={() => this.handleLogOut()}
+            style={{ padding: "2rem" }}
+          >
+            <ListItemIcon>
+              <Person />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Log out"}
+              primaryTypographyProps={{ variant: "headline" }}
+            />
+          </ListItem>
+        </List>
+      </SwipeableDrawer>
     );
   }
 }
 
-export default onClickOutside(SideDrawer);
+export default SideDrawer;

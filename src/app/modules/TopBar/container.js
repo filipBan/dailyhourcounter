@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleDrawer: () => dispatch(toggleDrawer()),
+  toggleDrawer: open => dispatch(toggleDrawer(open)),
   toggleCalendar: () => dispatch(toggleCalendar()),
   handleCalendarChange: date => dispatch(handleCalendarChange(date))
 });
