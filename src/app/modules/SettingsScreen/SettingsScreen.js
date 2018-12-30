@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Segment, Input } from "semantic-ui-react";
+import Input from "@material-ui/core/Input";
 
-import SaveButton from "../../components/SaveButton";
+import Button from "../../components/Button";
 
 import "./style.css";
 
@@ -29,7 +29,7 @@ class SettingsScreen extends Component {
     return (
       <div className="settings-screen-container">
         <div className="wages">
-          <Segment className="settings">
+          <div className="settings">
             <span>Salary</span>
             <Input
               type="number"
@@ -39,9 +39,9 @@ class SettingsScreen extends Component {
               value={wages}
               onChange={e => this.handleUpdateWagesInput(e)}
             />
-          </Segment>
+          </div>
         </div>
-        <SaveButton onClick={() => this.handleSaveNewWages()} />
+        <Button onClick={() => this.handleSaveNewWages()}>SAVE</Button>
       </div>
     );
   }

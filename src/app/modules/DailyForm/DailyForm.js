@@ -2,20 +2,14 @@ import React, { Component } from "react";
 import { endOfDay, subMinutes, startOfMinute } from "date-fns";
 import { Redirect } from "react-router-dom";
 
-import { Divider } from "semantic-ui-react";
 import Card from "@material-ui/core/Card";
-import Button from "@material-ui/core/Button";
+import Button from "../../components/Button";
 
 import styled from "styled-components";
 
 import TopBar from "../TopBar";
 
-// import TimePicker from "../../components/TimePicker";
-import SaveButton from "../../components/SaveButton";
-
 import TopControls from "./TopControls";
-
-import "react-datepicker/dist/react-datepicker.css";
 
 import { TimePicker } from "material-ui-pickers";
 
@@ -109,13 +103,13 @@ class DailyForm extends Component {
               <h4>Hours</h4>
               <div className="from-to-container">
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   onClick={e => this.openPicker(e, this.hoursStart)}
                 >
                   Start
                 </Button>
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   onClick={e => this.openPicker(e, this.hoursEnd)}
                   disabled={!workStart}
                 >
@@ -147,19 +141,18 @@ class DailyForm extends Component {
                 </div>
               </div>
             </div>
-            <Divider />
             <div className="break-hours">
               <h3>Breaks</h3>
               <div className="from-to-container">
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   onClick={e => this.openPicker(e, this.breakStart)}
                   disabled={!workEnd}
                 >
                   Start
                 </Button>
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   onClick={e => this.openPicker(e, this.breakEnd)}
                   disabled={!(workEnd && breakStart)}
                 >
@@ -200,7 +193,7 @@ class DailyForm extends Component {
           </Section>
         </HoursContainer>
         <Button
-          variant="contained"
+          variant="outlined"
           onClick={() => resetDailyData({ workStart, uid })}
           loading={savingData}
         >
@@ -209,7 +202,7 @@ class DailyForm extends Component {
         <Button
           onClick={() => saveHoursAndBreaksToFirebase(this.props)}
           disabled={savingData}
-          variant="contained"
+          variant="outlined"
         >
           SAVE
         </Button>

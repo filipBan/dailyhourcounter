@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Button, Form } from "semantic-ui-react";
 
 class LoginPage extends Component {
   submitForm(e) {
@@ -23,7 +22,7 @@ class LoginPage extends Component {
     return (
       <div className="login-page">
         <div className="login-form">
-          <Form
+          {/* <Form
             size="huge"
             className="form-container"
             onSubmit={event => this.submitForm(event)}
@@ -49,7 +48,7 @@ class LoginPage extends Component {
             <Button type="submit" primary fluid size="huge" loading={false}>
               Login
             </Button>
-          </Form>
+          </Form> */}
         </div>
       </div>
     );

@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Button, Segment } from "semantic-ui-react";
-import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 import TopBar from "../TopBar";
 
-import "moment/locale/en-gb";
-
-import SaveButton from "../../components/SaveButton";
+import Button from "../../components/Button";
 
 import "./style.css";
 
@@ -73,7 +69,7 @@ class ReportScreen extends Component {
       <div className="report-screen-container">
         <TopBar />
         <div className="report-dates-container">
-          <Segment className="report-dates">
+          <div className="report-dates">
             <div>
               <Button
                 size="big"
@@ -86,14 +82,14 @@ class ReportScreen extends Component {
                   ? format(reportStartDate, "d/M/yyyy")
                   : "Start"}
               </Button>
-              {this.state.isStartOpen && (
+              {/* {this.state.isStartOpen && (
                 <DatePicker
                   withPortal
                   inline
                   onChange={date => this.changeDate("start", date)}
                   locale="en-gb"
                 />
-              )}
+              )} */}
               <Button
                 size="big"
                 basic
@@ -104,7 +100,7 @@ class ReportScreen extends Component {
               >
                 {reportEndDate ? format(reportEndDate, "d/M/yyyy") : "End"}
               </Button>
-              {this.state.isEndOpen && (
+              {/* {this.state.isEndOpen && (
                 <DatePicker
                   withPortal
                   inline
@@ -112,7 +108,7 @@ class ReportScreen extends Component {
                   locale="en-gb"
                   minDate={reportStartDate}
                 />
-              )}
+              )} */}
             </div>
             <Button
               primary
@@ -122,11 +118,11 @@ class ReportScreen extends Component {
             >
               PREPARE THE REPORT
             </Button>
-          </Segment>
+          </div>
         </div>
 
         <div className="report-summary-container">
-          <Segment className="report-summary">
+          <div className="report-summary">
             {reportData && (
               <div className="table-container">
                 <table className="table">
@@ -151,7 +147,7 @@ class ReportScreen extends Component {
                 </table>
               </div>
             )}
-          </Segment>
+          </div>
         </div>
         {/* <SaveButton disabled /> */}
       </div>

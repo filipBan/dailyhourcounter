@@ -21,7 +21,7 @@ export const resetDailyData = ({ workStart, uid }) => async dispatch => {
   const today = new Date().toString();
   const year = workStart ? format(workStart, "yyyy") : format(today, "yyyy");
   const month = workStart ? format(workStart, "M") : format(today, "M");
-  const day = workStart ? format(workStart, "D") : format(today, "D");
+  const day = workStart ? format(workStart, "d") : format(today, "d");
 
   const result = await firebase
     .database()
