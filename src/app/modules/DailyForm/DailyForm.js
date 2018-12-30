@@ -11,7 +11,8 @@ import TopBar from "../TopBar";
 
 import TopControls from "./TopControls";
 
-import { TimePicker } from "material-ui-pickers";
+import { DateTimePicker } from "material-ui-pickers";
+import { format } from "date-fns/esm";
 
 const DailyFormContainer = styled.div`
   height: 100%;
@@ -25,11 +26,34 @@ const DailyFormContainer = styled.div`
 
 const HoursContainer = styled.div`
   width: 100%;
+  max-width: 40rem;
   padding: 0 1rem;
 `;
 
 const Section = styled(Card)`
   margin-bottom: 1rem;
+  min-height: 5rem;
+  padding: 2rem 0;
+  text-align: center;
+`;
+
+const SectionTitle = styled.div`
+  font-size: 2rem;
+  margin-top: 1rem;
+`;
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+
+  button:first-child {
+    margin-right: 0.5rem;
+  }
+
+  button:last-child {
+    margin-left: 0.5rem;
+  }
 `;
 
 // TODO - split this component up, it's too big
@@ -84,9 +108,9 @@ class DailyForm extends Component {
       uid
     } = this.props;
 
-    if (!this.props.auth.isLoggedIn) {
-      return <Redirect to="/" />;
-    }
+    // if (!this.props.auth.isLoggedIn) {
+    //   return <Redirect to="/" />;
+    // }
 
     const breakMaxTime = this.getBreakMaxTime();
 
@@ -98,25 +122,29 @@ class DailyForm extends Component {
             handleCalendarChange={handleCalendarChange}
             today={today}
           />
-          <Section className="hours-segment">
-            <div className="work-hours">
-              <h4>Hours</h4>
-              <div className="from-to-container">
+          <Section>
+            <div>
+              <SectionTitle>Hours</SectionTitle>
+              <ButtonContainer>
                 <Button
                   variant="outlined"
+                  color="primary"
+                  fullWidth
                   onClick={e => this.openPicker(e, this.hoursStart)}
                 >
-                  Start
+                  {workStart ? format(workStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
                   variant="outlined"
+                  color="primary"
+                  fullWidth
                   onClick={e => this.openPicker(e, this.hoursEnd)}
                   disabled={!workStart}
                 >
-                  End
+                  {workEnd ? format(workEnd, "HH:mm") : "End"}
                 </Button>
                 <div style={{ display: "none" }}>
-                  <TimePicker
+                  <DateTimePicker
                     clearable
                     ampm={false}
                     value={workStart}
@@ -127,7 +155,7 @@ class DailyForm extends Component {
                       this.hoursStart = node;
                     }}
                   />
-                  <TimePicker
+                  <DateTimePicker
                     clearable
                     ampm={false}
                     value={workEnd}
@@ -139,27 +167,32 @@ class DailyForm extends Component {
                     }}
                   />
                 </div>
-              </div>
+              </ButtonContainer>
             </div>
-            <div className="break-hours">
-              <h3>Breaks</h3>
-              <div className="from-to-container">
+
+            <div>
+              <SectionTitle>Breaks</SectionTitle>
+              <ButtonContainer>
                 <Button
                   variant="outlined"
+                  color="primary"
+                  fullWidth
                   onClick={e => this.openPicker(e, this.breakStart)}
                   disabled={!workEnd}
                 >
-                  Start
+                  {breakStart ? format(breakStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
                   variant="outlined"
+                  color="primary"
+                  fullWidth
                   onClick={e => this.openPicker(e, this.breakEnd)}
                   disabled={!(workEnd && breakStart)}
                 >
-                  End
+                  {breakEnd ? format(breakEnd, "HH:mm") : "End"}
                 </Button>
                 <div style={{ display: "none" }}>
-                  <TimePicker
+                  <DateTimePicker
                     clearable
                     ampm={false}
                     value={breakStart}
@@ -170,7 +203,7 @@ class DailyForm extends Component {
                       this.breakStart = node;
                     }}
                   />
-                  <TimePicker
+                  <DateTimePicker
                     clearable
                     ampm={false}
                     value={breakEnd}
@@ -182,7 +215,7 @@ class DailyForm extends Component {
                     }}
                   />
                 </div>
-              </div>
+              </ButtonContainer>
             </div>
           </Section>
           <Section>
@@ -192,20 +225,25 @@ class DailyForm extends Component {
             )}
           </Section>
         </HoursContainer>
-        <Button
-          variant="outlined"
-          onClick={() => resetDailyData({ workStart, uid })}
-          loading={savingData}
-        >
-          RESET
-        </Button>
-        <Button
-          onClick={() => saveHoursAndBreaksToFirebase(this.props)}
-          disabled={savingData}
-          variant="outlined"
-        >
-          SAVE
-        </Button>
+        <ButtonContainer>
+          <Button
+            variant="outlined"
+            fullWidth
+            onClick={() => resetDailyData({ workStart, uid })}
+            loading={savingData}
+          >
+            RESET
+          </Button>
+          <Button
+            onClick={() => saveHoursAndBreaksToFirebase(this.props)}
+            disabled={savingData}
+            fullWidth
+            color="primary"
+            variant="contained"
+          >
+            SAVE
+          </Button>
+        </ButtonContainer>
       </DailyFormContainer>
     );
   }

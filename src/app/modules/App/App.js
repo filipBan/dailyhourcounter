@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
 
 import SideDrawer from "../SideDrawer";
+import BottomNav from "../BottomNav";
 
 import firebase from "../../../firebaseConfig";
 
@@ -61,6 +62,7 @@ class App extends Component {
             <Route path="/reports" component={ReportScreenAsync} />
             <Route path="/settings" component={SettingsScreenAsync} />
           </Switch>
+          <BottomNav />
         </div>
       </Router>
     );

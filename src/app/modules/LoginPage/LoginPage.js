@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
+import Button from "../../components/Button";
+
 class LoginPage extends Component {
   submitForm(e) {
     e.preventDefault();
@@ -21,34 +23,25 @@ class LoginPage extends Component {
     const { email, password } = this.props;
     return (
       <div className="login-page">
+        I should see this
         <div className="login-form">
-          {/* <Form
-            size="huge"
-            className="form-container"
-            onSubmit={event => this.submitForm(event)}
-          >
-            <Form.Field>
-              <label>Email</label>
-              <input
-                aria-label="email"
-                type="email"
-                value={email}
-                onChange={e => this.handleInputChange("email", e)}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>Password</label>
-              <input
-                aria-label="email"
-                type="password"
-                value={password}
-                onChange={e => this.handleInputChange("password", e)}
-              />
-            </Form.Field>
+          <form onSubmit={event => this.submitForm(event)}>
+            <input
+              aria-label="email"
+              type="email"
+              value={email}
+              onChange={e => this.handleInputChange("email", e)}
+            />
+            <input
+              aria-label="email"
+              type="password"
+              value={password}
+              onChange={e => this.handleInputChange("password", e)}
+            />
             <Button type="submit" primary fluid size="huge" loading={false}>
               Login
             </Button>
-          </Form> */}
+          </form>
         </div>
       </div>
     );
