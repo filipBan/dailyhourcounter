@@ -228,7 +228,7 @@ class DailyForm extends Component {
           <Button
             variant="outlined"
             fullWidth
-            onClick={() => resetDailyData({ workStart, uid })}
+            onClick={() => resetDailyData({ today, uid })}
           >
             RESET
           </Button>

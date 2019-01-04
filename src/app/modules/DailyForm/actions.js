@@ -1,4 +1,4 @@
-import { differenceInMinutes, startOfDay, format, getTime } from "date-fns";
+import { differenceInMinutes, startOfDay, getTime } from "date-fns";
 import firebase from "../../../firebaseConfig";
 
 export const SET_TODAY_DATE = "SET_TODAY_DATE";
@@ -17,17 +17,20 @@ export const TOGGLE_CALENDAR = "TOGGLE_CALENDAR";
 
 export const RESET_DAY_DATA = "RESET_DAY_DATA";
 
-export const resetDailyData = ({ workStart, uid }) => async dispatch => {
-  const today = new Date().toString();
-  const year = workStart ? format(workStart, "yyyy") : format(today, "yyyy");
-  const month = workStart ? format(workStart, "M") : format(today, "M");
-  const day = workStart ? format(workStart, "d") : format(today, "d");
+export const resetDailyData = ({ today, uid }) => async dispatch => {
+  try {
+    await firebase
+      .firestore()
+      .collection("dates")
+      .doc(uid)
+      .collection("records")
+      .doc(getTime(startOfDay(today)).toString())
+      .delete();
 
-  const result = await firebase
-    .database()
-    .ref(`dates/${uid}/${year}/${month}/${day}`)
-    .remove();
-  return dispatch({ type: RESET_DAY_DATA });
+    return dispatch({ type: RESET_DAY_DATA });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const updateHours = (timeType, amount) => ({
@@ -109,9 +112,8 @@ export const handleCalendarChange = date => dispatch => {
 };
 
 export const fetchDailyData = ({ uid, today }) => async dispatch => {
-  console.error({ uid, today });
   try {
-    const test = await firebase
+    const data = await firebase
       .firestore()
       .collection("dates")
       .doc(uid)
@@ -120,21 +122,19 @@ export const fetchDailyData = ({ uid, today }) => async dispatch => {
       .get()
       .then(doc => doc.data());
 
-    console.error(test);
+    const result = {
+      ...data,
+      hours: data.hours.map(item => ({
+        start: item.start ? item.start.toDate() : null,
+        end: item.end ? item.end.toDate() : null
+      })),
+      breaks: data.breaks.map(item => ({
+        start: item.start ? item.start.toDate() : null,
+        end: item.end ? item.end.toDate() : null
+      }))
+    };
 
-    const year = format(today, "yyyy");
-    const month = format(today, "M");
-    const day = format(today, "d");
-    const output = {};
-    const result = await firebase
-      .database()
-      .ref(`dates/${uid}/${year}/${month}/${day}`)
-      .once("value", snapshot => {
-        snapshot.forEach(child => {
-          output[child.key] = child.val();
-        });
-      });
-    return dispatch({ type: REPLACE_DAY_DATA, payload: output });
+    return dispatch({ type: REPLACE_DAY_DATA, payload: result });
   } catch (err) {
     console.log(err);
   }

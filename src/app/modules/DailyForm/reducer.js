@@ -100,10 +100,18 @@ const today = (state = initialState, action) => {
     case CLEAR_ALL_TIMES:
       return {
         ...state,
-        workStart: null,
-        workEnd: null,
-        breakStart: null,
-        breakEnd: null,
+        hours: [
+          {
+            start: null,
+            end: null
+          }
+        ],
+        breaks: [
+          {
+            start: null,
+            end: null
+          }
+        ],
         workedMinutes: 0,
         breakMinutes: 0
       };
@@ -111,20 +119,7 @@ const today = (state = initialState, action) => {
     case REPLACE_DAY_DATA:
       return {
         ...state,
-        breakEnd: action.payload.breakEnd
-          ? new Date(action.payload.breakEnd)
-          : null,
-        breakStart: action.payload.breakStart
-          ? new Date(action.payload.breakStart)
-          : null,
-        breakMinutes: action.payload.breaks ? action.payload.breaks : null,
-        workedMinutes: action.payload.hours ? action.payload.hours : null,
-        workEnd: action.payload.workEnd
-          ? new Date(action.payload.workEnd)
-          : null,
-        workStart: action.payload.workStart
-          ? new Date(action.payload.workStart)
-          : null
+        ...action.payload
       };
 
     case RESET_DAY_DATA:
