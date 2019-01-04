@@ -35,7 +35,7 @@ class ReportScreen extends Component {
         .map(day => (day ? day.hours : 0))
         .reduce((a, b) => a + b, 0);
 
-      const totalBreaks = reportData
+      const breakMinutes = reportData
         .map(day => (day ? day.breaks : 0))
         .reduce((a, b) => a + b, 0);
 
@@ -48,9 +48,9 @@ class ReportScreen extends Component {
         })
         .reduce((a, b) => a + b, 0);
 
-      const hoursPayable = totalHours - totalBreaks;
+      const hoursPayable = totalHours - breakMinutes;
 
-      return { totalHours, totalBreaks, hoursPayable, toBePaid };
+      return { totalHours, breakMinutes, hoursPayable, toBePaid };
     }
   };
 
@@ -133,7 +133,7 @@ class ReportScreen extends Component {
                     </tr>
                     <tr>
                       <td>Breaks</td>
-                      <td>{reportSummary.totalBreaks}</td>
+                      <td>{reportSummary.breakMinutes}</td>
                     </tr>
                     <tr>
                       <td>Total hours</td>

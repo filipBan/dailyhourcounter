@@ -38,9 +38,7 @@ class LoginPage extends Component {
               value={password}
               onChange={e => this.handleInputChange("password", e)}
             />
-            <Button type="submit" primary fluid size="huge" loading={false}>
-              Login
-            </Button>
+            <Button type="submit">Login</Button>
           </form>
         </div>
       </div>

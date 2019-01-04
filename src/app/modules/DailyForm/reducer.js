@@ -26,12 +26,8 @@ const initialState = {
       end: null
     }
   ],
-  workStart: null,
-  workEnd: null,
-  breakStart: null,
-  breakEnd: null,
-  minutesWorked: 0,
-  totalBreaks: 0,
+  workedMinutes: 0,
+  breakMinutes: 0,
   savingData: false,
   error: null
 };
@@ -46,24 +42,44 @@ const today = (state = initialState, action) => {
     case UPDATE_HOURS:
       return {
         ...state,
-        [action.timeType]: action.amount,
-        minutesWorked:
+        hours: [
+          {
+            start:
+              action.timeType === "workStart"
+                ? action.amount
+                : state.hours[0].start,
+            end:
+              action.timeType === "workEnd" ? action.amount : state.hours[0].end
+          }
+        ],
+        workedMinutes:
           action.timeType === "workEnd"
-            ? calculateTimeWorked(state.workStart, action.amount)
+            ? calculateTimeWorked(state.hours[0].start, action.amount)
             : action.timeType === "workStart" && state.workEnd
-            ? calculateTimeWorked(action.amount, state.workEnd)
-            : state.minutesWorked
+            ? calculateTimeWorked(action.amount, state.hours[0].end)
+            : state.workedMinutes
       };
     case UPDATE_BREAKS:
       return {
         ...state,
-        [action.timeType]: action.amount,
-        totalBreaks:
+        breaks: [
+          {
+            start:
+              action.timeType === "breakStart"
+                ? action.amount
+                : state.breaks[0].start,
+            end:
+              action.timeType === "breakEnd"
+                ? action.amount
+                : state.breaks[0].end
+          }
+        ],
+        breakMinutes:
           action.timeType === "breakEnd"
-            ? calculateTotalBreaks(state.breakStart, action.amount)
+            ? calculateTotalBreaks(state.breaks[0].start, action.amount)
             : action.timeType === "breakStart" && state.breakEnd
-            ? calculateTotalBreaks(action.amount, state.breakEnd)
-            : state.totalBreaks
+            ? calculateTotalBreaks(action.amount, state.breaks[0].end)
+            : state.breakMinutes
       };
     case START_SAVING_DAY_DATA:
       return {
@@ -88,8 +104,8 @@ const today = (state = initialState, action) => {
         workEnd: null,
         breakStart: null,
         breakEnd: null,
-        minutesWorked: 0,
-        totalBreaks: 0
+        workedMinutes: 0,
+        breakMinutes: 0
       };
 
     case REPLACE_DAY_DATA:
@@ -101,8 +117,8 @@ const today = (state = initialState, action) => {
         breakStart: action.payload.breakStart
           ? new Date(action.payload.breakStart)
           : null,
-        totalBreaks: action.payload.breaks ? action.payload.breaks : null,
-        minutesWorked: action.payload.hours ? action.payload.hours : null,
+        breakMinutes: action.payload.breaks ? action.payload.breaks : null,
+        workedMinutes: action.payload.hours ? action.payload.hours : null,
         workEnd: action.payload.workEnd
           ? new Date(action.payload.workEnd)
           : null,

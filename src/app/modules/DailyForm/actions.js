@@ -1,10 +1,4 @@
-import {
-  differenceInMilliseconds,
-  differenceInMinutes,
-  startOfDay,
-  format,
-  getTime
-} from "date-fns";
+import { differenceInMinutes, startOfDay, format, getTime } from "date-fns";
 import firebase from "../../../firebaseConfig";
 
 export const SET_TODAY_DATE = "SET_TODAY_DATE";
@@ -58,9 +52,7 @@ export const calculateTimeWorked = (workStart, workEnd) => {
 export const calculateTotalBreaks = (breakStart, breakEnd) => {
   if (breakEnd > breakStart) {
     const result =
-      breakStart &&
-      breakEnd &&
-      differenceInMilliseconds(breakEnd, breakStart) / 1000 / 60 / 60;
+      breakStart && breakEnd && differenceInMinutes(breakEnd, breakStart);
     return result;
   }
   return 0;
@@ -71,42 +63,18 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
   getState
 ) => {
   const {
+    hours,
+    breaks,
     today,
-    workStart,
-    workEnd,
-    breakStart,
-    breakEnd,
-    minutesWorked,
-    totalBreaks,
+    workedMinutes,
+    breakMinutes,
     wages,
     uid
   } = dayData;
 
-  if (!workStart || !workEnd) {
+  if (!hours[0].start || !hours[0].end) {
     return;
   }
-
-  const currentWages = getState().settings.wages;
-
-  const startOfBreak = breakStart ? getTime(breakStart) : null;
-  const endOfBreak = breakEnd ? getTime(breakEnd) : null;
-  const breakTotal = totalBreaks ? totalBreaks : 0;
-  const workedTotal = minutesWorked ? minutesWorked : 0;
-  const wage = wages ? wages : currentWages;
-  const startOfWork = workStart ? getTime(workStart) : getTime(today);
-  const endOfWork = workEnd ? getTime(workEnd) : getTime(today);
-
-  console.log({
-    uid,
-    startOfBreak,
-    endOfBreak,
-    breakTotal,
-    workedTotal,
-    wage,
-    startOfWork,
-    endOfWork,
-    timestamp: getTime(startOfDay(today))
-  });
 
   try {
     dispatch({ type: START_SAVING_DAY_DATA });
@@ -118,13 +86,12 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
       .collection("records")
       .doc(getTime(startOfDay(today)).toString())
       .set({
-        breakEnd: endOfBreak,
-        breakStart: startOfBreak,
-        breaks: breakTotal,
-        hours: workedTotal,
-        wages: wage,
-        workEnd: endOfWork,
-        workStart: startOfWork
+        date: getTime(startOfDay(today)).toString(),
+        wages: wages || getState().settings.wages,
+        hours,
+        breaks,
+        workedMinutes,
+        breakMinutes
       });
 
     return dispatch({ type: FINISHED_SAVING_DAY_DATA });
@@ -142,7 +109,19 @@ export const handleCalendarChange = date => dispatch => {
 };
 
 export const fetchDailyData = ({ uid, today }) => async dispatch => {
+  console.error({ uid, today });
   try {
+    const test = await firebase
+      .firestore()
+      .collection("dates")
+      .doc(uid)
+      .collection("records")
+      .doc(getTime(startOfDay(today)).toString())
+      .get()
+      .then(doc => doc.data());
+
+    console.error(test);
+
     const year = format(today, "yyyy");
     const month = format(today, "M");
     const day = format(today, "d");

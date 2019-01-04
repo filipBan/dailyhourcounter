@@ -60,7 +60,9 @@ const ButtonContainer = styled.div`
 class DailyForm extends Component {
   componentDidMount() {
     const { uid, today, fetchDailyData } = this.props;
-    fetchDailyData({ uid, today });
+    if (uid) {
+      fetchDailyData({ uid, today });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -87,12 +89,10 @@ class DailyForm extends Component {
 
   render() {
     const {
-      workStart,
-      workEnd,
-      breakStart,
-      breakEnd,
-      minutesWorked,
-      totalBreaks,
+      hours,
+      breaks,
+      workedMinutes,
+      breakMinutes,
       updateBreaks,
       updateHours,
       savingData,
@@ -103,11 +103,20 @@ class DailyForm extends Component {
       uid
     } = this.props;
 
-    // if (!this.props.auth.isLoggedIn) {
-    //   return <Redirect to="/" />;
-    // }
+    if (!this.props.auth.isLoggedIn) {
+      return <Redirect to="/" />;
+    }
+
+    const workStart = hours[0].start;
+    const workEnd = hours[0].end;
+    const breakStart = breaks[0].start;
+    const breakEnd = breaks[0].end;
 
     const breakMaxTime = this.getBreakMaxTime();
+
+    const totalTimeWorked = `${Math.floor(
+      (workedMinutes - breakMinutes) / 60
+    )}h ${(workedMinutes - breakMinutes) % 60}min total`;
 
     return (
       <DailyFormContainer>
@@ -209,19 +218,17 @@ class DailyForm extends Component {
               </ButtonContainer>
             </div>
           </Section>
-          <Section>
-            Total hours:{" "}
-            {minutesWorked > 0 && (
-              <span> {(minutesWorked - totalBreaks).toFixed(2)}</span>
-            )}
-          </Section>
+          {workedMinutes > 0 && (
+            <Section>
+              <span> {totalTimeWorked}</span>
+            </Section>
+          )}
         </HoursContainer>
         <ButtonContainer>
           <Button
             variant="outlined"
             fullWidth
             onClick={() => resetDailyData({ workStart, uid })}
-            loading={savingData}
           >
             RESET
           </Button>
