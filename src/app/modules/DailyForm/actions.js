@@ -122,17 +122,19 @@ export const fetchDailyData = ({ uid, today }) => async dispatch => {
       .get()
       .then(doc => doc.data());
 
-    const result = {
-      ...data,
-      hours: data.hours.map(item => ({
-        start: item.start ? item.start.toDate() : null,
-        end: item.end ? item.end.toDate() : null
-      })),
-      breaks: data.breaks.map(item => ({
-        start: item.start ? item.start.toDate() : null,
-        end: item.end ? item.end.toDate() : null
-      }))
-    };
+    const result = data
+      ? {
+          ...data,
+          hours: data.hours.map(item => ({
+            start: item.start ? item.start.toDate() : null,
+            end: item.end ? item.end.toDate() : null
+          })),
+          breaks: data.breaks.map(item => ({
+            start: item.start ? item.start.toDate() : null,
+            end: item.end ? item.end.toDate() : null
+          }))
+        }
+      : {};
 
     return dispatch({ type: REPLACE_DAY_DATA, payload: result });
   } catch (err) {
