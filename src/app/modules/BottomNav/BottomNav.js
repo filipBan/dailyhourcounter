@@ -37,9 +37,7 @@ class SimpleBottomNavigation extends React.Component {
 
   render() {
     const { value } = this.state;
-    const { classes, location, match } = this.props;
-
-    console.log({ location, match });
+    const { classes, location } = this.props;
 
     if (location.pathname === "/") {
       return null;

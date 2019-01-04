@@ -17,9 +17,8 @@ const Container = styled.div`
 
 class TopBar extends Component {
   changeCalendarDate = date => {
-    const { handleCalendarChange, toggleCalendar } = this.props;
+    const { handleCalendarChange } = this.props;
     handleCalendarChange(date);
-    toggleCalendar();
   };
 
   openPicker = e => {

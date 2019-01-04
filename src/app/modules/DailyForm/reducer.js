@@ -4,7 +4,6 @@ import {
   ERROR_SAVING_DAY_DATA,
   UPDATE_BREAKS,
   UPDATE_HOURS,
-  TOGGLE_CALENDAR,
   SET_TODAY_DATE,
   CLEAR_ALL_TIMES,
   REPLACE_DAY_DATA,
@@ -15,15 +14,26 @@ import {
 
 const initialState = {
   today: new Date(),
+  hours: [
+    {
+      start: null,
+      end: null
+    }
+  ],
+  breaks: [
+    {
+      start: null,
+      end: null
+    }
+  ],
   workStart: null,
   workEnd: null,
   breakStart: null,
   breakEnd: null,
-  timeWorked: 0,
+  minutesWorked: 0,
   totalBreaks: 0,
   savingData: false,
-  error: null,
-  calendarVisible: false
+  error: null
 };
 
 const today = (state = initialState, action) => {
@@ -37,12 +47,12 @@ const today = (state = initialState, action) => {
       return {
         ...state,
         [action.timeType]: action.amount,
-        timeWorked:
+        minutesWorked:
           action.timeType === "workEnd"
             ? calculateTimeWorked(state.workStart, action.amount)
             : action.timeType === "workStart" && state.workEnd
             ? calculateTimeWorked(action.amount, state.workEnd)
-            : state.timeWorked
+            : state.minutesWorked
       };
     case UPDATE_BREAKS:
       return {
@@ -71,11 +81,6 @@ const today = (state = initialState, action) => {
         savingData: false,
         error: action.error
       };
-    case TOGGLE_CALENDAR:
-      return {
-        ...state,
-        calendarVisible: !state.calendarVisible
-      };
     case CLEAR_ALL_TIMES:
       return {
         ...state,
@@ -83,7 +88,7 @@ const today = (state = initialState, action) => {
         workEnd: null,
         breakStart: null,
         breakEnd: null,
-        timeWorked: 0,
+        minutesWorked: 0,
         totalBreaks: 0
       };
 
@@ -97,7 +102,7 @@ const today = (state = initialState, action) => {
           ? new Date(action.payload.breakStart)
           : null,
         totalBreaks: action.payload.breaks ? action.payload.breaks : null,
-        timeWorked: action.payload.hours ? action.payload.hours : null,
+        minutesWorked: action.payload.hours ? action.payload.hours : null,
         workEnd: action.payload.workEnd
           ? new Date(action.payload.workEnd)
           : null,

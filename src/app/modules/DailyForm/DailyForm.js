@@ -70,11 +70,6 @@ class DailyForm extends Component {
     }
   }
 
-  calculateTotalHours = () => {
-    const { timeWorked, totalBreaks } = this.props;
-    return timeWorked - totalBreaks;
-  };
-
   getBreakMaxTime = () => {
     const { workStart, workEnd, today } = this.props;
     let newTime = workEnd;
@@ -96,7 +91,7 @@ class DailyForm extends Component {
       workEnd,
       breakStart,
       breakEnd,
-      timeWorked,
+      minutesWorked,
       totalBreaks,
       updateBreaks,
       updateHours,
@@ -145,7 +140,6 @@ class DailyForm extends Component {
                 </Button>
                 <div style={{ display: "none" }}>
                   <DateTimePicker
-                    clearable
                     ampm={false}
                     value={workStart}
                     onChange={date =>
@@ -156,7 +150,6 @@ class DailyForm extends Component {
                     }}
                   />
                   <DateTimePicker
-                    clearable
                     ampm={false}
                     value={workEnd}
                     onChange={date =>
@@ -193,7 +186,6 @@ class DailyForm extends Component {
                 </Button>
                 <div style={{ display: "none" }}>
                   <DateTimePicker
-                    clearable
                     ampm={false}
                     value={breakStart}
                     onChange={date =>
@@ -204,7 +196,6 @@ class DailyForm extends Component {
                     }}
                   />
                   <DateTimePicker
-                    clearable
                     ampm={false}
                     value={breakEnd}
                     onChange={date =>
@@ -220,8 +211,8 @@ class DailyForm extends Component {
           </Section>
           <Section>
             Total hours:{" "}
-            {timeWorked > 0 && (
-              <span> {(timeWorked - totalBreaks).toFixed(2)}</span>
+            {minutesWorked > 0 && (
+              <span> {(minutesWorked - totalBreaks).toFixed(2)}</span>
             )}
           </Section>
         </HoursContainer>
