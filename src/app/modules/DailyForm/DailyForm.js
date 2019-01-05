@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { endOfDay, subMinutes, startOfMinute, addDays } from "date-fns";
+import { startOfMinute, addDays } from "date-fns";
 import { Redirect } from "react-router-dom";
 
 import Card from "@material-ui/core/Card";
+import Badge from "@material-ui/core/Badge";
+
 import Button from "../../components/Button";
 
 import styled from "styled-components";
@@ -51,12 +53,13 @@ const ButtonContainer = styled.div`
   width: 100%;
   padding: 1rem;
   display: flex;
+  justify-content: center;
 
-  button:first-child {
+  div:first-child {
     margin-right: 0.5rem;
   }
 
-  button:last-child {
+  div:nth-child(2) {
     margin-left: 0.5rem;
   }
 `;
@@ -94,7 +97,6 @@ class DailyForm extends Component {
       breakMinutes,
       updateBreaks,
       updateHours,
-      savingData,
       saveHoursAndBreaksToFirebase,
       today,
       handleCalendarChange,
@@ -129,6 +131,8 @@ class DailyForm extends Component {
               <SectionTitle>Hours</SectionTitle>
               <ButtonContainer>
                 <Button
+                  deleteBadge={workStart}
+                  onDelete={() => updateHours("workStart", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
@@ -137,6 +141,8 @@ class DailyForm extends Component {
                   {workStart ? format(workStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
+                  deleteBadge={workEnd}
+                  onDelete={() => updateHours("workEnd", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
@@ -182,6 +188,8 @@ class DailyForm extends Component {
               <SectionTitle>Breaks</SectionTitle>
               <ButtonContainer>
                 <Button
+                  deleteBadge={breakStart}
+                  onDelete={() => updateHours("breakStart", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
@@ -191,6 +199,8 @@ class DailyForm extends Component {
                   {breakStart ? format(breakStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
+                  deleteBadge={breakEnd}
+                  onDelete={() => updateHours("breakEnd", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
