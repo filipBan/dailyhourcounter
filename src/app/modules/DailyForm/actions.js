@@ -67,6 +67,7 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
   getState
 ) => {
   const {
+    error,
     hours,
     breaks,
     today,
@@ -76,8 +77,31 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
     uid
   } = dayData;
 
-  if (!hours[0].start || !hours[0].end) {
+  const workStart = hours[0].start;
+  const workEnd = hours[0].end;
+  const breakStart = breaks[0].start;
+  const breakEnd = breaks[0].end;
+
+  if (error) {
     return;
+  }
+
+  if (
+    (!workStart && !workEnd) ||
+    (workStart && !workEnd) ||
+    (!workStart && workEnd)
+  ) {
+    return dispatch({
+      type: ERROR_SAVING_DAY_DATA,
+      error: "You need to provide work start and end times to save."
+    });
+  }
+
+  if ((breakStart && !breakEnd) || (!breakStart && breakEnd)) {
+    return dispatch({
+      type: ERROR_SAVING_DAY_DATA,
+      error: "You need to provide both break start and end times to save."
+    });
   }
 
   try {
@@ -104,8 +128,6 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
     return dispatch({ type: ERROR_SAVING_DAY_DATA, error });
   }
 };
-
-export const toggleCalendar = () => ({ type: TOGGLE_CALENDAR });
 
 export const handleCalendarChange = date => dispatch => {
   dispatch({ type: SET_TODAY_DATE, date });

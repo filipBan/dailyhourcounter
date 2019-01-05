@@ -37,6 +37,11 @@ const Section = styled(Card)`
   text-align: center;
 `;
 
+const ErrorSection = styled(Section)`
+  font-size: 1.2rem;
+  color: red;
+`;
+
 const SectionTitle = styled.div`
   font-size: 2rem;
   margin-top: 1rem;
@@ -72,12 +77,6 @@ class DailyForm extends Component {
     }
   }
 
-  getBreakMaxTime = () => {
-    const { workStart, workEnd, today } = this.props;
-    let newTime = workEnd;
-    return workStart < workEnd ? newTime : subMinutes(endOfDay(today), 59);
-  };
-
   handleDateChange = date => {
     console.log(startOfMinute(date));
     this.setState({ selectedDate: date });
@@ -112,8 +111,6 @@ class DailyForm extends Component {
     const workEnd = hours[0].end;
     const breakStart = breaks[0].start;
     const breakEnd = breaks[0].end;
-
-    const breakMaxTime = this.getBreakMaxTime();
 
     const totalTimeWorked = `${Math.floor(
       (workedMinutes - breakMinutes) / 60
@@ -235,15 +232,15 @@ class DailyForm extends Component {
               </ButtonContainer>
             </div>
           </Section>
-          {workedMinutes > 0 && (
+          {!error && workedMinutes > 0 && (
             <Section>
               <span> {totalTimeWorked}</span>
             </Section>
           )}
           {error && (
-            <Section>
+            <ErrorSection>
               <span> {error}</span>
-            </Section>
+            </ErrorSection>
           )}
         </HoursContainer>
         <ButtonContainer>
@@ -256,7 +253,6 @@ class DailyForm extends Component {
           </Button>
           <Button
             onClick={() => saveHoursAndBreaksToFirebase(this.props)}
-            disabled={!!error || savingData}
             fullWidth
             color="primary"
             variant="contained"

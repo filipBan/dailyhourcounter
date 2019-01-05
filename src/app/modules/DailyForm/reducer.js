@@ -169,7 +169,8 @@ const today = (state = initialState, action) => {
     case ERROR_SAVING_DAY_DATA:
       return {
         ...state,
-        savingData: false
+        savingData: false,
+        error: action.error
       };
     case CLEAR_ALL_TIMES:
       return {
