@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { endOfDay, subMinutes, startOfMinute } from "date-fns";
+import { endOfDay, subMinutes, startOfMinute, addDays } from "date-fns";
 import { Redirect } from "react-router-dom";
 
 import Card from "@material-ui/core/Card";
@@ -100,7 +100,8 @@ class DailyForm extends Component {
       today,
       handleCalendarChange,
       resetDailyData,
-      uid
+      uid,
+      error
     } = this.props;
 
     if (!this.props.auth.isLoggedIn) {
@@ -149,6 +150,10 @@ class DailyForm extends Component {
                 </Button>
                 <div style={{ display: "none" }}>
                   <DateTimePicker
+                    initialFocusedDate={today}
+                    minDate={today}
+                    maxDate={today}
+                    openTo="hours"
                     ampm={false}
                     value={workStart}
                     onChange={date =>
@@ -159,6 +164,10 @@ class DailyForm extends Component {
                     }}
                   />
                   <DateTimePicker
+                    initialFocusedDate={today}
+                    minDate={today}
+                    maxDate={addDays(today, 1)}
+                    openTo="hours"
                     ampm={false}
                     value={workEnd}
                     onChange={date =>
@@ -195,6 +204,10 @@ class DailyForm extends Component {
                 </Button>
                 <div style={{ display: "none" }}>
                   <DateTimePicker
+                    initialFocusedDate={today}
+                    minDate={today}
+                    maxDate={workEnd}
+                    openTo="hours"
                     ampm={false}
                     value={breakStart}
                     onChange={date =>
@@ -205,6 +218,10 @@ class DailyForm extends Component {
                     }}
                   />
                   <DateTimePicker
+                    initialFocusedDate={today}
+                    minDate={today}
+                    maxDate={workEnd}
+                    openTo="hours"
                     ampm={false}
                     value={breakEnd}
                     onChange={date =>
@@ -223,6 +240,11 @@ class DailyForm extends Component {
               <span> {totalTimeWorked}</span>
             </Section>
           )}
+          {error && (
+            <Section>
+              <span> {error}</span>
+            </Section>
+          )}
         </HoursContainer>
         <ButtonContainer>
           <Button
@@ -234,7 +256,7 @@ class DailyForm extends Component {
           </Button>
           <Button
             onClick={() => saveHoursAndBreaksToFirebase(this.props)}
-            disabled={savingData}
+            disabled={!!error || savingData}
             fullWidth
             color="primary"
             variant="contained"

@@ -46,6 +46,7 @@ export const updateBreaks = (timeType, amount) => ({
 });
 
 export const calculateTimeWorked = (workStart, workEnd) => {
+  console.log("Calculating time worked");
   const result =
     workStart && workEnd && differenceInMinutes(workEnd, workStart);
 

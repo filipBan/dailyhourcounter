@@ -1,3 +1,5 @@
+import { getTime } from "date-fns";
+
 import {
   START_SAVING_DAY_DATA,
   FINISHED_SAVING_DAY_DATA,
@@ -32,6 +34,77 @@ const initialState = {
   error: null
 };
 
+const checkForErrors = (hours, breaks, action) => {
+  console.log(
+    "Checking for errors",
+    getTime(action.amount),
+    getTime(hours[0].start)
+  );
+  console.log(getTime(action.amount) < getTime(hours[0].start));
+
+  switch (action.timeType) {
+    case "workStart":
+      if (getTime(action.amount) > getTime(hours[0].end)) {
+        return "Work can't finish before it started (sadly).";
+      } else if (
+        breaks[0].end &&
+        getTime(action.amount) > getTime(breaks[0].end)
+      ) {
+        return "Work can't start after a break ends.";
+      } else if (
+        breaks[0].start &&
+        getTime(action.amount) > getTime(breaks[0].start)
+      ) {
+        return "Work can't start after a break start.";
+      }
+
+      return null;
+
+    case "workEnd":
+      if (getTime(action.amount) < getTime(hours[0].start)) {
+        return "Work can't finish before it started (sadly).";
+      } else if (
+        breaks[0].end &&
+        getTime(action.amount) < getTime(breaks[0].end)
+      ) {
+        return "Break can't end after works' end.";
+      } else if (
+        breaks[0].start &&
+        getTime(action.amount) < getTime(breaks[0].start)
+      ) {
+        return "Break can't start after works' end.";
+      }
+
+      return null;
+
+    case "breakStart":
+      if (getTime(action.amount) < getTime(hours[0].start)) {
+        return "Break can't start before you get to work.";
+      } else if (getTime(action.amount) > getTime(hours[0].end)) {
+        return "Break can't start after works' end.";
+      } else if (
+        breaks[0].end &&
+        getTime(action.amount) > getTime(breaks[0].end)
+      ) {
+        return "Break can't start after breaks' end.";
+      }
+
+      return null;
+    case "breakEnd":
+      if (getTime(action.amount) < getTime(hours[0].start)) {
+        return "Break can't end before you get to work.";
+      } else if (getTime(action.amount) > getTime(hours[0].end)) {
+        return "Break can't end after works' end.";
+      } else if (getTime(action.amount) < getTime(breaks[0].start)) {
+        return "Break can't end before it started.";
+      }
+
+      return null;
+    default:
+      return null;
+  }
+};
+
 const today = (state = initialState, action) => {
   switch (action.type) {
     case SET_TODAY_DATE:
@@ -57,7 +130,8 @@ const today = (state = initialState, action) => {
             ? calculateTimeWorked(state.hours[0].start, action.amount)
             : action.timeType === "workStart" && state.workEnd
             ? calculateTimeWorked(action.amount, state.hours[0].end)
-            : state.workedMinutes
+            : state.workedMinutes,
+        error: checkForErrors(state.hours, state.breaks, action)
       };
     case UPDATE_BREAKS:
       return {
@@ -79,7 +153,8 @@ const today = (state = initialState, action) => {
             ? calculateTotalBreaks(state.breaks[0].start, action.amount)
             : action.timeType === "breakStart" && state.breakEnd
             ? calculateTotalBreaks(action.amount, state.breaks[0].end)
-            : state.breakMinutes
+            : state.breakMinutes,
+        error: checkForErrors(state.hours, state.breaks, action)
       };
     case START_SAVING_DAY_DATA:
       return {
@@ -94,8 +169,7 @@ const today = (state = initialState, action) => {
     case ERROR_SAVING_DAY_DATA:
       return {
         ...state,
-        savingData: false,
-        error: action.error
+        savingData: false
       };
     case CLEAR_ALL_TIMES:
       return {
