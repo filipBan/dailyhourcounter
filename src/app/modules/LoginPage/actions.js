@@ -13,18 +13,12 @@ export const UPDATE_INPUT = "UPDATE_INPUT";
 export const fetchUserData = uid => async dispatch => {
   try {
     const user = await firebase
-      .database()
-      .ref(`/users/${uid}`)
-      .once("value")
-      .then(snapshot => {
-        const user = {};
-        snapshot.forEach(snap => {
-          const key = snap.key;
-          const value = snap.val();
-          user[key] = value;
-        });
-        return user;
-      });
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .get()
+      .then(doc => doc.data());
+
     dispatch({ type: UPDATE_USER_DATA, user });
   } catch (err) {
     console.log(err);

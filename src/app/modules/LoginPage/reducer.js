@@ -15,9 +15,10 @@ const initialState = {
   uid: "",
   wages: 0,
   loading: false,
-  error: undefined,
+  error: null,
   email: "",
-  password: ""
+  password: "",
+  emailVerified: false
 };
 
 const auth = (state = initialState, action) => {
@@ -27,11 +28,12 @@ const auth = (state = initialState, action) => {
     case AUTH_SUCCESS:
       const user = {
         isLoggedIn: true,
+        emailVerified: action.payload.emailVerified,
         email: action.payload.email,
         uid: action.payload.uid,
         loading: false
       };
-      return user;
+      return { ...state, ...user };
     case AUTH_FAIL:
       return { ...state, loading: false, error: action.payload };
     case AUTH_LOGOUT:
