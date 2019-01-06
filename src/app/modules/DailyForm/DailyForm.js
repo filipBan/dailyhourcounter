@@ -131,7 +131,7 @@ class DailyForm extends Component {
 
     return (
       <DailyFormContainer>
-        <TopBar />
+        <TopBar title="Save hours" showCalendar />
         <Progress>{savingData && <LinearProgress />}</Progress>
         <HoursContainer>
           <TopControls

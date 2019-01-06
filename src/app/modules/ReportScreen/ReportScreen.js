@@ -67,7 +67,8 @@ class ReportScreen extends Component {
 
     return (
       <div className="report-screen-container">
-        <TopBar />
+        <TopBar title="Reports" />
+
         <div className="report-dates-container">
           <div className="report-dates">
             <div>

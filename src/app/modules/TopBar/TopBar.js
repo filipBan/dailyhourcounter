@@ -3,7 +3,6 @@ import React, { Component, Fragment } from "react";
 import { DatePicker } from "material-ui-pickers";
 
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import CalendarToday from "@material-ui/icons/CalendarToday";
@@ -12,13 +11,26 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
-  margin-bottom: 1rem;
+`;
 
-  /* @media only screen and (max-width: 800px) {
-    & {
-      display: none;
-    }
-  } */
+const Title = styled.span`
+  margin-left: 1rem;
+  font-size: 2rem;
+  min-width: 15rem;
+`;
+
+const StyledAppbar = styled(AppBar)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.3rem 1rem;
+`;
+
+const Calendar = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 `;
 
 class TopBar extends Component {
@@ -32,42 +44,42 @@ class TopBar extends Component {
   };
 
   render() {
-    const { toggleDrawer, today, match } = this.props;
+    const { toggleDrawer, today, title, showCalendar } = this.props;
 
     return (
       <Container>
-        <AppBar position="static">
-          <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-            <IconButton
-              color="inherit"
-              aria-label="Menu"
-              onClick={() => toggleDrawer(true)}
-            >
-              <MenuIcon />
-            </IconButton>
-            {match.path === "/today" && (
-              <Fragment>
-                <IconButton
-                  color="inherit"
-                  aria-label="Menu"
-                  onClick={this.openPicker}
-                >
-                  <CalendarToday />
-                </IconButton>
-                <div style={{ display: "none" }}>
-                  <DatePicker
-                    value={today}
-                    onChange={this.changeCalendarDate}
-                    animateYearScrolling
-                    ref={node => {
-                      this.picker = node;
-                    }}
-                  />
-                </div>
-              </Fragment>
-            )}
-          </Toolbar>
-        </AppBar>
+        <StyledAppbar position="static">
+          <IconButton
+            color="inherit"
+            aria-label="Menu"
+            onClick={() => toggleDrawer(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+          {title && <Title>{title}</Title>}
+          {showCalendar && (
+            <Calendar>
+              <IconButton
+                color="inherit"
+                aria-label="Menu"
+                onClick={this.openPicker}
+              >
+                <CalendarToday />
+              </IconButton>
+              <div style={{ display: "none" }}>
+                <DatePicker
+                  value={today}
+                  onChange={this.changeCalendarDate}
+                  animateYearScrolling
+                  showTodayButton
+                  ref={node => {
+                    this.picker = node;
+                  }}
+                />
+              </div>
+            </Calendar>
+          )}
+        </StyledAppbar>
       </Container>
     );
   }
