@@ -254,11 +254,13 @@ class DailyForm extends Component {
               </ButtonContainer>
             </div>
           </Section>
-          {!error && workedMinutes > 0 && (
-            <Section>
+          <Section>
+            {!error && workedMinutes > 0 ? (
               <span> {totalTimeWorked}</span>
-            </Section>
-          )}
+            ) : (
+              <span>No records</span>
+            )}
+          </Section>
           {error && (
             <ErrorSection>
               <span> {error}</span>

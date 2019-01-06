@@ -197,7 +197,10 @@ const today = (state = initialState, action) => {
       };
 
     case RESET_DAY_DATA:
-      return initialState;
+      return {
+        ...initialState,
+        today: state.today
+      };
     default:
       return state;
   }
