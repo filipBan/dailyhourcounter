@@ -34,18 +34,27 @@ const initialState = {
   error: null
 };
 
-const checkForErrors = (hours, breaks, action) => {
-  console.log(
-    "Checking for errors",
-    getTime(action.amount),
-    getTime(hours[0].start)
-  );
-  console.log(getTime(action.amount) < getTime(hours[0].start));
+const getMinutes = (hours, breaks, action) => {
+  switch (action.timeType) {
+    case "workStart":
+      return calculateTimeWorked(action.amount, hours[0].end);
+    case "workEnd":
+      return calculateTimeWorked(hours[0].start, action.amount);
+    case "breakStart":
+      return calculateTotalBreaks(action.amount, breaks[0].end);
+    case "breakEnd":
+      return calculateTotalBreaks(breaks[0].start, action.amount);
 
+    default:
+      return null;
+  }
+};
+
+const checkForErrors = (hours, breaks, action) => {
   switch (action.timeType) {
     case "workStart":
       if (getTime(action.amount) > getTime(hours[0].end)) {
-        return "Work can't finish before it started (sadly).";
+        return "If you worked overnight remember to change the day as well by clicking on the day label in time picker.";
       } else if (
         breaks[0].end &&
         getTime(action.amount) > getTime(breaks[0].end)
@@ -62,7 +71,7 @@ const checkForErrors = (hours, breaks, action) => {
 
     case "workEnd":
       if (getTime(action.amount) < getTime(hours[0].start)) {
-        return "Work can't finish before it started (sadly).";
+        return "If you worked overnight remember to change the day as well by clicking on the day label in time picker.";
       } else if (
         breaks[0].end &&
         getTime(action.amount) < getTime(breaks[0].end)
@@ -125,12 +134,7 @@ const today = (state = initialState, action) => {
               action.timeType === "workEnd" ? action.amount : state.hours[0].end
           }
         ],
-        workedMinutes:
-          action.timeType === "workEnd"
-            ? calculateTimeWorked(state.hours[0].start, action.amount)
-            : action.timeType === "workStart" && state.workEnd
-            ? calculateTimeWorked(action.amount, state.hours[0].end)
-            : state.workedMinutes,
+        workedMinutes: getMinutes(state.hours, state.breaks, action),
         error: checkForErrors(state.hours, state.breaks, action)
       };
     case UPDATE_BREAKS:
@@ -148,12 +152,7 @@ const today = (state = initialState, action) => {
                 : state.breaks[0].end
           }
         ],
-        breakMinutes:
-          action.timeType === "breakEnd"
-            ? calculateTotalBreaks(state.breaks[0].start, action.amount)
-            : action.timeType === "breakStart" && state.breakEnd
-            ? calculateTotalBreaks(action.amount, state.breaks[0].end)
-            : state.breakMinutes,
+        breakMinutes: getMinutes(state.hours, state.breaks, action),
         error: checkForErrors(state.hours, state.breaks, action)
       };
     case START_SAVING_DAY_DATA:

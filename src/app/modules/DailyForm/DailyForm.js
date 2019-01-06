@@ -3,7 +3,7 @@ import { startOfMinute, addDays } from "date-fns";
 import { Redirect } from "react-router-dom";
 
 import Card from "@material-ui/core/Card";
-import Badge from "@material-ui/core/Badge";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Button from "../../components/Button";
 
@@ -42,6 +42,10 @@ const Section = styled(Card)`
 const ErrorSection = styled(Section)`
   font-size: 1.2rem;
   color: red;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SectionTitle = styled.div`
@@ -62,6 +66,12 @@ const ButtonContainer = styled.div`
   div:nth-child(2) {
     margin-left: 0.5rem;
   }
+`;
+
+const Progress = styled.div`
+  width: 100%;
+  height: 1rem;
+  /* margin-bottom: 1rem; */
 `;
 
 // TODO - split this component up, it's too big
@@ -98,6 +108,7 @@ class DailyForm extends Component {
       updateBreaks,
       updateHours,
       saveHoursAndBreaksToFirebase,
+      savingData,
       today,
       handleCalendarChange,
       resetDailyData,
@@ -121,6 +132,7 @@ class DailyForm extends Component {
     return (
       <DailyFormContainer>
         <TopBar />
+        <Progress>{savingData && <LinearProgress />}</Progress>
         <HoursContainer>
           <TopControls
             handleCalendarChange={handleCalendarChange}
@@ -189,7 +201,7 @@ class DailyForm extends Component {
               <ButtonContainer>
                 <Button
                   deleteBadge={breakStart}
-                  onDelete={() => updateHours("breakStart", null)}
+                  onDelete={() => updateBreaks("breakStart", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
@@ -200,7 +212,7 @@ class DailyForm extends Component {
                 </Button>
                 <Button
                   deleteBadge={breakEnd}
-                  onDelete={() => updateHours("breakEnd", null)}
+                  onDelete={() => updateBreaks("breakEnd", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
@@ -266,6 +278,7 @@ class DailyForm extends Component {
             fullWidth
             color="primary"
             variant="contained"
+            disabled={savingData}
           >
             SAVE
           </Button>

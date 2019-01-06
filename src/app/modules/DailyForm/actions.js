@@ -46,7 +46,6 @@ export const updateBreaks = (timeType, amount) => ({
 });
 
 export const calculateTimeWorked = (workStart, workEnd) => {
-  console.log("Calculating time worked");
   const result =
     workStart && workEnd && differenceInMinutes(workEnd, workStart);
 
@@ -54,7 +53,7 @@ export const calculateTimeWorked = (workStart, workEnd) => {
 };
 
 export const calculateTotalBreaks = (breakStart, breakEnd) => {
-  if (breakEnd > breakStart) {
+  if (getTime(breakEnd) > getTime(breakStart)) {
     const result =
       breakStart && breakEnd && differenceInMinutes(breakEnd, breakStart);
     return result;
@@ -107,7 +106,7 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
   try {
     dispatch({ type: START_SAVING_DAY_DATA });
 
-    firebase
+    await firebase
       .firestore()
       .collection("dates")
       .doc(uid)

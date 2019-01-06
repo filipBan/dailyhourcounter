@@ -8,6 +8,16 @@ import TrendingUp from "@material-ui/icons/TrendingUp";
 import Settings from "@material-ui/icons/Settings";
 import Person from "@material-ui/icons/Person";
 
+import styled from "styled-components";
+
+const StyledBottomNav = styled.div`
+  @media only screen and (min-width: 800px) {
+    & {
+      display: none;
+    }
+  }
+`;
+
 const styles = {
   root: {
     position: "fixed",
@@ -44,37 +54,39 @@ class SimpleBottomNavigation extends React.Component {
     }
 
     return (
-      <BottomNavigation
-        value={value}
-        onChange={this.handleChange}
-        showLabels
-        classes={{ root: classes.root }}
-      >
-        <BottomNavigationAction
-          label="Today"
-          icon={<Person />}
-          classes={{
-            label: classes.label
-          }}
-          onClick={() => this.handleLink("/today")}
-        />
-        <BottomNavigationAction
-          label="Reports"
-          icon={<TrendingUp />}
-          classes={{
-            label: classes.label
-          }}
-          onClick={() => this.handleLink("/reports")}
-        />
-        <BottomNavigationAction
-          label="Settings"
-          icon={<Settings />}
-          classes={{
-            label: classes.label
-          }}
-          onClick={() => this.handleLink("/settings")}
-        />
-      </BottomNavigation>
+      <StyledBottomNav>
+        <BottomNavigation
+          value={value}
+          onChange={this.handleChange}
+          showLabels
+          classes={{ root: classes.root }}
+        >
+          <BottomNavigationAction
+            label="Today"
+            icon={<Person />}
+            classes={{
+              label: classes.label
+            }}
+            onClick={() => this.handleLink("/today")}
+          />
+          <BottomNavigationAction
+            label="Reports"
+            icon={<TrendingUp />}
+            classes={{
+              label: classes.label
+            }}
+            onClick={() => this.handleLink("/reports")}
+          />
+          <BottomNavigationAction
+            label="Settings"
+            icon={<Settings />}
+            classes={{
+              label: classes.label
+            }}
+            onClick={() => this.handleLink("/settings")}
+          />
+        </BottomNavigation>
+      </StyledBottomNav>
     );
   }
 }
