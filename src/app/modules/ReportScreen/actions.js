@@ -21,8 +21,6 @@ export const fetchDateRangeData = (start, end, uid) => async dispatch => {
   const startDay = getTime(startOfDay(start));
   const endDay = getTime(startOfDay(end));
 
-  console.log({ startDay, endDay });
-
   try {
     dispatch({ type: START_FETCHING_REPORT_DATA });
     const rawData = [];
