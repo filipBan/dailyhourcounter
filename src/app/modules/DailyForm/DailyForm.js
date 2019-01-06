@@ -71,7 +71,6 @@ const ButtonContainer = styled.div`
 const Progress = styled.div`
   width: 100%;
   height: 1rem;
-  /* margin-bottom: 1rem; */
 `;
 
 // TODO - split this component up, it's too big

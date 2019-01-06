@@ -1,4 +1,6 @@
 import {
+  ERROR_FETCHING_REPORT_DATA,
+  START_FETCHING_REPORT_DATA,
   UPDATE_REPORT_START_DATE,
   UPDATE_REPORT_END_DATE,
   UPDATE_REPORT_DATA
@@ -7,7 +9,9 @@ import {
 const initialState = {
   reportStartDate: null,
   reportEndDate: null,
-  reportData: null
+  reportData: null,
+  fetching: false,
+  error: null
 };
 
 const reports = (state = initialState, action) => {
@@ -17,6 +21,11 @@ const reports = (state = initialState, action) => {
         ...state,
         reportStartDate: action.date
       };
+    case START_FETCHING_REPORT_DATA:
+      return {
+        ...state,
+        fetching: true
+      };
     case UPDATE_REPORT_END_DATE:
       return {
         ...state,
@@ -25,7 +34,13 @@ const reports = (state = initialState, action) => {
     case UPDATE_REPORT_DATA:
       return {
         ...state,
-        reportData: action.data
+        reportData: action.data,
+        fetching: false
+      };
+    case ERROR_FETCHING_REPORT_DATA:
+      return {
+        ...state,
+        error: action.error
       };
     default:
       return state;

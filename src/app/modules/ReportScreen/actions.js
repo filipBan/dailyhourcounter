@@ -1,9 +1,11 @@
 import firebase from "../../../firebaseConfig";
-import { addDays, format, differenceInDays } from "date-fns";
+import { addDays, format, startOfDay, getTime } from "date-fns";
 
 export const UPDATE_REPORT_START_DATE = "UPDATE_REPORT_START_DATE";
 export const UPDATE_REPORT_END_DATE = "UPDATE_REPORT_END_DATE";
 export const UPDATE_REPORT_DATA = "UPDATE_REPORT_DATA";
+export const START_FETCHING_REPORT_DATA = "START_FETCHING_REPORT_DATA";
+export const ERROR_FETCHING_REPORT_DATA = "ERROR_FETCHING_REPORT_DATA";
 
 export const changeReportStartDay = date => ({
   type: UPDATE_REPORT_START_DATE,
@@ -15,38 +17,40 @@ export const changeReportEndDay = date => ({
   date
 });
 
-const getReportDates = (startDay, endDay) => {
-  const difference = differenceInDays(endDay, startDay);
-  const result = [];
-
-  for (let i = 0; i <= difference; i++) {
-    let currentDay = addDays(startDay, i);
-
-    const year = format(currentDay, "yyyy");
-    const month = format(currentDay, "M");
-    const day = format(currentDay, "d");
-
-    result.push({ year, month, day });
-  }
-
-  return result;
-};
-
 export const fetchDateRangeData = (start, end, uid) => async dispatch => {
-  const startDay = start;
-  const endDay = end;
+  const startDay = getTime(startOfDay(start));
+  const endDay = getTime(startOfDay(end));
 
-  const reportDates = getReportDates(startDay, endDay);
+  console.log({ startDay, endDay });
 
-  const firebaseData = reportDates.map(date =>
-    firebase
-      .database()
-      .ref(`dates/${uid}/${date.year}/${date.month}/${date.day}`)
-      .once("value")
-      .then(snapshot => snapshot.val())
-  );
+  try {
+    dispatch({ type: START_FETCHING_REPORT_DATA });
+    const rawData = [];
+    await firebase
+      .firestore()
+      .collection("dates")
+      .doc(uid)
+      .collection("records")
+      .where("date", ">=", startDay)
+      .where("date", "<=", endDay)
+      .get()
+      .then(snapshot => snapshot.forEach(item => rawData.push(item.data())));
 
-  const data = await Promise.all(firebaseData);
+    const result = rawData.map(item => ({
+      ...item,
+      hours: item.hours.map(item => ({
+        start: item.start ? item.start.toDate() : null,
+        end: item.end ? item.end.toDate() : null
+      })),
+      breaks: item.breaks.map(item => ({
+        start: item.start ? item.start.toDate() : null,
+        end: item.end ? item.end.toDate() : null
+      }))
+    }));
 
-  dispatch({ type: UPDATE_REPORT_DATA, data });
+    dispatch({ type: UPDATE_REPORT_DATA, data: result });
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: ERROR_FETCHING_REPORT_DATA, error });
+  }
 };

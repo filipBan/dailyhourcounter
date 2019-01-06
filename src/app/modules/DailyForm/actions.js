@@ -113,7 +113,7 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
       .collection("records")
       .doc(getTime(startOfDay(today)).toString())
       .set({
-        date: getTime(startOfDay(today)).toString(),
+        date: getTime(startOfDay(today)),
         wages: wages || getState().settings.wages,
         hours,
         breaks,
