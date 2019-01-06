@@ -3,7 +3,6 @@ import { Redirect, Link } from "react-router-dom";
 
 import Input from "@material-ui/core/Input";
 import Card from "@material-ui/core/Card";
-import Tooltip from "@material-ui/core/Tooltip";
 
 import styled from "styled-components";
 
@@ -85,8 +84,8 @@ const StyledInput = styled(Input)`
 
 class RegisterPage extends Component {
   state = {
-    username: "",
-    wages: 0,
+    userName: "",
+    wages: "",
     email: "",
     password: "",
     confirmPassword: ""
@@ -94,13 +93,22 @@ class RegisterPage extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    const { email, password } = this.props.auth;
-    this.props.logInWithEmailAndPassword(email, password);
+    const { userName, wages, email, password, confirmPassword } = this.state;
+    if (
+      userName &&
+      wages &&
+      email &&
+      password &&
+      confirmPassword &&
+      password === confirmPassword
+    ) {
+      this.props.registerNewAccount(this.state);
+    }
   }
 
   handleInputChange(field, event) {
     const { value } = event.target;
-    this.props.updateInput(field, value);
+    this.setState({ [field]: value });
   }
 
   render() {
@@ -108,7 +116,7 @@ class RegisterPage extends Component {
       return <Redirect to="/today" />;
     }
 
-    const { email, password } = this.props;
+    const { userName, wages, email, password, confirmPassword } = this.state;
     return (
       <Container>
         <Logo>
@@ -119,27 +127,28 @@ class RegisterPage extends Component {
           <FormContainer>
             <Form onSubmit={event => this.submitForm(event)}>
               <StyledInput
-                type="email"
-                value={email}
-                onChange={e => this.handleInputChange("email", e)}
-                placeholder="username"
+                type="string"
+                value={userName}
+                onChange={e => this.handleInputChange("userName", e)}
+                placeholder="user name"
                 fullWidth
+                required
               />
-              <Tooltip title="Delete">
-                <StyledInput
-                  type="email"
-                  value={email}
-                  onChange={e => this.handleInputChange("email", e)}
-                  placeholder="current hourly salary"
-                  fullWidth
-                />
-              </Tooltip>
+              <StyledInput
+                type="number"
+                value={wages}
+                onChange={e => this.handleInputChange("wages", e)}
+                placeholder="current hourly salary"
+                fullWidth
+                required
+              />
               <StyledInput
                 type="email"
                 value={email}
                 onChange={e => this.handleInputChange("email", e)}
                 placeholder="email"
                 fullWidth
+                required
               />
               <StyledInput
                 type="password"
@@ -147,13 +156,15 @@ class RegisterPage extends Component {
                 onChange={e => this.handleInputChange("password", e)}
                 placeholder="password"
                 fullWidth
+                required
               />
               <StyledInput
                 type="password"
-                value={password}
-                onChange={e => this.handleInputChange("password", e)}
+                value={confirmPassword}
+                onChange={e => this.handleInputChange("confirmPassword", e)}
                 placeholder="confirm password"
                 fullWidth
+                required
               />
               <Button
                 type="submit"

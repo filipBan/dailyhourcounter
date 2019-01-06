@@ -1,5 +1,5 @@
 import firebase from "../../../firebaseConfig";
-import { addDays, format, startOfDay, getTime } from "date-fns";
+import { startOfDay, getTime } from "date-fns";
 
 export const UPDATE_REPORT_START_DATE = "UPDATE_REPORT_START_DATE";
 export const UPDATE_REPORT_END_DATE = "UPDATE_REPORT_END_DATE";
