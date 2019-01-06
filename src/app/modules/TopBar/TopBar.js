@@ -14,11 +14,11 @@ const Container = styled.div`
   width: 100%;
   margin-bottom: 1rem;
 
-  @media only screen and (max-width: 800px) {
+  /* @media only screen and (max-width: 800px) {
     & {
       display: none;
     }
-  }
+  } */
 `;
 
 class TopBar extends Component {
