@@ -18,6 +18,11 @@ const LoginPageAsync = Loadable({
   loading: () => <div>Loading...</div>
 });
 
+const RegisterPageAsync = Loadable({
+  loader: () => import("../RegisterPage"),
+  loading: () => <div>Loading...</div>
+});
+
 const ReportScreenAsync = Loadable({
   loader: () => import("../ReportScreen"),
   loading: () => <div>Loading...</div>
@@ -60,6 +65,7 @@ class App extends Component {
             <Route path="/today" component={DailyFormAsync} />
             <Route path="/reports" component={ReportScreenAsync} />
             <Route path="/settings" component={SettingsScreenAsync} />
+            <Route path="/register" component={RegisterPageAsync} />
           </Switch>
         </div>
       </Router>

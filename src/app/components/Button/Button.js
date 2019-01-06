@@ -6,6 +6,8 @@ import Button from "@material-ui/core/Button";
 const Container = styled.div`
   min-width: 16rem;
   position: relative;
+  display: flex;
+  justify-content: center;
 `;
 
 const DeleteBadge = styled.div`
