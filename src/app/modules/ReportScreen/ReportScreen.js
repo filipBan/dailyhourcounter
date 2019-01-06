@@ -92,7 +92,7 @@ class ReportScreen extends Component {
       : 0;
 
   getDayPayment = day =>
-    ((day.workedMinutes - day.breakMinutes) / 60) * (day.wages / 100);
+    ((day.workedMinutes - day.breakMinutes) / 60) * day.wages;
 
   calculateReportSummary = reportData => {
     if (reportData) {
