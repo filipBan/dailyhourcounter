@@ -7,6 +7,10 @@ export const registerNewAccount = props => async dispatch => {
       .auth()
       .createUserWithEmailAndPassword(email, password);
 
+    const currentUser = firebase.auth().currentUser;
+
+    currentUser.sendEmailVerification();
+
     const { uid } = user.user;
 
     await firebase

@@ -51,8 +51,11 @@ export const logoutUser = () => async dispatch => {
 };
 
 export const saveLoggedUserSession = user => dispatch => {
-  dispatch(fetchUserData(user.uid));
-  return dispatch({ type: AUTH_SUCCESS, payload: user });
+  if (user) {
+    dispatch(fetchUserData(user.uid));
+    return dispatch({ type: AUTH_SUCCESS, payload: user });
+  }
+  return dispatch({ type: AUTH_END });
 };
 
 export const updateInput = (field, value) => dispatch =>

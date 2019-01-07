@@ -3,6 +3,7 @@ import {
   AUTH_FAIL,
   AUTH_LOGOUT,
   AUTH_START,
+  AUTH_END,
   UPDATE_INPUT,
   UPDATE_USER_DATA
 } from "./actions";
@@ -18,20 +19,27 @@ const initialState = {
   error: null,
   email: "",
   password: "",
-  emailVerified: false
+  emailVerified: false,
+  checkingAuthState: true
 };
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_START:
       return { ...state, loading: true };
+    case AUTH_END:
+      return {
+        ...initialState,
+        checkingAuthState: false
+      };
     case AUTH_SUCCESS:
       const user = {
         isLoggedIn: true,
         emailVerified: action.payload.emailVerified,
         email: action.payload.email,
         uid: action.payload.uid,
-        loading: false
+        loading: false,
+        checkingAuthState: false
       };
       return { ...state, ...user };
     case AUTH_FAIL:

@@ -1,6 +1,13 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from "react-router-dom";
 import Loadable from "react-loadable";
+
+import ErrorPage from "./ErrorPage";
 
 import SideDrawer from "../SideDrawer";
 
@@ -33,6 +40,34 @@ const SettingsScreenAsync = Loadable({
   loading: () => <div>Loading...</div>
 });
 
+function PrivateRoute({
+  path,
+  canIAccessIt,
+  redirectPath,
+  component: Component
+}) {
+  return (
+    <Route
+      path={path}
+      render={props =>
+        canIAccessIt ? <Component {...props} /> : <Redirect to={redirectPath} />
+      }
+    />
+  );
+}
+
+const CheckAuthState = props => {
+  if (!props.checkingAuthState && props.isLoggedIn) {
+    return <Redirect to="/today" />;
+  }
+
+  if (!props.checkingAuthState && !props.isLoggedIn) {
+    return <Redirect to="/login" />;
+  }
+
+  return <div>Checkking auth state</div>;
+};
+
 class App extends Component {
   constructor() {
     super();
@@ -45,6 +80,7 @@ class App extends Component {
         this.props.saveLoggedUserSession(user);
       } else {
         console.log("No user/Logged out");
+        this.props.saveLoggedUserSession(null);
       }
     });
   }
@@ -56,16 +92,52 @@ class App extends Component {
   }
 
   render() {
+    const { isLoggedIn, emailVerified } = this.props.auth;
+    const canIAccessIt = isLoggedIn ? (emailVerified ? true : false) : false;
+
+    const redirectPath = isLoggedIn ? (emailVerified ? "/" : "/error") : "/";
+
     return (
       <Router>
         <div className="main-app">
           <SideDrawer />
           <Switch>
-            <Route exact path="/" component={LoginPageAsync} />
-            <Route path="/today" component={DailyFormAsync} />
-            <Route path="/reports" component={ReportScreenAsync} />
-            <Route path="/settings" component={SettingsScreenAsync} />
+            <Route
+              exact
+              path="/"
+              render={() => <CheckAuthState {...this.props.auth} />}
+            />
+            <Route path="/login" component={LoginPageAsync} />
             <Route path="/register" component={RegisterPageAsync} />
+            <PrivateRoute
+              path="/today"
+              component={DailyFormAsync}
+              canIAccessIt={canIAccessIt}
+              redirectPath={redirectPath}
+            />
+            <PrivateRoute
+              path="/reports"
+              component={ReportScreenAsync}
+              canIAccessIt={canIAccessIt}
+              redirectPath={redirectPath}
+            />
+            <PrivateRoute
+              path="/settings"
+              component={SettingsScreenAsync}
+              canIAccessIt={canIAccessIt}
+              redirectPath={redirectPath}
+            />
+            <Route
+              path="/error"
+              render={props => {
+                const allProps = {
+                  ...props,
+                  ...this.props.auth,
+                  logoutUser: this.props.logoutUser
+                };
+                return <ErrorPage {...allProps} />;
+              }}
+            />
           </Switch>
         </div>
       </Router>

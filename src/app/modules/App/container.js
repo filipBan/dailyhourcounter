@@ -1,5 +1,8 @@
 import { connect } from "react-redux";
-import { saveLoggedUserSession } from "../../modules/LoginPage/actions";
+import {
+  saveLoggedUserSession,
+  logoutUser
+} from "../../modules/LoginPage/actions";
 import App from "./App";
 
 const mapStateToProps = state => ({
@@ -8,7 +11,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveLoggedUserSession: user => dispatch(saveLoggedUserSession(user))
+  saveLoggedUserSession: user => dispatch(saveLoggedUserSession(user)),
+  logoutUser: () => dispatch(logoutUser())
 });
 
 export default connect(

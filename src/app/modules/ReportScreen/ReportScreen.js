@@ -134,10 +134,6 @@ class ReportScreen extends Component {
   };
 
   render() {
-    if (!this.props.auth.isLoggedIn) {
-      return <Redirect to="/" />;
-    }
-
     const { fetchDateRangeData } = this.props;
     const {
       reportStartDate,
@@ -148,8 +144,6 @@ class ReportScreen extends Component {
     const { uid } = this.props.auth;
 
     const reportSummary = this.calculateReportSummary(reportData);
-
-    console.log({ reportSummary });
 
     return (
       <Container>

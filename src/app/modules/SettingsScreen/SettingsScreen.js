@@ -20,10 +20,6 @@ class SettingsScreen extends Component {
   };
 
   render() {
-    if (!this.props.auth.isLoggedIn) {
-      return <Redirect to="/" />;
-    }
-
     const { wages } = this.props.settings;
 
     return (

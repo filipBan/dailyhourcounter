@@ -115,10 +115,6 @@ class DailyForm extends Component {
       error
     } = this.props;
 
-    if (!this.props.auth.isLoggedIn) {
-      return <Redirect to="/" />;
-    }
-
     const workStart = hours[0].start;
     const workEnd = hours[0].end;
     const breakStart = breaks[0].start;
