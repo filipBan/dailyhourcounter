@@ -35,7 +35,7 @@ const Logo = styled.div`
 `;
 
 const ErrorPage = props => {
-  if (props.checkingAuthState) {
+  if (props.checkingAuthState || !props.isLoggedIn) {
     return <Redirect to="/" />;
   }
 

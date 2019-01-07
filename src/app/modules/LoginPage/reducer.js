@@ -45,7 +45,10 @@ const auth = (state = initialState, action) => {
     case AUTH_FAIL:
       return { ...state, loading: false, error: action.payload };
     case AUTH_LOGOUT:
-      return initialState;
+      return {
+        ...initialState,
+        checkingAuthState: false
+      };
     case UPDATE_INPUT:
       return {
         ...state,
