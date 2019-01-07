@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import { toggleDrawer } from "./actions";
-import { logoutUser } from "../LoginPage/actions";
+import { logoutUser } from "../../modules/LoginPage/actions";
 
 import SideDrawer from "./SideDrawer";
 

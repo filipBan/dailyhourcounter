@@ -7,9 +7,7 @@ import {
 } from "react-router-dom";
 import Loadable from "react-loadable";
 
-import VerifyPage from "./VerifyPage";
-
-import SideDrawer from "../SideDrawer";
+import SideDrawer from "../../components/SideDrawer";
 
 import firebase from "../../../firebaseConfig";
 
@@ -40,6 +38,11 @@ const SettingsScreenAsync = Loadable({
   loading: () => <div>Loading...</div>
 });
 
+const VerifyPageAsync = Loadable({
+  loader: () => import("../VerifyPage"),
+  loading: () => <div>Loading...</div>
+});
+
 function PrivateRoute({
   path,
   canIAccessIt,
@@ -65,7 +68,7 @@ const CheckAuthState = props => {
     return <Redirect to="/login" />;
   }
 
-  return <div>Checkking auth state</div>;
+  return null;
 };
 
 class App extends Component {
@@ -135,7 +138,7 @@ class App extends Component {
                   ...this.props.auth,
                   logoutUser: this.props.logoutUser
                 };
-                return <VerifyPage {...allProps} />;
+                return <VerifyPageAsync {...allProps} />;
               }}
             />
           </Switch>
