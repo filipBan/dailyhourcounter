@@ -33,9 +33,6 @@ const theme = createMuiTheme({
         color: "#000",
         fontSize: "1.2rem"
       },
-      selected: {
-        backgroundColor: blue["500"]
-      },
       current: {
         color: blue["500"]
       }
