@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Loadable from "react-loadable";
 
-import ErrorPage from "./ErrorPage";
+import VerifyPage from "./VerifyPage";
 
 import SideDrawer from "../SideDrawer";
 
@@ -135,7 +135,7 @@ class App extends Component {
                   ...this.props.auth,
                   logoutUser: this.props.logoutUser
                 };
-                return <ErrorPage {...allProps} />;
+                return <VerifyPage {...allProps} />;
               }}
             />
           </Switch>

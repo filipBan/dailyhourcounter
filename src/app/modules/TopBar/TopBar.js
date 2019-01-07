@@ -21,7 +21,7 @@ const Title = styled.span`
 
 const StyledAppbar = styled(AppBar)`
   display: flex;
-  flex-direction: row;
+  flex-direction: row !important;
   justify-content: flex-start;
   align-items: center;
   padding: 0.3rem 1rem;
