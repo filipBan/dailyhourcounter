@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
-import { saveLoggedUserSession, logoutUser } from "../../store/auth/actions";
 import App from "./App";
+
+import { saveLoggedUserSession, logoutUser } from "../../store/auth/actions";
+import { checkNotifications } from "../../store/notifications/actions";
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -9,7 +11,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   saveLoggedUserSession: user => dispatch(saveLoggedUserSession(user)),
-  logoutUser: () => dispatch(logoutUser())
+  logoutUser: () => dispatch(logoutUser()),
+  checkNotifications: uid => dispatch(checkNotifications(uid))
 });
 
 export default connect(

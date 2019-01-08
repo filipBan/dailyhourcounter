@@ -81,6 +81,7 @@ class App extends Component {
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.props.saveLoggedUserSession(user);
+        this.props.checkNotifications(user.uid);
       } else {
         console.log("No user/Logged out");
         this.props.saveLoggedUserSession(null);
