@@ -1,8 +1,5 @@
 import { connect } from "react-redux";
-import {
-  saveLoggedUserSession,
-  logoutUser
-} from "../../modules/LoginPage/actions";
+import { saveLoggedUserSession, logoutUser } from "../../store/auth/actions";
 import App from "./App";
 
 const mapStateToProps = state => ({

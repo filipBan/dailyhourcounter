@@ -1,5 +1,5 @@
 import { UPDATE_WAGES_INPUT } from "./actions";
-import { UPDATE_USER_DATA } from "../LoginPage/actions";
+import { UPDATE_USER_DATA } from "../auth/actions";
 
 const initialState = {
   wages: ""

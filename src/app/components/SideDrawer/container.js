@@ -1,13 +1,13 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { toggleDrawer } from "./actions";
-import { logoutUser } from "../../modules/LoginPage/actions";
+import { toggleDrawer } from "../../store/ui/sideDrawer/actions";
+import { logoutUser } from "../../store/auth/actions";
 
 import SideDrawer from "./SideDrawer";
 
 const mapStateToProps = state => ({
-  visible: state.sideDrawer.visible
+  visible: state.ui.sideDrawer.visible
 });
 
 const mapDispatchToProps = dispatch => ({

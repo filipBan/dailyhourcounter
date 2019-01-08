@@ -1,7 +1,10 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import LoginPage from "./LoginPage";
-import { logInWithEmailAndPassword, updateInput } from "./actions";
+import {
+  logInWithEmailAndPassword,
+  updateInput
+} from "../../store/auth/actions";
 
 const mapStateToProps = state => ({
   auth: state.auth

@@ -7,8 +7,8 @@ import {
   UPDATE_INPUT,
   UPDATE_USER_DATA
 } from "./actions";
-import { REPLACE_DAY_DATA } from "../DailyForm/actions";
-import { UPDATE_WAGES } from "../SettingsScreen/actions";
+import { REPLACE_DAY_DATA } from "../today/actions";
+import { UPDATE_WAGES } from "../settings/actions";
 
 const initialState = {
   isLoggedIn: false,

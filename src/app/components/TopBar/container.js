@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import TopBar from "./TopBar";
-import { toggleDrawer } from "../SideDrawer/actions";
-import { handleCalendarChange } from "../../modules/DailyForm/actions";
+import { toggleDrawer } from "../../store/ui/sideDrawer/actions";
+import { handleCalendarChange } from "../../store/today/actions";
 
 const mapStateToProps = state => ({
   today: state.today.today

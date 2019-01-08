@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import RegisterPage from "./RegisterPage";
 
-import { registerNewAccount } from "./actions";
+import { registerNewAccount } from "../../store/auth/actions";
 
 const mapStateToProps = state => ({
   auth: state.auth
