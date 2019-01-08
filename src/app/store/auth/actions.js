@@ -61,6 +61,39 @@ export const saveLoggedUserSession = user => dispatch => {
 export const updateInput = (field, value) => dispatch =>
   dispatch({ type: UPDATE_INPUT, payload: { field, value } });
 
+const addWelcomeNotice = async uid => {
+  try {
+    await firebase
+      .firestore()
+      .collection("notifications")
+      .doc(uid)
+      .collection("notices")
+      .add({
+        read: false,
+        type: "welcome",
+        component: "WelcomeNotice"
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const addUserRecordToDb = async (uid, userName, wages) => {
+  try {
+    await firebase
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .set({
+        uid,
+        userName,
+        wages
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const registerNewAccount = props => async dispatch => {
   const { email, password, userName, wages } = props;
   try {
@@ -74,15 +107,9 @@ export const registerNewAccount = props => async dispatch => {
 
     const { uid } = user.user;
 
-    await firebase
-      .firestore()
-      .collection("users")
-      .doc(uid)
-      .set({
-        uid,
-        userName,
-        wages
-      });
+    await addUserRecordToDb(uid, userName, wages);
+
+    await addWelcomeNotice(uid);
 
     dispatch({ type: "REGISTRATION COMPLETE" });
   } catch (error) {
