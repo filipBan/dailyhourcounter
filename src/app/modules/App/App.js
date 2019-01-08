@@ -71,6 +71,7 @@ const CheckAuthState = props => {
   return null;
 };
 
+//TODO - switch to React.lazy and Suspense
 class App extends Component {
   constructor() {
     super();
@@ -78,13 +79,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const { checkNotifications, saveLoggedUserSession } = this.props;
+
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.props.saveLoggedUserSession(user);
-        this.props.checkNotifications(user.uid);
+        saveLoggedUserSession(user);
+        checkNotifications(user.uid);
       } else {
-        console.log("No user/Logged out");
-        this.props.saveLoggedUserSession(null);
+        saveLoggedUserSession(null);
       }
     });
   }

@@ -69,9 +69,13 @@ const addWelcomeNotice = async uid => {
       .doc(uid)
       .collection("notices")
       .add({
+        content:
+          "You now have access to a 14 day full trial. After it's over you can get the premium account from your profile page. (It's in the top left menu)",
+        footer: "Enjoy :)",
+        header: "Great to see you!",
         read: false,
-        type: "welcome",
-        component: "WelcomeNotice"
+        subheader: "Thanks for subscribing!",
+        type: "welcome"
       });
   } catch (error) {
     throw new Error(error);

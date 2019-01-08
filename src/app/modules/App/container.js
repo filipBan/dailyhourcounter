@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import App from "./App";
 
 import { saveLoggedUserSession, logoutUser } from "../../store/auth/actions";
-import { checkNotifications } from "../../store/notifications/actions";
+import { checkNotifications } from "../../store/ui/notifications/actions";
 
 const mapStateToProps = state => ({
   auth: state.auth,

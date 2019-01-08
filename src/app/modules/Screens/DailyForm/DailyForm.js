@@ -10,6 +10,8 @@ import Button from "../../../components/Button";
 import TopBar from "../../../components/TopBar";
 import TopControls from "./TopControls";
 
+import Notification from "../../Notification";
+
 const DailyFormContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -106,7 +108,8 @@ class DailyForm extends Component {
       handleCalendarChange,
       resetDailyData,
       uid,
-      error
+      error,
+      modalOpen
     } = this.props;
 
     const workStart = hours[0].start;
@@ -274,6 +277,7 @@ class DailyForm extends Component {
             SAVE
           </Button>
         </ButtonContainer>
+        <Notification />
       </DailyFormContainer>
     );
   }
