@@ -9,7 +9,7 @@ import {
   fetchDailyData,
   resetDailyData,
   handleCalendarChange
-} from "../../store/today/actions";
+} from "../../../store/today/actions";
 
 const mapStateToProps = state => ({
   ...state.today,

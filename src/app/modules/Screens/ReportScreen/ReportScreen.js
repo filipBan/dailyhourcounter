@@ -12,9 +12,8 @@ import TableRow from "@material-ui/core/TableRow";
 
 import { DatePicker } from "material-ui-pickers";
 
-import TopBar from "../../components/TopBar";
-
-import Button from "../../components/Button";
+import TopBar from "../../../components/TopBar";
+import Button from "../../../components/Button";
 
 const StyledTable = styled(Table)`
   th {

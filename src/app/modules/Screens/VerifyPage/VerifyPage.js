@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 
 import styled from "styled-components";
-import Button from "../../components/Button";
+import Button from "../../../components/Button";
 
 const Container = styled.div`
   width: 100%;

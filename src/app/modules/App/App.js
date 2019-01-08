@@ -14,32 +14,32 @@ import firebase from "../../../firebaseConfig";
 import "./style.css";
 
 const DailyFormAsync = Loadable({
-  loader: () => import("../DailyForm"),
+  loader: () => import("../Screens/DailyForm"),
   loading: () => <div>Loading...</div>
 });
 
 const LoginPageAsync = Loadable({
-  loader: () => import("../LoginPage"),
+  loader: () => import("../Screens/LoginPage"),
   loading: () => <div>Loading...</div>
 });
 
 const RegisterPageAsync = Loadable({
-  loader: () => import("../RegisterPage"),
+  loader: () => import("../Screens/RegisterPage"),
   loading: () => <div>Loading...</div>
 });
 
 const ReportScreenAsync = Loadable({
-  loader: () => import("../ReportScreen"),
+  loader: () => import("../Screens/ReportScreen"),
   loading: () => <div>Loading...</div>
 });
 
 const SettingsScreenAsync = Loadable({
-  loader: () => import("../SettingsScreen"),
+  loader: () => import("../Screens/SettingsScreen"),
   loading: () => <div>Loading...</div>
 });
 
 const VerifyPageAsync = Loadable({
-  loader: () => import("../VerifyPage"),
+  loader: () => import("../Screens/VerifyPage"),
   loading: () => <div>Loading...</div>
 });
 

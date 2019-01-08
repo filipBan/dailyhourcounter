@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ReportScreen from "./SettingsScreen";
-import { updateWages, updateWagesInput } from "../../store/settings/actions";
+import { updateWages, updateWagesInput } from "../../../store/settings/actions";
 
 //TODO - likely better to just pass isLoggedIn instead of the whole auth state
 // same applies to most screen components

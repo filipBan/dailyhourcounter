@@ -4,7 +4,7 @@ import LoginPage from "./LoginPage";
 import {
   logInWithEmailAndPassword,
   updateInput
-} from "../../store/auth/actions";
+} from "../../../store/auth/actions";
 
 const mapStateToProps = state => ({
   auth: state.auth

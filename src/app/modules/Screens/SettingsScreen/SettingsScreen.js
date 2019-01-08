@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Input from "@material-ui/core/Input";
 
-import Button from "../../components/Button";
+import Button from "../../../components/Button";
 
 import "./style.css";
 

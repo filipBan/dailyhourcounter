@@ -6,7 +6,7 @@ import {
   changeReportStartDay,
   changeReportEndDay,
   fetchDateRangeData
-} from "../../store/reports/actions";
+} from "../../../store/reports/actions";
 
 const mapStateToProps = state => ({
   auth: state.auth,
