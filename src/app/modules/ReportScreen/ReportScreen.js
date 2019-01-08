@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { format } from "date-fns";
 import styled from "styled-components";
 import Card from "@material-ui/core/Card";
@@ -13,7 +12,7 @@ import TableRow from "@material-ui/core/TableRow";
 
 import { DatePicker } from "material-ui-pickers";
 
-import TopBar from "../TopBar";
+import TopBar from "../../components/TopBar";
 
 import Button from "../../components/Button";
 

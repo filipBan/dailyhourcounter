@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 import today from "../modules/DailyForm/reducer";
 import auth from "../modules/LoginPage/reducer";
-import sideDrawer from "../modules/SideDrawer/reducer";
+import sideDrawer from "../components/SideDrawer/reducer";
 import reports from "../modules/ReportScreen/reducer";
 import settings from "../modules/SettingsScreen/reducer";
 
