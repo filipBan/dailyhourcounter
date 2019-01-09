@@ -25,20 +25,18 @@ export const fetchUserData = uid => async dispatch => {
   }
 };
 
-export const logInWithEmailAndPassword = (
-  email,
-  password
-) => async dispatch => {
-  try {
-    dispatch({ type: AUTH_START });
-    const user = await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password);
-    dispatch({ type: AUTH_SUCCESS, payload: user.user });
-    dispatch(fetchUserData(user.user.uid));
-  } catch (error) {
-    dispatch({ type: AUTH_FAIL, payload: error });
-  }
+export const logInWithEmailAndPassword = (email, password) => dispatch => {
+  dispatch({ type: AUTH_START });
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(user => {
+      if (user) {
+        dispatch({ type: AUTH_SUCCESS, payload: user.user });
+        return dispatch(fetchUserData(user.user.uid));
+      }
+    })
+    .catch(e => dispatch({ type: AUTH_FAIL, payload: e.message }));
 };
 
 export const logoutUser = () => async dispatch => {
