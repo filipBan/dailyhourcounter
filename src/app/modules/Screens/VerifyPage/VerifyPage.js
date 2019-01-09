@@ -34,6 +34,12 @@ const Logo = styled.div`
   margin-bottom: 2rem;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
 const ErrorPage = props => {
   if (props.checkingAuthState || !props.isLoggedIn) {
     return <Redirect to="/" />;
@@ -59,9 +65,18 @@ const ErrorPage = props => {
           If you want to try again later then click on the button below and log
           in with provided details whenever you have a moment.
         </p>
-        <Button variant="outlined" onClick={props.logoutUser}>
-          Logout
-        </Button>
+        <ButtonContainer>
+          <Button
+            fullWidth
+            variant="outlined"
+            onClick={() => window.location.reload()}
+          >
+            Refresh
+          </Button>
+          <Button fullWidth variant="outlined" onClick={props.logoutUser}>
+            Logout
+          </Button>
+        </ButtonContainer>
       </StyledCard>
     </Container>
   );
