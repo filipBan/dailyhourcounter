@@ -5,6 +5,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Button from "../../../components/Button";
 import Snackbar from "../../../components/Snackbar";
+import AuthInput from "../../../components/AuthInput";
 
 import {
   Container,
@@ -13,22 +14,13 @@ import {
   BottomLinks,
   FormContainer,
   Form,
-  StyledInput,
   Progress
 } from "../../../components/StyledComponents/LoginRegister";
 
 class RegisterPage extends Component {
-  state = {
-    userName: "",
-    wages: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  };
-
   submitForm(e) {
     e.preventDefault();
-    const { userName, wages, email, password, confirmPassword } = this.state;
+    const { userName, wages, email, password, confirmPassword } = this.props;
     if (
       userName &&
       wages &&
@@ -37,13 +29,13 @@ class RegisterPage extends Component {
       confirmPassword &&
       password === confirmPassword
     ) {
-      this.props.registerNewAccount(this.state);
+      this.props.registerNewAccount(this.props);
     }
   }
 
   handleInputChange(field, event) {
     const { value } = event.target;
-    this.setState({ [field]: value });
+    this.props.updateInput(field, value);
   }
 
   render() {
@@ -51,9 +43,16 @@ class RegisterPage extends Component {
       return <Redirect to="/today" />;
     }
 
-    const { userName, wages, email, password, confirmPassword } = this.state;
-
-    const { loading, error, clearAuthErrors } = this.props;
+    const {
+      userName,
+      wages,
+      email,
+      password,
+      confirmPassword,
+      loading,
+      error,
+      clearAuthErrors
+    } = this.props;
 
     return (
       <Container>
@@ -65,50 +64,35 @@ class RegisterPage extends Component {
           <FormContainer>
             <Progress>{loading && <LinearProgress />}</Progress>
             <Form onSubmit={event => this.submitForm(event)}>
-              <StyledInput
-                type="string"
+              <AuthInput
+                type="userName"
                 value={userName}
-                onChange={e => this.handleInputChange("userName", e)}
-                placeholder="user name"
-                fullWidth
-                required
-                paddingTop="2rem"
+                onChange={(type, e) => this.handleInputChange(type, e)}
+                paddingtop="2rem"
               />
-              <StyledInput
+              <AuthInput
                 type="number"
                 value={wages}
-                onChange={e => this.handleInputChange("wages", e)}
-                placeholder="current hourly salary"
-                fullWidth
-                required
-                paddingTop="2rem"
+                onChange={(type, e) => this.handleInputChange("wages", e)}
+                paddingtop="2rem"
               />
-              <StyledInput
+              <AuthInput
                 type="email"
                 value={email}
-                onChange={e => this.handleInputChange("email", e)}
-                placeholder="email"
-                fullWidth
-                required
-                paddingTop="2rem"
+                onChange={(type, e) => this.handleInputChange(type, e)}
+                paddingtop="2rem"
               />
-              <StyledInput
+              <AuthInput
                 type="password"
                 value={password}
-                onChange={e => this.handleInputChange("password", e)}
-                placeholder="password"
-                fullWidth
-                required
-                paddingTop="2rem"
+                onChange={(type, e) => this.handleInputChange(type, e)}
+                paddingtop="2rem"
               />
-              <StyledInput
+              <AuthInput
                 type="password"
                 value={confirmPassword}
-                onChange={e => this.handleInputChange("confirmPassword", e)}
-                placeholder="confirm password"
-                fullWidth
-                required
-                paddingTop="2rem"
+                onChange={(type, e) => this.handleInputChange(type, e)}
+                paddingtop="2rem"
               />
               <Button
                 type="submit"

@@ -71,7 +71,7 @@ export const Progress = styled.div`
 export const StyledInput = styled(Input)`
   input {
     font-size: 1.6rem;
-    padding-top: ${props => props.paddingTop};
+    padding-top: ${props => props.paddingtop};
   }
 `;
 

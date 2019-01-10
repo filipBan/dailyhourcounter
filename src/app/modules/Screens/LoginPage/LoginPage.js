@@ -25,8 +25,8 @@ class LoginPage extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    const { email, password } = this.props.auth;
-    this.props.logInWithEmailAndPassword(email, password);
+    const { email, password, logInWithEmailAndPassword } = this.props;
+    logInWithEmailAndPassword(email, password);
   }
 
   handleInputChange(field, event) {
@@ -35,12 +35,11 @@ class LoginPage extends Component {
   }
 
   render() {
-    if (this.props.auth.isLoggedIn) {
+    if (this.props.isLoggedIn) {
       return <Redirect to="/today" />;
     }
 
-    const { email, password, error, loading } = this.props.auth;
-    const { clearAuthErrors } = this.props;
+    const { email, password, error, loading, clearAuthErrors } = this.props;
 
     console.log({ email, password });
 

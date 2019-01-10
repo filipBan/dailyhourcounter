@@ -19,10 +19,13 @@ const initialState = {
   wages: 0,
   loading: false,
   error: null,
-  email: "",
-  password: "",
   emailVerified: false,
-  checkingAuthState: true
+  checkingAuthState: true,
+  login: {
+    email: "",
+    password: ""
+  },
+  register: {}
 };
 
 const auth = (state = initialState, action) => {
@@ -60,7 +63,10 @@ const auth = (state = initialState, action) => {
     case UPDATE_INPUT:
       return {
         ...state,
-        [action.payload.field]: action.payload.value
+        [action.payload.screen]: {
+          ...state[action.payload.screen],
+          [action.payload.field]: action.payload.value
+        }
       };
     case UPDATE_USER_DATA:
       return {

@@ -60,8 +60,8 @@ export const saveLoggedUserSession = user => dispatch => {
   return dispatch({ type: AUTH_END });
 };
 
-export const updateInput = (field, value) => dispatch =>
-  dispatch({ type: UPDATE_INPUT, payload: { field, value } });
+export const updateInput = (screen, field, value) => dispatch =>
+  dispatch({ type: UPDATE_INPUT, payload: { screen, field, value } });
 
 const addWelcomeNotice = async uid => {
   try {
