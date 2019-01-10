@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./app/modules/App";
+
 import { Provider } from "react-redux";
-import registerServiceWorker from "./registerServiceWorker";
-import store from "./app/store";
 
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
 import blue from "@material-ui/core/colors/blue";
 import green from "@material-ui/core/colors/green";
+
+import App from "./app/modules/App";
+import store from "./app/store";
+import registerServiceWorker from "./registerServiceWorker";
+import "./index.css";
 
 const theme = createMuiTheme({
   typography: {

@@ -1,47 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch
 } from "react-router-dom";
-import Loadable from "react-loadable";
-
-import SideDrawer from "../../components/SideDrawer";
-
 import firebase from "../../../firebaseConfig";
 
-import "./style.css";
-
-const DailyFormAsync = Loadable({
-  loader: () => import("../Screens/DailyForm"),
-  loading: () => <div>Loading...</div>
-});
-
-const LoginPageAsync = Loadable({
-  loader: () => import("../Screens/LoginPage"),
-  loading: () => <div>Loading...</div>
-});
-
-const RegisterPageAsync = Loadable({
-  loader: () => import("../Screens/RegisterPage"),
-  loading: () => <div>Loading...</div>
-});
-
-const ReportScreenAsync = Loadable({
-  loader: () => import("../Screens/ReportScreen"),
-  loading: () => <div>Loading...</div>
-});
-
-const SettingsScreenAsync = Loadable({
-  loader: () => import("../Screens/SettingsScreen"),
-  loading: () => <div>Loading...</div>
-});
-
-const VerifyPageAsync = Loadable({
-  loader: () => import("../Screens/VerifyPage"),
-  loading: () => <div>Loading...</div>
-});
+const SideDrawer = React.lazy(() => import("../../components/SideDrawer"));
+const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
+const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
+const RegisterPage = React.lazy(() => import("../Screens/RegisterPage"));
+const ReportScreen = React.lazy(() => import("../Screens/ReportScreen"));
+const SettingsScreen = React.lazy(() => import("../Screens/SettingsScreen"));
+const VerifyPage = React.lazy(() => import("../Screens/VerifyPage"));
 
 function PrivateRoute({
   path,
@@ -71,7 +43,6 @@ const CheckAuthState = props => {
   return null;
 };
 
-//TODO - switch to React.lazy and Suspense
 class App extends Component {
   constructor() {
     super();
@@ -105,46 +76,54 @@ class App extends Component {
 
     return (
       <Router>
-        <div className="main-app">
-          <SideDrawer />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => <CheckAuthState {...this.props.auth} />}
-            />
-            <Route path="/login" component={LoginPageAsync} />
-            <Route path="/register" component={RegisterPageAsync} />
-            <PrivateRoute
-              path="/today"
-              component={DailyFormAsync}
-              canIAccessIt={canIAccessIt}
-              redirectPath={redirectPath}
-            />
-            <PrivateRoute
-              path="/reports"
-              component={ReportScreenAsync}
-              canIAccessIt={canIAccessIt}
-              redirectPath={redirectPath}
-            />
-            <PrivateRoute
-              path="/settings"
-              component={SettingsScreenAsync}
-              canIAccessIt={canIAccessIt}
-              redirectPath={redirectPath}
-            />
-            <Route
-              path="/error"
-              render={props => {
-                const allProps = {
-                  ...props,
-                  ...this.props.auth,
-                  logoutUser: this.props.logoutUser
-                };
-                return <VerifyPageAsync {...allProps} />;
-              }}
-            />
-          </Switch>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start"
+          }}
+        >
+          <Suspense fallback={<div>Loading...</div>}>
+            <SideDrawer />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => <CheckAuthState {...this.props.auth} />}
+              />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/register" component={RegisterPage} />
+              <PrivateRoute
+                path="/today"
+                component={DailyForm}
+                canIAccessIt={canIAccessIt}
+                redirectPath={redirectPath}
+              />
+              <PrivateRoute
+                path="/reports"
+                component={ReportScreen}
+                canIAccessIt={canIAccessIt}
+                redirectPath={redirectPath}
+              />
+              <PrivateRoute
+                path="/settings"
+                component={SettingsScreen}
+                canIAccessIt={canIAccessIt}
+                redirectPath={redirectPath}
+              />
+              <Route
+                path="/error"
+                render={props => {
+                  const allProps = {
+                    ...props,
+                    ...this.props.auth,
+                    logoutUser: this.props.logoutUser
+                  };
+                  return <VerifyPage {...allProps} />;
+                }}
+              />
+            </Switch>
+          </Suspense>
         </div>
       </Router>
     );
