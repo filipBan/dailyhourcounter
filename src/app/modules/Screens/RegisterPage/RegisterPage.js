@@ -3,6 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 
 import Input from "@material-ui/core/Input";
 import Card from "@material-ui/core/Card";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import styled from "styled-components";
 
@@ -64,6 +65,7 @@ const FormContainer = styled(Card)`
   align-items: center;
   width: 30rem;
   padding: 2rem 3rem;
+  position: relative;
 `;
 
 const Form = styled.form`
@@ -80,6 +82,15 @@ const StyledInput = styled(Input)`
     font-size: 1.6rem;
     padding-top: 2.5rem;
   }
+`;
+
+const Progress = styled.div`
+  width: 100%;
+  height: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 `;
 
 class RegisterPage extends Component {
@@ -112,11 +123,14 @@ class RegisterPage extends Component {
   }
 
   render() {
-    if (this.props.auth.isLoggedIn) {
+    if (this.props.isLoggedIn) {
       return <Redirect to="/today" />;
     }
 
     const { userName, wages, email, password, confirmPassword } = this.state;
+
+    const { loading } = this.props;
+
     return (
       <Container>
         <Logo>
@@ -125,6 +139,7 @@ class RegisterPage extends Component {
         </Logo>
         <FormSection>
           <FormContainer>
+            <Progress>{loading && <LinearProgress />}</Progress>
             <Form onSubmit={event => this.submitForm(event)}>
               <StyledInput
                 type="string"
@@ -172,6 +187,7 @@ class RegisterPage extends Component {
                 variant="contained"
                 fullWidth
                 style={{ marginTop: "2rem" }}
+                disabled={loading}
               >
                 Register
               </Button>

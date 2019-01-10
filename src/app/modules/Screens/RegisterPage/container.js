@@ -5,7 +5,8 @@ import RegisterPage from "./RegisterPage";
 import { registerNewAccount } from "../../../store/auth/actions";
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  isLoggedIn: state.auth.isLoggedIn,
+  loading: state.auth.loading
 });
 
 const mapDispatchToProps = dispatch => ({

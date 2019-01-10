@@ -4,8 +4,10 @@ import {
   AUTH_LOGOUT,
   AUTH_START,
   AUTH_END,
+  CLEAR_AUTH_ERRORS,
   UPDATE_INPUT,
-  UPDATE_USER_DATA
+  UPDATE_USER_DATA,
+  REGISTRATION_COMPLETE
 } from "./actions";
 import { REPLACE_DAY_DATA } from "../today/actions";
 import { UPDATE_WAGES } from "../settings/actions";
@@ -28,6 +30,7 @@ const auth = (state = initialState, action) => {
     case AUTH_START:
       return { ...state, loading: true };
     case AUTH_END:
+    case REGISTRATION_COMPLETE:
       return {
         ...initialState,
         checkingAuthState: false
@@ -48,6 +51,11 @@ const auth = (state = initialState, action) => {
       return {
         ...initialState,
         checkingAuthState: false
+      };
+    case CLEAR_AUTH_ERRORS:
+      return {
+        ...state,
+        error: null
       };
     case UPDATE_INPUT:
       return {

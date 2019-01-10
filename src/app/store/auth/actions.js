@@ -6,9 +6,13 @@ export const AUTH_START = "AUTH_START";
 export const AUTH_END = "AUTH_END";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
+export const REGISTRATION_COMPLETE = "REGISTRATION_COMPLETE";
+
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 
 export const UPDATE_INPUT = "UPDATE_INPUT";
+
+export const CLEAR_AUTH_ERRORS = "CLEAR_AUTH_ERRORS";
 
 export const fetchUserData = uid => async dispatch => {
   try {
@@ -99,6 +103,7 @@ const addUserRecordToDb = async (uid, userName, wages) => {
 export const registerNewAccount = props => async dispatch => {
   const { email, password, userName, wages } = props;
   try {
+    dispatch({ type: AUTH_START });
     const user = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
@@ -113,8 +118,10 @@ export const registerNewAccount = props => async dispatch => {
 
     await addWelcomeNotice(uid);
 
-    dispatch({ type: "REGISTRATION COMPLETE" });
+    dispatch({ type: REGISTRATION_COMPLETE });
   } catch (error) {
     console.error(error);
   }
 };
+
+export const clearAuthErrors = () => ({ type: CLEAR_AUTH_ERRORS });

@@ -3,10 +3,12 @@ import { Redirect, Link } from "react-router-dom";
 
 import Input from "@material-ui/core/Input";
 import Card from "@material-ui/core/Card";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import styled from "styled-components";
 
 import Button from "../../../components/Button";
+import Snackbar from "../../../components/Snackbar";
 
 const Container = styled.div`
   display: flex;
@@ -53,11 +55,12 @@ const RegisterLinks = styled.div`
 const FormContainer = styled(Card)`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 30rem;
   height: 30rem;
   padding: 2rem;
+  position: relative;
 `;
 
 const Form = styled.form`
@@ -67,7 +70,7 @@ const Form = styled.form`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 2rem 3rem;
+  padding: 2rem 3rem 0 3rem;
 `;
 
 const StyledInput = styled(Input)`
@@ -76,7 +79,20 @@ const StyledInput = styled(Input)`
   }
 `;
 
+const Progress = styled.div`
+  width: 100%;
+  height: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+`;
+
 class LoginPage extends Component {
+  componentWillUnmount() {
+    this.props.clearAuthErrors();
+  }
+
   submitForm(e) {
     e.preventDefault();
     const { email, password } = this.props.auth;
@@ -93,7 +109,9 @@ class LoginPage extends Component {
       return <Redirect to="/today" />;
     }
 
-    const { email, password } = this.props;
+    const { email, password, error, loading } = this.props.auth;
+    const { clearAuthErrors } = this.props;
+
     return (
       <Container>
         <Logo>
@@ -102,6 +120,7 @@ class LoginPage extends Component {
         </Logo>
         <FormSection>
           <FormContainer>
+            <Progress>{loading && <LinearProgress />}</Progress>
             <Form onSubmit={event => this.submitForm(event)}>
               <StyledInput
                 type="email"
@@ -122,6 +141,7 @@ class LoginPage extends Component {
                 color="primary"
                 variant="contained"
                 fullWidth
+                disabled={loading}
               >
                 Login
               </Button>
@@ -134,6 +154,7 @@ class LoginPage extends Component {
             </RegisterLinks>
           </FormContainer>
         </FormSection>
+        <Snackbar error={error} onClose={clearAuthErrors} />
       </Container>
     );
   }

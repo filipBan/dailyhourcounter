@@ -38,6 +38,12 @@ const CloseButton = styled.div`
   right: 0;
 `;
 
+const StyledButton = styled(Button)`
+  background-color: red;
+  border: 5px solid #272727;
+  font-size: 1.6rem;
+`;
+
 class Notification extends Component {
   closeModal = () => {
     const { closeNotificationModal, notification, userId } = this.props;
@@ -64,13 +70,13 @@ class Notification extends Component {
               <Close />
             </IconButton>
           </CloseButton>
-          <Button
+          <StyledButton
             color="secondary"
             variant="contained"
             onClick={this.closeModal}
           >
             Let's go
-          </Button>
+          </StyledButton>
         </Content>
       </StyledModal>
     );

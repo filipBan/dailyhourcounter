@@ -10,6 +10,12 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const StyledButton = styled(Button)`
+  font-size: 1.6rem;
+
+  background-color: ${props => props.coloroverride};
+`;
+
 const DeleteBadge = styled.div`
   position: absolute;
   top: -0.5rem;
@@ -38,7 +44,7 @@ const SharedButton = props => {
       {props.deleteBadge && (
         <DeleteBadge onClick={props.onDelete}>x</DeleteBadge>
       )}
-      <Button {...props}>{props.children}</Button>
+      <StyledButton {...props}>{props.children}</StyledButton>
     </Container>
   );
 };
