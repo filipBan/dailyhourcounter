@@ -15,7 +15,7 @@ import {
   Form,
   Progress,
   StyledInput
-} from "../../../components/StyledComponents/styledComponents";
+} from "../../../components/StyledComponents/LoginRegister";
 
 class LoginPage extends Component {
   componentWillUnmount() {

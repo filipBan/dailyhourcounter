@@ -15,7 +15,7 @@ import {
   Form,
   StyledInput,
   Progress
-} from "../../../components/StyledComponents/styledComponents";
+} from "../../../components/StyledComponents/LoginRegister";
 
 class RegisterPage extends Component {
   state = {
