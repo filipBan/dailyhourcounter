@@ -41,8 +41,6 @@ class LoginPage extends Component {
 
     const { email, password, error, loading, clearAuthErrors } = this.props;
 
-    console.log({ email, password });
-
     return (
       <Container>
         <Logo>
