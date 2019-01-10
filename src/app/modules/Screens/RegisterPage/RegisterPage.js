@@ -1,98 +1,21 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 
-import Input from "@material-ui/core/Input";
-import Card from "@material-ui/core/Card";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
-import styled from "styled-components";
 
 import Button from "../../../components/Button";
 import Snackbar from "../../../components/Snackbar";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #89cff0;
-  height: auto;
-  min-height: 100vh;
-  width: 100%;
-`;
-
-const Logo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  flex: 1;
-  font-family: "Bungee", cursive;
-  font-size: 4rem;
-`;
-
-const FormSection = styled.div`
-  flex: 3;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  @media only screen and (min-width: 800px) {
-    & {
-      flex: 4;
-    }
-  }
-`;
-
-const TermsLinks = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-  text-align: center;
-  margin-bottom: 2rem;
-
-  a {
-    margin-top: 1rem;
-  }
-`;
-
-const FormContainer = styled(Card)`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 30rem;
-  padding: 2rem 3rem;
-  position: relative;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 2rem;
-`;
-
-const StyledInput = styled(Input)`
-  input {
-    font-size: 1.6rem;
-    padding-top: 2.5rem;
-  }
-`;
-
-const Progress = styled.div`
-  width: 100%;
-  height: 1rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-`;
+import {
+  Container,
+  Logo,
+  FormSection,
+  BottomLinks,
+  FormContainer,
+  Form,
+  StyledInput,
+  Progress
+} from "../../../components/StyledComponents/styledComponents";
 
 class RegisterPage extends Component {
   state = {
@@ -134,7 +57,7 @@ class RegisterPage extends Component {
 
     return (
       <Container>
-        <Logo>
+        <Logo fontSize="4rem">
           <span>Daily</span>
           <span>Hours</span>
         </Logo>
@@ -149,6 +72,7 @@ class RegisterPage extends Component {
                 placeholder="user name"
                 fullWidth
                 required
+                paddingTop="2rem"
               />
               <StyledInput
                 type="number"
@@ -157,6 +81,7 @@ class RegisterPage extends Component {
                 placeholder="current hourly salary"
                 fullWidth
                 required
+                paddingTop="2rem"
               />
               <StyledInput
                 type="email"
@@ -165,6 +90,7 @@ class RegisterPage extends Component {
                 placeholder="email"
                 fullWidth
                 required
+                paddingTop="2rem"
               />
               <StyledInput
                 type="password"
@@ -173,6 +99,7 @@ class RegisterPage extends Component {
                 placeholder="password"
                 fullWidth
                 required
+                paddingTop="2rem"
               />
               <StyledInput
                 type="password"
@@ -181,6 +108,7 @@ class RegisterPage extends Component {
                 placeholder="confirm password"
                 fullWidth
                 required
+                paddingTop="2rem"
               />
               <Button
                 type="submit"
@@ -193,7 +121,7 @@ class RegisterPage extends Component {
                 Register
               </Button>
             </Form>
-            <TermsLinks>
+            <BottomLinks marginBottom="2rem">
               <span>
                 By registering you automatically accept the following:
               </span>
@@ -203,11 +131,11 @@ class RegisterPage extends Component {
               <Link to="/register">
                 <span>Privacy policy</span>
               </Link>
-            </TermsLinks>
-            <TermsLinks>
+            </BottomLinks>
+            <BottomLinks marginBottom="2rem">
               Already have an account?
               <Link to="/">Login</Link>
-            </TermsLinks>
+            </BottomLinks>
           </FormContainer>
         </FormSection>
         <Snackbar error={error} onClose={clearAuthErrors} />

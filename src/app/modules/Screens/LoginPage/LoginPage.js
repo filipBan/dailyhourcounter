@@ -9,9 +9,9 @@ import Snackbar from "../../../components/Snackbar";
 import {
   Container,
   Logo,
-  LoginFormSection,
+  FormSection,
   BottomLinks,
-  LoginFormContainer,
+  FormContainer,
   Form,
   Progress,
   StyledInput
@@ -47,8 +47,8 @@ class LoginPage extends Component {
           <span>Daily</span>
           <span>Hours</span>
         </Logo>
-        <LoginFormSection>
-          <LoginFormContainer>
+        <FormSection>
+          <FormContainer height="30rem">
             <Progress>{loading && <LinearProgress />}</Progress>
             <Form onSubmit={event => this.submitForm(event)}>
               <StyledInput
@@ -81,8 +81,8 @@ class LoginPage extends Component {
                 <span>Register here.</span>
               </Link>
             </BottomLinks>
-          </LoginFormContainer>
-        </LoginFormSection>
+          </FormContainer>
+        </FormSection>
         <Snackbar error={error} onClose={clearAuthErrors} />
       </Container>
     );
