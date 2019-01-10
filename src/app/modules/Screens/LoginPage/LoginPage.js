@@ -13,9 +13,10 @@ import {
   BottomLinks,
   FormContainer,
   Form,
-  Progress,
-  StyledInput
+  Progress
 } from "../../../components/StyledComponents/LoginRegister";
+
+import AuthInput from "../../../components/AuthInput";
 
 class LoginPage extends Component {
   componentWillUnmount() {
@@ -41,6 +42,8 @@ class LoginPage extends Component {
     const { email, password, error, loading } = this.props.auth;
     const { clearAuthErrors } = this.props;
 
+    console.log({ email, password });
+
     return (
       <Container>
         <Logo>
@@ -51,19 +54,15 @@ class LoginPage extends Component {
           <FormContainer height="30rem">
             <Progress>{loading && <LinearProgress />}</Progress>
             <Form onSubmit={event => this.submitForm(event)}>
-              <StyledInput
+              <AuthInput
                 type="email"
                 value={email}
-                onChange={e => this.handleInputChange("email", e)}
-                placeholder="email"
-                fullWidth
+                onChange={(type, e) => this.handleInputChange(type, e)}
               />
-              <StyledInput
+              <AuthInput
                 type="password"
                 value={password}
-                onChange={e => this.handleInputChange("password", e)}
-                placeholder="password"
-                fullWidth
+                onChange={(type, e) => this.handleInputChange(type, e)}
               />
               <Button
                 type="submit"
