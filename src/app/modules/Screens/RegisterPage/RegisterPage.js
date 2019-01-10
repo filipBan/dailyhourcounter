@@ -8,6 +8,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import styled from "styled-components";
 
 import Button from "../../../components/Button";
+import Snackbar from "../../../components/Snackbar";
 
 const Container = styled.div`
   display: flex;
@@ -129,7 +130,7 @@ class RegisterPage extends Component {
 
     const { userName, wages, email, password, confirmPassword } = this.state;
 
-    const { loading } = this.props;
+    const { loading, error, clearAuthErrors } = this.props;
 
     return (
       <Container>
@@ -209,6 +210,7 @@ class RegisterPage extends Component {
             </TermsLinks>
           </FormContainer>
         </FormSection>
+        <Snackbar error={error} onClose={clearAuthErrors} />
       </Container>
     );
   }

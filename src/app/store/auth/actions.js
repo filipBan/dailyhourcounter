@@ -120,7 +120,7 @@ export const registerNewAccount = props => async dispatch => {
 
     dispatch({ type: REGISTRATION_COMPLETE });
   } catch (error) {
-    console.error(error);
+    dispatch({ type: AUTH_FAIL, payload: error.message });
   }
 };
 
