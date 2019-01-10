@@ -1,92 +1,21 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 
-import Input from "@material-ui/core/Input";
-import Card from "@material-ui/core/Card";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
-import styled from "styled-components";
 
 import Button from "../../../components/Button";
 import Snackbar from "../../../components/Snackbar";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #89cff0;
-  height: 100vh;
-  width: 100%;
-`;
-
-const Logo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  flex: 2;
-  font-family: "Bungee", cursive;
-  font-size: 7rem;
-`;
-
-const FormSection = styled.div`
-  flex: 3;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  @media only screen and (min-width: 800px) {
-    & {
-      flex: 4;
-    }
-  }
-`;
-
-const RegisterLinks = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-`;
-
-const FormContainer = styled(Card)`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 30rem;
-  height: 30rem;
-  padding: 2rem;
-  position: relative;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 2rem 3rem 0 3rem;
-`;
-
-const StyledInput = styled(Input)`
-  input {
-    font-size: 1.6rem;
-  }
-`;
-
-const Progress = styled.div`
-  width: 100%;
-  height: 1rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-`;
+import {
+  Container,
+  Logo,
+  LoginFormSection,
+  BottomLinks,
+  LoginFormContainer,
+  Form,
+  Progress,
+  StyledInput
+} from "../../../components/StyledComponents/styledComponents";
 
 class LoginPage extends Component {
   componentWillUnmount() {
@@ -118,8 +47,8 @@ class LoginPage extends Component {
           <span>Daily</span>
           <span>Hours</span>
         </Logo>
-        <FormSection>
-          <FormContainer>
+        <LoginFormSection>
+          <LoginFormContainer>
             <Progress>{loading && <LinearProgress />}</Progress>
             <Form onSubmit={event => this.submitForm(event)}>
               <StyledInput
@@ -146,14 +75,14 @@ class LoginPage extends Component {
                 Login
               </Button>
             </Form>
-            <RegisterLinks>
+            <BottomLinks>
               <span>Don't have an account?</span>
               <Link to="/register">
                 <span>Register here.</span>
               </Link>
-            </RegisterLinks>
-          </FormContainer>
-        </FormSection>
+            </BottomLinks>
+          </LoginFormContainer>
+        </LoginFormSection>
         <Snackbar error={error} onClose={clearAuthErrors} />
       </Container>
     );
