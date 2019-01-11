@@ -125,3 +125,5 @@ export const registerNewAccount = props => async dispatch => {
 };
 
 export const clearAuthErrors = () => ({ type: CLEAR_AUTH_ERRORS });
+
+export const authError = error => ({ type: AUTH_FAIL, payload: error });

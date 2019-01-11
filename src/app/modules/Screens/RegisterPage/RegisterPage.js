@@ -29,7 +29,9 @@ class RegisterPage extends Component {
       confirmPassword &&
       password === confirmPassword
     ) {
-      this.props.registerNewAccount(this.props);
+      return this.props.registerNewAccount(this.props);
+    } else if (password !== confirmPassword) {
+      return this.props.authError("Passwords don't match");
     }
   }
 
@@ -91,7 +93,9 @@ class RegisterPage extends Component {
               <AuthInput
                 type="password"
                 value={confirmPassword}
-                onChange={(type, e) => this.handleInputChange(type, e)}
+                onChange={(type, e) =>
+                  this.handleInputChange("confirmPassword", e)
+                }
                 paddingtop="2rem"
               />
               <Button
