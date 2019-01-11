@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import firebase from "../../../firebaseConfig";
 
-const SideDrawer = React.lazy(() => import("../../components/SideDrawer"));
 const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
 const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
 const RegisterPage = React.lazy(() => import("../Screens/RegisterPage"));
@@ -84,7 +83,6 @@ class App extends Component {
           }}
         >
           <Suspense fallback={<div>Loading...</div>}>
-            <SideDrawer />
             <Switch>
               <Route
                 exact

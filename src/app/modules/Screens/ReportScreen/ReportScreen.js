@@ -15,6 +15,8 @@ import { DatePicker } from "material-ui-pickers";
 import TopBar from "../../../components/TopBar";
 import Button from "../../../components/Button";
 
+const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
+
 const StyledTable = styled(Table)`
   th {
     font-size: 1.4rem;
@@ -146,6 +148,7 @@ class ReportScreen extends Component {
     return (
       <Container>
         <TopBar title="Reports" />
+        <SideDrawer />
         <Progress>{fetching && <LinearProgress />}</Progress>
         <SectionContainer>
           <Section>
@@ -187,6 +190,7 @@ class ReportScreen extends Component {
             <Button
               color="primary"
               variant="contained"
+              disabled={fetching}
               onClick={() =>
                 fetchDateRangeData(reportStartDate, reportEndDate, uid)
               }

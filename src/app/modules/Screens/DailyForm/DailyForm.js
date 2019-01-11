@@ -12,6 +12,8 @@ import TopControls from "./TopControls";
 
 import Notification from "../../Notification";
 
+const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
+
 const DailyFormContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -123,6 +125,8 @@ class DailyForm extends Component {
 
     return (
       <DailyFormContainer>
+        <SideDrawer />
+
         <TopBar title="Save hours" showCalendar />
         <Progress>{savingData && <LinearProgress />}</Progress>
         <HoursContainer>
