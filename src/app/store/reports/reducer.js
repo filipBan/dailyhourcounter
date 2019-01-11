@@ -40,7 +40,8 @@ const reports = (state = initialState, action) => {
     case ERROR_FETCHING_REPORT_DATA:
       return {
         ...state,
-        error: action.error
+        error: action.error,
+        fetching: false
       };
     default:
       return state;

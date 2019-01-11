@@ -199,7 +199,7 @@ class ReportScreen extends Component {
             </Button>
           </Section>
         </SectionContainer>
-        {reportData && (
+        {reportData && reportData.length ? (
           <SectionContainer>
             <TableContainer>
               <StyledTable>
@@ -276,6 +276,11 @@ class ReportScreen extends Component {
                 </TableBody>
               </StyledTable>
             </TableContainer>
+          </SectionContainer>
+        ) : null}
+        {reportData && !reportData.length && (
+          <SectionContainer>
+            <Section>There are no records between those dates.</Section>
           </SectionContainer>
         )}
       </Container>
