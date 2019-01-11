@@ -77,6 +77,14 @@ const Progress = styled.div`
 
 // TODO - split this component up, it's too big
 class ReportScreen extends Component {
+  componentWillUnmount() {
+    const { clearReportData } = this.props;
+    const { reportData } = this.props.reports;
+    if (reportData && !reportData.length) {
+      clearReportData();
+    }
+  }
+
   openPicker = (e, node) => {
     node.open(e);
   };

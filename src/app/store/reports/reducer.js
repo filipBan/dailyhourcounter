@@ -1,4 +1,5 @@
 import {
+  CLEAR_REPORT_DATA,
   ERROR_FETCHING_REPORT_DATA,
   START_FETCHING_REPORT_DATA,
   UPDATE_REPORT_START_DATE,
@@ -43,6 +44,8 @@ const reports = (state = initialState, action) => {
         error: action.error,
         fetching: false
       };
+    case CLEAR_REPORT_DATA:
+      return initialState;
     default:
       return state;
   }

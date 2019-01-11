@@ -7,6 +7,8 @@ export const UPDATE_REPORT_DATA = "UPDATE_REPORT_DATA";
 export const START_FETCHING_REPORT_DATA = "START_FETCHING_REPORT_DATA";
 export const ERROR_FETCHING_REPORT_DATA = "ERROR_FETCHING_REPORT_DATA";
 
+export const CLEAR_REPORT_DATA = "CLEAR_REPORT_DATA";
+
 export const changeReportStartDay = date => ({
   type: UPDATE_REPORT_START_DATE,
   date
@@ -52,3 +54,5 @@ export const fetchDateRangeData = (start, end, uid) => async dispatch => {
     dispatch({ type: ERROR_FETCHING_REPORT_DATA, error });
   }
 };
+
+export const clearReportData = () => ({ type: CLEAR_REPORT_DATA });
