@@ -38,15 +38,6 @@ const Section = styled(Card)`
   text-align: center;
 `;
 
-const ErrorSection = styled(Section)`
-  font-size: 1.2rem;
-  color: red;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const SectionTitle = styled.div`
   font-size: 2rem;
   margin-top: 1rem;

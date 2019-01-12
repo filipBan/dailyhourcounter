@@ -112,6 +112,41 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
     });
   }
 
+  if (getTime(breakStart) < getTime(workStart)) {
+    return dispatch({
+      type: ERROR_SAVING_DAY_DATA,
+      error: "Break can't start before work start."
+    });
+  }
+
+  if (getTime(breakStart) > getTime(breakEnd)) {
+    return dispatch({
+      type: ERROR_SAVING_DAY_DATA,
+      error: "Break can't start after it ended."
+    });
+  }
+
+  if (getTime(breakEnd) < getTime(workStart)) {
+    return dispatch({
+      type: ERROR_SAVING_DAY_DATA,
+      error: "Break can't finish before work started."
+    });
+  }
+
+  if (getTime(breakEnd) > getTime(workEnd)) {
+    return dispatch({
+      type: ERROR_SAVING_DAY_DATA,
+      error: "Break can't finish after works' end."
+    });
+  }
+
+  if (getTime(workStart) > getTime(workEnd)) {
+    return dispatch({
+      type: ERROR_SAVING_DAY_DATA,
+      error: "Work can't end before it started."
+    });
+  }
+
   try {
     dispatch({ type: START_SAVING_DAY_DATA });
 
