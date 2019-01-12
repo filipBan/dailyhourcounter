@@ -242,7 +242,7 @@ class DailyForm extends Component {
             </div>
           </Section>
           <Section>
-            {!error && workedMinutes > 0 ? (
+            {!error && workedMinutes - breakMinutes > 0 ? (
               <span> {totalTimeWorked}</span>
             ) : (
               <span>No records</span>
