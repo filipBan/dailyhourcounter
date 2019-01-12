@@ -9,6 +9,7 @@ export const CLEAR_ALL_TIMES = "CLEAR_ALL_TIMES";
 export const SAVE_TIMES_TO_FIREBASE = "SAVE_TIMES_TO_FIREBASE";
 export const START_FETCHING_DAY_DATA = "START_FETCHING_DAY_DATA";
 export const REPLACE_DAY_DATA = "REPLACE_DAY_DATA";
+export const ERROR_FETCHING_DAY_DATA = "ERROR_FETCHING_DAY_DATA";
 
 export const START_SAVING_DAY_DATA = "START_SAVING_DAY_DATA";
 export const FINISHED_SAVING_DAY_DATA = "FINISHED_SAVING_DAY_DATA";
@@ -168,8 +169,9 @@ export const fetchDailyData = ({ uid, today }) => async dispatch => {
       : {};
 
     return dispatch({ type: REPLACE_DAY_DATA, payload: result });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: ERROR_FETCHING_DAY_DATA, error: error.message });
   }
 };
 

@@ -5,6 +5,7 @@ import {
   START_FETCHING_DAY_DATA,
   FINISHED_SAVING_DAY_DATA,
   ERROR_SAVING_DAY_DATA,
+  ERROR_FETCHING_DAY_DATA,
   UPDATE_BREAKS,
   UPDATE_HOURS,
   SET_TODAY_DATE,
@@ -129,6 +130,12 @@ const today = (state = initialState, action) => {
       return {
         ...state,
         loadingData: true
+      };
+    case ERROR_FETCHING_DAY_DATA:
+      return {
+        ...state,
+        error: action.error,
+        loadingData: false
       };
     case UPDATE_HOURS:
       return {
