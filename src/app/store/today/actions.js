@@ -18,6 +18,11 @@ export const TOGGLE_CALENDAR = "TOGGLE_CALENDAR";
 
 export const RESET_DAY_DATA = "RESET_DAY_DATA";
 
+//TODO - save daily data to localforage first and then load from local memory first.
+// If item is not in local memory then attempt to fetch from database and add to
+// local memory if it's there. Will also affect generating reports, as they also should ask
+// local memory first
+
 export const resetDailyData = ({ today, uid }) => async dispatch => {
   try {
     await firebase
