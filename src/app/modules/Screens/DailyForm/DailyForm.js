@@ -277,7 +277,7 @@ class DailyForm extends Component {
           </Button>
         </ButtonContainer>
         <Notification />
-        <Snackbar error={error} onClose={clearTodayErrors} />
+        {error && <Snackbar error={error} onClose={clearTodayErrors} />}
       </DailyFormContainer>
     );
   }

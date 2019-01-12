@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 
-import LinearProgress from "@material-ui/core/LinearProgress";
-
 import Button from "../../../components/Button";
 
 import {
@@ -17,6 +15,9 @@ import {
 
 import AuthInput from "../../../components/AuthInput";
 
+const LinearProgress = React.lazy(() =>
+  import("@material-ui/core/LinearProgress")
+);
 const Snackbar = React.lazy(() => import("../../../components/Snackbar"));
 
 class LoginPage extends Component {
@@ -80,7 +81,7 @@ class LoginPage extends Component {
             </BottomLinks>
           </FormContainer>
         </FormSection>
-        <Snackbar error={error} onClose={clearAuthErrors} />
+        {error && <Snackbar error={error} onClose={clearAuthErrors} />}
       </Container>
     );
   }

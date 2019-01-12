@@ -127,7 +127,7 @@ class RegisterPage extends Component {
             </BottomLinks>
           </FormContainer>
         </FormSection>
-        <Snackbar error={error} onClose={clearAuthErrors} />
+        {error && <Snackbar error={error} onClose={clearAuthErrors} />}
       </Container>
     );
   }
