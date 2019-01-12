@@ -8,12 +8,12 @@ import styled from "styled-components";
 
 import Button from "../../../components/Button";
 import TopBar from "../../../components/TopBar";
-import Snackbar from "../../../components/Snackbar";
-import Notification from "../../Notification";
 
 import TopControls from "./TopControls";
 
 const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
+const Snackbar = React.lazy(() => import("../../../components/Snackbar"));
+const Notification = React.lazy(() => import("../../Notification"));
 
 const DailyFormContainer = styled.div`
   height: 100%;

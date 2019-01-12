@@ -4,7 +4,6 @@ import { Redirect, Link } from "react-router-dom";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Button from "../../../components/Button";
-import Snackbar from "../../../components/Snackbar";
 import AuthInput from "../../../components/AuthInput";
 
 import {
@@ -16,6 +15,8 @@ import {
   Form,
   Progress
 } from "../../../components/StyledComponents/LoginRegister";
+
+const Snackbar = React.lazy(() => import("../../../components/Snackbar"));
 
 class RegisterPage extends Component {
   submitForm(e) {

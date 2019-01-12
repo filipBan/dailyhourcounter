@@ -4,7 +4,6 @@ import { Redirect, Link } from "react-router-dom";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Button from "../../../components/Button";
-import Snackbar from "../../../components/Snackbar";
 
 import {
   Container,
@@ -17,6 +16,8 @@ import {
 } from "../../../components/StyledComponents/LoginRegister";
 
 import AuthInput from "../../../components/AuthInput";
+
+const Snackbar = React.lazy(() => import("../../../components/Snackbar"));
 
 class LoginPage extends Component {
   componentWillUnmount() {
