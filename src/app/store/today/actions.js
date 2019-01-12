@@ -13,6 +13,7 @@ export const REPLACE_DAY_DATA = "REPLACE_DAY_DATA";
 export const START_SAVING_DAY_DATA = "START_SAVING_DAY_DATA";
 export const FINISHED_SAVING_DAY_DATA = "FINISHED_SAVING_DAY_DATA";
 export const ERROR_SAVING_DAY_DATA = "ERROR_SAVING_DAY_DATA";
+export const CLEAR_TODAY_ERRORS = "CLEAR_TODAY_ERRORS";
 
 export const TOGGLE_CALENDAR = "TOGGLE_CALENDAR";
 
@@ -24,6 +25,7 @@ export const RESET_DAY_DATA = "RESET_DAY_DATA";
 // local memory first
 
 export const resetDailyData = ({ today, uid }) => async dispatch => {
+  dispatch({ type: START_SAVING_DAY_DATA });
   try {
     await firebase
       .firestore()
@@ -170,3 +172,5 @@ export const fetchDailyData = ({ uid, today }) => async dispatch => {
     console.log(err);
   }
 };
+
+export const clearTodayErrors = () => ({ type: CLEAR_TODAY_ERRORS });

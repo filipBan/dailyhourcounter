@@ -8,9 +8,10 @@ import styled from "styled-components";
 
 import Button from "../../../components/Button";
 import TopBar from "../../../components/TopBar";
-import TopControls from "./TopControls";
-
+import Snackbar from "../../../components/Snackbar";
 import Notification from "../../Notification";
+
+import TopControls from "./TopControls";
 
 const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
 
@@ -87,11 +88,6 @@ class DailyForm extends Component {
     }
   }
 
-  handleDateChange = date => {
-    console.log(startOfMinute(date));
-    this.setState({ selectedDate: date });
-  };
-
   openPicker = (e, node) => {
     node.open(e);
   };
@@ -110,6 +106,7 @@ class DailyForm extends Component {
       today,
       handleCalendarChange,
       resetDailyData,
+      clearTodayErrors,
       uid,
       error
     } = this.props;
@@ -118,6 +115,7 @@ class DailyForm extends Component {
     const workEnd = hours[0].end;
     const breakStart = breaks[0].start;
     const breakEnd = breaks[0].end;
+    const processing = savingData || loadingData;
 
     const totalTimeWorked = `${Math.floor(
       (workedMinutes - breakMinutes) / 60
@@ -139,24 +137,24 @@ class DailyForm extends Component {
               <SectionTitle>Hours</SectionTitle>
               <ButtonContainer>
                 <Button
-                  deletebadge={workStart}
+                  deleteBadge={workStart}
                   onDelete={() => updateHours("workStart", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
                   onClick={e => this.openPicker(e, this.hoursStart)}
-                  disabled={savingData || loadingData}
+                  disabled={processing}
                 >
                   {workStart ? format(workStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
-                  deletebadge={workEnd}
+                  deleteBadge={workEnd}
                   onDelete={() => updateHours("workEnd", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
                   onClick={e => this.openPicker(e, this.hoursEnd)}
-                  disabled={!workStart}
+                  disabled={!workStart || processing}
                 >
                   {workEnd ? format(workEnd, "HH:mm") : "End"}
                 </Button>
@@ -197,24 +195,24 @@ class DailyForm extends Component {
               <SectionTitle>Breaks</SectionTitle>
               <ButtonContainer>
                 <Button
-                  deletebadge={breakStart}
+                  deleteBadge={breakStart}
                   onDelete={() => updateBreaks("breakStart", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
                   onClick={e => this.openPicker(e, this.breakStart)}
-                  disabled={!workEnd}
+                  disabled={!workEnd || processing}
                 >
                   {breakStart ? format(breakStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
-                  deletebadge={breakEnd}
+                  deleteBadge={breakEnd}
                   onDelete={() => updateBreaks("breakEnd", null)}
                   variant="outlined"
                   color="primary"
                   fullWidth
                   onClick={e => this.openPicker(e, this.breakEnd)}
-                  disabled={!(workEnd && breakStart)}
+                  disabled={!(workEnd && breakStart) || processing}
                 >
                   {breakEnd ? format(breakEnd, "HH:mm") : "End"}
                 </Button>
@@ -258,11 +256,6 @@ class DailyForm extends Component {
               <span>No records</span>
             )}
           </Section>
-          {error && (
-            <ErrorSection>
-              <span> {error}</span>
-            </ErrorSection>
-          )}
         </HoursContainer>
         <ButtonContainer>
           <Button
@@ -278,12 +271,13 @@ class DailyForm extends Component {
             fullWidth
             color="primary"
             variant="contained"
-            disabled={savingData || loadingData}
+            disabled={savingData || loadingData || error}
           >
             SAVE
           </Button>
         </ButtonContainer>
         <Notification />
+        <Snackbar error={error} onClose={clearTodayErrors} />
       </DailyFormContainer>
     );
   }

@@ -38,10 +38,18 @@ const DeleteBadge = styled.div`
   }
 `;
 
-const SharedButton = ({ onDelete, ...other }) => {
+const DisabledBadge = styled(DeleteBadge)`
+  border: 1px solid #ddd;
+  color: #ddd;
+`;
+
+const SharedButton = ({ onDelete, deleteBadge, ...other }) => {
   return (
     <Container>
-      {other.deletebadge && <DeleteBadge onClick={onDelete}>x</DeleteBadge>}
+      {deleteBadge && !other.disabled && (
+        <DeleteBadge onClick={onDelete}>x</DeleteBadge>
+      )}
+      {deleteBadge && other.disabled && <DisabledBadge>x</DisabledBadge>}
       <StyledButton {...other}>{other.children}</StyledButton>
     </Container>
   );

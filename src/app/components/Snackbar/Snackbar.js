@@ -44,7 +44,7 @@ const SnackbarWrapper = ({ onClose, error }) => {
     <StyledSnackbar
       open={Boolean(error)}
       onClose={onClose}
-      autoHideDuration={3000}
+      autoHideDuration={6000}
     >
       <StyledSnackbarContent
         aria-describedby="client-snackbar"

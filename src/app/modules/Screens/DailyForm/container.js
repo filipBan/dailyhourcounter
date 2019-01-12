@@ -8,7 +8,8 @@ import {
   updateHours,
   fetchDailyData,
   resetDailyData,
-  handleCalendarChange
+  handleCalendarChange,
+  clearTodayErrors
 } from "../../../store/today/actions";
 
 const mapStateToProps = state => ({
@@ -26,7 +27,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(saveHoursAndBreaksToFirebase(dayData)),
   fetchDailyData: props => dispatch(fetchDailyData(props)),
   resetDailyData: props => dispatch(resetDailyData(props)),
-  handleCalendarChange: date => dispatch(handleCalendarChange(date))
+  handleCalendarChange: date => dispatch(handleCalendarChange(date)),
+  clearTodayErrors: () => dispatch(clearTodayErrors())
 });
 
 export default withRouter(
