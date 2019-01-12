@@ -106,12 +106,12 @@ class DailyForm extends Component {
       updateHours,
       saveHoursAndBreaksToFirebase,
       savingData,
+      loadingData,
       today,
       handleCalendarChange,
       resetDailyData,
       uid,
-      error,
-      modalOpen
+      error
     } = this.props;
 
     const workStart = hours[0].start;
@@ -128,7 +128,7 @@ class DailyForm extends Component {
         <SideDrawer />
 
         <TopBar title="Save hours" showCalendar />
-        <Progress>{savingData && <LinearProgress />}</Progress>
+        <Progress>{(savingData || loadingData) && <LinearProgress />}</Progress>
         <HoursContainer>
           <TopControls
             handleCalendarChange={handleCalendarChange}
@@ -145,6 +145,7 @@ class DailyForm extends Component {
                   color="primary"
                   fullWidth
                   onClick={e => this.openPicker(e, this.hoursStart)}
+                  disabled={savingData || loadingData}
                 >
                   {workStart ? format(workStart, "HH:mm") : "Start"}
                 </Button>
@@ -268,6 +269,7 @@ class DailyForm extends Component {
             variant="outlined"
             fullWidth
             onClick={() => resetDailyData({ today, uid })}
+            disabled={savingData || loadingData}
           >
             RESET
           </Button>
@@ -276,7 +278,7 @@ class DailyForm extends Component {
             fullWidth
             color="primary"
             variant="contained"
-            disabled={savingData}
+            disabled={savingData || loadingData}
           >
             SAVE
           </Button>

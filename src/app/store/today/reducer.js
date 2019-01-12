@@ -2,6 +2,7 @@ import { getTime } from "date-fns";
 
 import {
   START_SAVING_DAY_DATA,
+  START_FETCHING_DAY_DATA,
   FINISHED_SAVING_DAY_DATA,
   ERROR_SAVING_DAY_DATA,
   UPDATE_BREAKS,
@@ -31,7 +32,8 @@ const initialState = {
   workedMinutes: 0,
   breakMinutes: 0,
   savingData: false,
-  error: null
+  error: null,
+  loadingData: false
 };
 
 const getMinutes = (hours, breaks, action) => {
@@ -121,6 +123,11 @@ const today = (state = initialState, action) => {
         ...state,
         today: action.date
       };
+    case START_FETCHING_DAY_DATA:
+      return {
+        ...state,
+        loadingData: true
+      };
     case UPDATE_HOURS:
       return {
         ...state,
@@ -193,7 +200,8 @@ const today = (state = initialState, action) => {
     case REPLACE_DAY_DATA:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loadingData: false
       };
 
     case RESET_DAY_DATA:

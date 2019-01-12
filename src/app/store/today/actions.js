@@ -7,6 +7,7 @@ export const UPDATE_HOURS = "UPDATE_HOURS";
 export const UPDATE_BREAKS = "UPDATE_BREAKS";
 export const CLEAR_ALL_TIMES = "CLEAR_ALL_TIMES";
 export const SAVE_TIMES_TO_FIREBASE = "SAVE_TIMES_TO_FIREBASE";
+export const START_FETCHING_DAY_DATA = "START_FETCHING_DAY_DATA";
 export const REPLACE_DAY_DATA = "REPLACE_DAY_DATA";
 
 export const START_SAVING_DAY_DATA = "START_SAVING_DAY_DATA";
@@ -134,6 +135,7 @@ export const handleCalendarChange = date => dispatch => {
 };
 
 export const fetchDailyData = ({ uid, today }) => async dispatch => {
+  dispatch({ type: START_FETCHING_DAY_DATA });
   try {
     const data = await firebase
       .firestore()
