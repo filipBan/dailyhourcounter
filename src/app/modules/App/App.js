@@ -89,8 +89,8 @@ class App extends Component {
                 path="/"
                 render={() => <CheckAuthState {...this.props.auth} />}
               />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/register" component={RegisterPage} />
+              <Route path="/login" render={() => <LoginPage />} />
+              <Route path="/register" render={() => <RegisterPage />} />
               <PrivateRoute
                 path="/today"
                 component={DailyForm}

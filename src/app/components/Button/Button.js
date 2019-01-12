@@ -38,13 +38,11 @@ const DeleteBadge = styled.div`
   }
 `;
 
-const SharedButton = props => {
+const SharedButton = ({ onDelete, ...other }) => {
   return (
     <Container>
-      {props.deleteBadge && (
-        <DeleteBadge onClick={props.onDelete}>x</DeleteBadge>
-      )}
-      <StyledButton {...props}>{props.children}</StyledButton>
+      {other.deletebadge && <DeleteBadge onClick={onDelete}>x</DeleteBadge>}
+      <StyledButton {...other}>{other.children}</StyledButton>
     </Container>
   );
 };

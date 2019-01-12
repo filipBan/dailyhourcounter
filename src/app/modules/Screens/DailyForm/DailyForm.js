@@ -139,7 +139,7 @@ class DailyForm extends Component {
               <SectionTitle>Hours</SectionTitle>
               <ButtonContainer>
                 <Button
-                  deleteBadge={workStart}
+                  deletebadge={workStart}
                   onDelete={() => updateHours("workStart", null)}
                   variant="outlined"
                   color="primary"
@@ -150,7 +150,7 @@ class DailyForm extends Component {
                   {workStart ? format(workStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
-                  deleteBadge={workEnd}
+                  deletebadge={workEnd}
                   onDelete={() => updateHours("workEnd", null)}
                   variant="outlined"
                   color="primary"
@@ -197,7 +197,7 @@ class DailyForm extends Component {
               <SectionTitle>Breaks</SectionTitle>
               <ButtonContainer>
                 <Button
-                  deleteBadge={breakStart}
+                  deletebadge={breakStart}
                   onDelete={() => updateBreaks("breakStart", null)}
                   variant="outlined"
                   color="primary"
@@ -208,7 +208,7 @@ class DailyForm extends Component {
                   {breakStart ? format(breakStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
-                  deleteBadge={breakEnd}
+                  deletebadge={breakEnd}
                   onDelete={() => updateBreaks("breakEnd", null)}
                   variant="outlined"
                   color="primary"
