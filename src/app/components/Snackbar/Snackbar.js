@@ -12,7 +12,7 @@ const StyledSnackbarContent = styled(SnackbarContent)`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: red;
+  background-color: #f44336 !important;
   flex-direction: row;
   border-radius: 0.5rem;
 

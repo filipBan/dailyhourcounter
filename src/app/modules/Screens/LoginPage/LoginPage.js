@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
-
+import LinearProgress from "@material-ui/core/LinearProgress";
 import Button from "../../../components/Button";
 
 import {
@@ -14,11 +14,7 @@ import {
 } from "../../../components/StyledComponents/LoginRegister";
 
 import AuthInput from "../../../components/AuthInput";
-
-const LinearProgress = React.lazy(() =>
-  import("@material-ui/core/LinearProgress")
-);
-const Snackbar = React.lazy(() => import("../../../components/Snackbar"));
+import Snackbar from "../../../components/Snackbar";
 
 class LoginPage extends Component {
   componentWillUnmount() {
@@ -81,7 +77,7 @@ class LoginPage extends Component {
             </BottomLinks>
           </FormContainer>
         </FormSection>
-        {error && <Snackbar error={error} onClose={clearAuthErrors} />}
+        <Snackbar error={error} onClose={clearAuthErrors} />
       </Container>
     );
   }

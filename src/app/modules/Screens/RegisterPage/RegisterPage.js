@@ -5,6 +5,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Button from "../../../components/Button";
 import AuthInput from "../../../components/AuthInput";
+import Snackbar from "../../../components/Snackbar";
 
 import {
   Container,
@@ -15,8 +16,6 @@ import {
   Form,
   Progress
 } from "../../../components/StyledComponents/LoginRegister";
-
-const Snackbar = React.lazy(() => import("../../../components/Snackbar"));
 
 class RegisterPage extends Component {
   submitForm(e) {
@@ -127,7 +126,7 @@ class RegisterPage extends Component {
             </BottomLinks>
           </FormContainer>
         </FormSection>
-        {error && <Snackbar error={error} onClose={clearAuthErrors} />}
+        <Snackbar error={error} onClose={clearAuthErrors} />
       </Container>
     );
   }

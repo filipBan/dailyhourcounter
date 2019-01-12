@@ -34,6 +34,7 @@ const initialState = {
   breakMinutes: 0,
   savingData: false,
   error: null,
+  savingDisabled: false,
   loadingData: false
 };
 
@@ -143,7 +144,10 @@ const today = (state = initialState, action) => {
           }
         ],
         workedMinutes: getMinutes(state.hours, state.breaks, action),
-        error: checkForErrors(state.hours, state.breaks, action)
+        error: checkForErrors(state.hours, state.breaks, action),
+        savingDisabled: Boolean(
+          checkForErrors(state.hours, state.breaks, action)
+        )
       };
     case UPDATE_BREAKS:
       return {
@@ -161,7 +165,10 @@ const today = (state = initialState, action) => {
           }
         ],
         breakMinutes: getMinutes(state.hours, state.breaks, action),
-        error: checkForErrors(state.hours, state.breaks, action)
+        error: checkForErrors(state.hours, state.breaks, action),
+        savingDisabled: Boolean(
+          checkForErrors(state.hours, state.breaks, action)
+        )
       };
     case START_SAVING_DAY_DATA:
       return {
