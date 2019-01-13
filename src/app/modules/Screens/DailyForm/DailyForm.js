@@ -136,6 +136,7 @@ class DailyForm extends Component {
                   fullWidth
                   onClick={e => this.openPicker(e, this.hoursStart)}
                   disabled={processing}
+                  aria-label="work-start"
                 >
                   {workStart ? format(workStart, "HH:mm") : "Start"}
                 </Button>
@@ -147,11 +148,13 @@ class DailyForm extends Component {
                   fullWidth
                   onClick={e => this.openPicker(e, this.hoursEnd)}
                   disabled={!workStart || processing}
+                  aria-label="work-end"
                 >
                   {workEnd ? format(workEnd, "HH:mm") : "End"}
                 </Button>
                 <div style={{ display: "none" }}>
                   <DateTimePicker
+                    aria-label="work-start-picker"
                     initialFocusedDate={today}
                     minDate={today}
                     maxDate={today}
@@ -194,6 +197,7 @@ class DailyForm extends Component {
                   fullWidth
                   onClick={e => this.openPicker(e, this.breakStart)}
                   disabled={!workEnd || processing}
+                  aria-label="break-start"
                 >
                   {breakStart ? format(breakStart, "HH:mm") : "Start"}
                 </Button>
@@ -205,6 +209,7 @@ class DailyForm extends Component {
                   fullWidth
                   onClick={e => this.openPicker(e, this.breakEnd)}
                   disabled={!(workEnd && breakStart) || processing}
+                  aria-label="break-end"
                 >
                   {breakEnd ? format(breakEnd, "HH:mm") : "End"}
                 </Button>
@@ -263,7 +268,10 @@ class DailyForm extends Component {
             fullWidth
             color="primary"
             variant="contained"
-            disabled={savingData || loadingData || savingDisabled || error}
+            disabled={
+              savingData || loadingData || savingDisabled || Boolean(error)
+            }
+            aria-label="day-form-save"
           >
             SAVE
           </Button>

@@ -66,7 +66,7 @@ class SideDrawer extends Component {
             />
           </ListItem>
 
-          <ListItem
+          {/* <ListItem
             button
             onClick={() => this.handleRedirect("/settings")}
             style={{ padding: "2rem" }}
@@ -78,7 +78,7 @@ class SideDrawer extends Component {
               primary={"Settings"}
               primaryTypographyProps={{ variant: "h5" }}
             />
-          </ListItem>
+          </ListItem> */}
 
           <ListItem
             button

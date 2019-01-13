@@ -103,12 +103,12 @@ class App extends Component {
                 canIAccessIt={canIAccessIt}
                 redirectPath={redirectPath}
               />
-              <PrivateRoute
+              {/* <PrivateRoute
                 path="/settings"
                 component={SettingsScreen}
                 canIAccessIt={canIAccessIt}
                 redirectPath={redirectPath}
-              />
+              /> */}
               <Route
                 path="/error"
                 render={props => {

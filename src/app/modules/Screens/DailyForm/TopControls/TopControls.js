@@ -21,10 +21,10 @@ const Container = styled(Card)`
 
 const TopControls = ({ handleCalendarChange, today }) => {
   return (
-    <Container>
+    <Container aria-label="top-controls">
       <IconButton
         color="inherit"
-        aria-label="left"
+        aria-label="date-back"
         onClick={() => handleCalendarChange(subDays(today, 1))}
       >
         <ChevronLeft />
@@ -32,7 +32,7 @@ const TopControls = ({ handleCalendarChange, today }) => {
       <span>{format(today, "EEEE do MMM yyyy").toString()}</span>
       <IconButton
         color="inherit"
-        aria-label="left"
+        aria-label="date-forward"
         onClick={() => handleCalendarChange(addDays(today, 1))}
       >
         <ChevronRight />
