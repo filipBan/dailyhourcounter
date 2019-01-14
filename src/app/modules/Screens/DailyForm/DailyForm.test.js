@@ -56,6 +56,10 @@ function renderWithRedux(ui, store) {
   };
 }
 
+// =============================================
+// Defaults and basic controls
+// =============================================
+
 it("Can render with redux with defaults", () => {
   const store = createStore(reducer, initialState);
   renderWithRedux(<DailyForm />, store);
@@ -187,4 +191,271 @@ it("All picker buttons except workStart to be disabled when none have data", () 
   expect(getByLabelText("work-end").disabled).toBeTruthy();
   expect(getByLabelText("break-start").disabled).toBeTruthy();
   expect(getByLabelText("break-end").disabled).toBeTruthy();
+});
+
+// =============================================
+// Input error handling
+// =============================================
+
+it("Displays a correct error when trying to save with only work start provided", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T16:00"),
+          end: null
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "You need to provide work start and end times to save."
+  );
+});
+
+it("Displays a correct error when trying to save with work start, end and break start", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T10:00"),
+          end: new Date("2019-01-10T10:00")
+        }
+      ],
+      breaks: [
+        {
+          start: new Date("2019-01-10T11:00"),
+          end: null
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "You need to provide both break start and end times to save them."
+  );
+});
+
+it("Displays a correct error when trying to save with workStart > workEnd", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T12:00"),
+          end: new Date("2019-01-10T10:00")
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "Work can't end before it started. If you worked overnight remember to also change the day."
+  );
+});
+
+it("Displays a correct error when trying to save with breakStart < workStart", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T10:00"),
+          end: new Date("2019-01-10T17:00")
+        }
+      ],
+      breaks: [
+        {
+          start: new Date("2019-01-10T09:00"),
+          end: new Date("2019-01-10T12:00")
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "Break can't start before work start."
+  );
+});
+
+it("Displays a correct error when trying to save with breakStart > workEnd", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T10:00"),
+          end: new Date("2019-01-10T17:00")
+        }
+      ],
+      breaks: [
+        {
+          start: new Date("2019-01-10T18:00"),
+          end: new Date("2019-01-10T12:00")
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "Break can't start after works' end."
+  );
+});
+
+it("Displays a correct error when trying to save with breakStart > breakEnd", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T10:00"),
+          end: new Date("2019-01-10T17:00")
+        }
+      ],
+      breaks: [
+        {
+          start: new Date("2019-01-10T13:00"),
+          end: new Date("2019-01-10T12:00")
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "Break can't start after it ended."
+  );
+});
+
+it("Displays a correct error when trying to save with breakEnd > workEnd", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T10:00"),
+          end: new Date("2019-01-10T17:00")
+        }
+      ],
+      breaks: [
+        {
+          start: new Date("2019-01-10T11:00"),
+          end: new Date("2019-01-10T18:00")
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "Break can't finish after works' end."
+  );
+});
+
+it("Displays a correct error when trying to save with workStart === workEnd", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T10:00"),
+          end: new Date("2019-01-10T10:00")
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "Work start and end can't be the same."
+  );
+});
+
+it("Displays a correct error when trying to save with breakStart === breakEnd", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T10:00"),
+          end: new Date("2019-01-10T19:00")
+        }
+      ],
+      breaks: [
+        {
+          start: new Date("2019-01-10T12:00"),
+          end: new Date("2019-01-10T12:00")
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "Break start and end can't be the same."
+  );
+});
+
+it("Displays a correct error when trying to save with breakStart === breakEnd", () => {
+  const state = {
+    ...initialState,
+    today: {
+      ...initialState.today,
+      hours: [
+        {
+          start: new Date("2019-01-10T10:00"),
+          end: new Date("2019-01-10T19:00")
+        }
+      ],
+      breaks: [
+        {
+          start: new Date("2019-01-10T12:00"),
+          end: new Date("2019-01-10T12:00")
+        }
+      ]
+    }
+  };
+  const store = createStore(reducer, state, applyMiddleware(thunk));
+  const { getByLabelText } = renderWithRedux(<DailyForm />, store);
+  fireEvent.click(getByLabelText("day-form-save"));
+
+  expect(getByLabelText("snackbar").textContent).toBe(
+    "Break start and end can't be the same."
+  );
 });

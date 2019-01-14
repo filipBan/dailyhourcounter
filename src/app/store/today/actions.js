@@ -84,11 +84,19 @@ const checkForErrors = (hours, breaks) => {
   }
 
   if ((breakStart && !breakEnd) || (!breakStart && breakEnd)) {
-    return "You need to provide both break start and end times to save.";
+    return "You need to provide both break start and end times to save them.";
+  }
+
+  if (getTime(workStart) === getTime(workEnd)) {
+    return "Work start and end can't be the same.";
+  }
+
+  if (getTime(breakStart) === getTime(breakEnd)) {
+    return "Break start and end can't be the same.";
   }
 
   if (getTime(workStart) > getTime(workEnd)) {
-    return "Work can't end before it started.";
+    return "Work can't end before it started. If you worked overnight remember to also change the day.";
   }
 
   if (breakStart && getTime(breakStart) < getTime(workStart)) {
@@ -101,10 +109,6 @@ const checkForErrors = (hours, breaks) => {
 
   if (breakStart && breakEnd && getTime(breakStart) > getTime(breakEnd)) {
     return "Break can't start after it ended.";
-  }
-
-  if (breakEnd && getTime(breakEnd) < getTime(workStart)) {
-    return "Break can't finish before work started.";
   }
 
   if (breakEnd && getTime(breakEnd) > getTime(workEnd)) {
