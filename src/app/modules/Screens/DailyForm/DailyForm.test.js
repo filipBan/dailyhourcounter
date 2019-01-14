@@ -65,6 +65,13 @@ it("Can render with redux with defaults", () => {
   renderWithRedux(<DailyForm />, store);
 });
 
+it("Should match the snapshot", () => {
+  const store = createStore(reducer, initialState);
+  const { container } = renderWithRedux(<DailyForm />, store);
+
+  expect(container).toMatchSnapshot();
+});
+
 it("Has correct start values in the select buttons", () => {
   const store = createStore(reducer, initialState);
   const { getByLabelText } = renderWithRedux(<DailyForm />, store);
