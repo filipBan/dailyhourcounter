@@ -117,7 +117,11 @@ class DailyForm extends Component {
         <SideDrawer />
 
         <TopBar title="Save hours" showCalendar />
-        <Progress>{(savingData || loadingData) && <LinearProgress />}</Progress>
+        <Progress>
+          {(savingData || loadingData) && (
+            <LinearProgress aria-label="loading-progress" />
+          )}
+        </Progress>
         <HoursContainer>
           <TopControls
             handleCalendarChange={handleCalendarChange}

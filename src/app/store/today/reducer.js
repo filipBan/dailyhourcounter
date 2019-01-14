@@ -2,8 +2,9 @@ import { getTime } from "date-fns";
 
 import {
   START_SAVING_DAY_DATA,
-  START_FETCHING_DAY_DATA,
   FINISHED_SAVING_DAY_DATA,
+  START_FETCHING_DAY_DATA,
+  FINISH_FETCHING_DAY_DATA,
   ERROR_SAVING_DAY_DATA,
   ERROR_FETCHING_DAY_DATA,
   UPDATE_BREAKS,
@@ -65,6 +66,11 @@ const today = (state = initialState, action) => {
       return {
         ...state,
         loadingData: true
+      };
+    case FINISH_FETCHING_DAY_DATA:
+      return {
+        ...state,
+        loadingData: false
       };
     case ERROR_FETCHING_DAY_DATA:
       return {
@@ -142,8 +148,7 @@ const today = (state = initialState, action) => {
     case REPLACE_DAY_DATA:
       return {
         ...state,
-        ...action.payload,
-        loadingData: false
+        ...action.payload
       };
 
     case CLEAR_TODAY_ERRORS:

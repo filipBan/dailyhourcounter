@@ -11,9 +11,9 @@ import thunk from "redux-thunk";
 import DailyForm from "./container";
 import reducer from "../../../store/reducers";
 
-const initialState = {
+const initialState = Object.freeze({
   today: {
-    today: new Date("2019-01-10T16:00"),
+    today: new Date("2019-01-10T16:00Z"),
     hours: [
       {
         start: null,
@@ -30,14 +30,13 @@ const initialState = {
     breakMinutes: 0,
     savingData: false,
     error: null,
-    savingDisabled: false,
     loadingData: false
   },
   auth: {},
   ui: {},
   reports: {},
   settings: {}
-};
+});
 
 afterEach(cleanup);
 
@@ -83,7 +82,7 @@ it("Has correct start values in the select buttons", () => {
 });
 
 it("Has correct default date displayed in the top controls", () => {
-  const store = createStore(reducer, initialState);
+  const store = createStore(reducer, initialState, applyMiddleware(thunk));
   const { getByLabelText } = renderWithRedux(<DailyForm />, store);
   expect(getByLabelText("top-controls").textContent).toBe(
     "Thursday 10th Jan 2019"
@@ -465,4 +464,54 @@ it("Displays a correct error when trying to save with breakStart === breakEnd", 
   expect(getByLabelText("snackbar").textContent).toBe(
     "Break start and end can't be the same."
   );
+});
+
+// =============================================
+// Loading progress bar
+// =============================================
+
+it("Shows a loading bar when data fetching starts", () => {
+  const store = createStore(reducer, initialState, applyMiddleware(thunk));
+  const { queryByLabelText } = renderWithRedux(<DailyForm />, store);
+
+  //how to test save-click here, and not the implementation?????????
+
+  expect(queryByLabelText("loading-progress")).toBeNull();
+  store.dispatch({ type: "START_FETCHING_DAY_DATA" });
+  expect(queryByLabelText("loading-progress")).toBeTruthy();
+});
+
+it("Hides the loading bar when data fetching stops", () => {
+  const store = createStore(reducer, initialState, applyMiddleware(thunk));
+  const { queryByLabelText } = renderWithRedux(<DailyForm />, store);
+
+  //how to test save-click here, and not the implementation?????????
+
+  store.dispatch({ type: "START_FETCHING_DAY_DATA" });
+  expect(queryByLabelText("loading-progress")).toBeTruthy();
+  store.dispatch({ type: "FINISH_FETCHING_DAY_DATA" });
+  expect(queryByLabelText("loading-progress")).toBeNull();
+});
+
+it("Shows a loading progress bar when saving data", () => {
+  const store = createStore(reducer, initialState, applyMiddleware(thunk));
+  const { queryByLabelText } = renderWithRedux(<DailyForm />, store);
+
+  //how to test save-click here, and not the implementation?????????
+
+  expect(queryByLabelText("loading-progress")).toBeNull();
+  store.dispatch({ type: "START_SAVING_DAY_DATA" });
+  expect(queryByLabelText("loading-progress")).toBeTruthy();
+});
+
+it("Hides the loading bar when data saving stops", () => {
+  const store = createStore(reducer, initialState, applyMiddleware(thunk));
+  const { queryByLabelText } = renderWithRedux(<DailyForm />, store);
+
+  //how to test save-click here, and not the implementation?????????
+
+  store.dispatch({ type: "START_SAVING_DAY_DATA" });
+  expect(queryByLabelText("loading-progress")).toBeTruthy();
+  store.dispatch({ type: "FINISHED_SAVING_DAY_DATA" });
+  expect(queryByLabelText("loading-progress")).toBeNull();
 });

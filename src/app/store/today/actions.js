@@ -8,6 +8,7 @@ export const UPDATE_BREAKS = "UPDATE_BREAKS";
 export const CLEAR_ALL_TIMES = "CLEAR_ALL_TIMES";
 export const SAVE_TIMES_TO_FIREBASE = "SAVE_TIMES_TO_FIREBASE";
 export const START_FETCHING_DAY_DATA = "START_FETCHING_DAY_DATA";
+export const FINISH_FETCHING_DAY_DATA = "FINISH_FETCHING_DAY_DATA";
 export const REPLACE_DAY_DATA = "REPLACE_DAY_DATA";
 export const ERROR_FETCHING_DAY_DATA = "ERROR_FETCHING_DAY_DATA";
 
@@ -202,6 +203,7 @@ export const fetchDailyData = ({ uid, today }) => async dispatch => {
         }
       : {};
 
+    dispatch({ type: FINISH_FETCHING_DAY_DATA });
     return dispatch({ type: REPLACE_DAY_DATA, payload: result });
   } catch (error) {
     console.log(error);
