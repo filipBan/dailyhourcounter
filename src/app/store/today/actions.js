@@ -70,6 +70,50 @@ export const calculateTotalBreaks = (breakStart, breakEnd) => {
   return 0;
 };
 
+const checkForErrors = (hours, breaks) => {
+  const workStart = hours[0].start;
+  const workEnd = hours[0].end;
+  const breakStart = breaks[0].start;
+  const breakEnd = breaks[0].end;
+  if (
+    (!workStart && !workEnd) ||
+    (workStart && !workEnd) ||
+    (!workStart && workEnd)
+  ) {
+    return "You need to provide work start and end times to save.";
+  }
+
+  if ((breakStart && !breakEnd) || (!breakStart && breakEnd)) {
+    return "You need to provide both break start and end times to save.";
+  }
+
+  if (getTime(workStart) > getTime(workEnd)) {
+    return "Work can't end before it started.";
+  }
+
+  if (breakStart && getTime(breakStart) < getTime(workStart)) {
+    return "Break can't start before work start.";
+  }
+
+  if (breakStart && getTime(breakStart) > getTime(workEnd)) {
+    return "Break can't start after works' end.";
+  }
+
+  if (breakStart && breakEnd && getTime(breakStart) > getTime(breakEnd)) {
+    return "Break can't start after it ended.";
+  }
+
+  if (breakEnd && getTime(breakEnd) < getTime(workStart)) {
+    return "Break can't finish before work started.";
+  }
+
+  if (breakEnd && getTime(breakEnd) > getTime(workEnd)) {
+    return "Break can't finish after works' end.";
+  }
+
+  return null;
+};
+
 export const saveHoursAndBreaksToFirebase = dayData => async (
   dispatch,
   getState
@@ -85,65 +129,16 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
     uid
   } = dayData;
 
-  const workStart = hours[0].start;
-  const workEnd = hours[0].end;
-  const breakStart = breaks[0].start;
-  const breakEnd = breaks[0].end;
-
   if (error) {
     return;
   }
 
-  if (
-    (!workStart && !workEnd) ||
-    (workStart && !workEnd) ||
-    (!workStart && workEnd)
-  ) {
-    return dispatch({
-      type: ERROR_SAVING_DAY_DATA,
-      error: "You need to provide work start and end times to save."
-    });
-  }
+  const savingError = checkForErrors(hours, breaks);
 
-  if ((breakStart && !breakEnd) || (!breakStart && breakEnd)) {
+  if (savingError) {
     return dispatch({
       type: ERROR_SAVING_DAY_DATA,
-      error: "You need to provide both break start and end times to save."
-    });
-  }
-
-  if (getTime(breakStart) < getTime(workStart)) {
-    return dispatch({
-      type: ERROR_SAVING_DAY_DATA,
-      error: "Break can't start before work start."
-    });
-  }
-
-  if (getTime(breakStart) > getTime(breakEnd)) {
-    return dispatch({
-      type: ERROR_SAVING_DAY_DATA,
-      error: "Break can't start after it ended."
-    });
-  }
-
-  if (getTime(breakEnd) < getTime(workStart)) {
-    return dispatch({
-      type: ERROR_SAVING_DAY_DATA,
-      error: "Break can't finish before work started."
-    });
-  }
-
-  if (getTime(breakEnd) > getTime(workEnd)) {
-    return dispatch({
-      type: ERROR_SAVING_DAY_DATA,
-      error: "Break can't finish after works' end."
-    });
-  }
-
-  if (getTime(workStart) > getTime(workEnd)) {
-    return dispatch({
-      type: ERROR_SAVING_DAY_DATA,
-      error: "Work can't end before it started."
+      savingError
     });
   }
 

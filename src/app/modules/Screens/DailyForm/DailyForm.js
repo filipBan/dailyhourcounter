@@ -99,8 +99,7 @@ class DailyForm extends Component {
       resetDailyData,
       clearTodayErrors,
       uid,
-      error,
-      savingDisabled
+      error
     } = this.props;
 
     const workStart = hours[0].start;
@@ -268,9 +267,7 @@ class DailyForm extends Component {
             fullWidth
             color="primary"
             variant="contained"
-            disabled={
-              savingData || loadingData || savingDisabled || Boolean(error)
-            }
+            disabled={savingData || loadingData}
             aria-label="day-form-save"
           >
             SAVE
