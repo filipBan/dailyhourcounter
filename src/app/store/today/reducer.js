@@ -118,7 +118,7 @@ const today = (state = initialState, action) => {
       return {
         ...state,
         savingData: false,
-        error: action.savingError
+        error: action.error
       };
     case CLEAR_ALL_TIMES:
       return {
