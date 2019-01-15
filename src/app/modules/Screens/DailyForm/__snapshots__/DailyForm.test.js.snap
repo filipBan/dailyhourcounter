@@ -346,6 +346,7 @@ exports[`Should match the snapshot 1`] = `
         </div>
       </div>
       <div
+        aria-label="total-time-display"
         class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-VigVT kXzkUW"
       >
         <span>
@@ -360,6 +361,7 @@ exports[`Should match the snapshot 1`] = `
         class="sc-bdVaJa jsQcrn"
       >
         <button
+          aria-label="reset-button"
           class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-outlined-295 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
           tabindex="0"
           type="button"

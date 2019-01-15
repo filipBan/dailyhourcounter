@@ -47,7 +47,9 @@ const SharedButton = ({ onDelete, deleteBadge, ...other }) => {
   return (
     <Container>
       {deleteBadge && !other.disabled && (
-        <DeleteBadge onClick={onDelete}>x</DeleteBadge>
+        <DeleteBadge onClick={onDelete} aria-label="delete-badge">
+          x
+        </DeleteBadge>
       )}
       {deleteBadge && other.disabled && <DisabledBadge>x</DisabledBadge>}
       <StyledButton {...other}>{other.children}</StyledButton>

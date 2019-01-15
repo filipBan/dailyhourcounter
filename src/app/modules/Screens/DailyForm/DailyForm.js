@@ -249,9 +249,9 @@ class DailyForm extends Component {
               </ButtonContainer>
             </div>
           </Section>
-          <Section>
+          <Section aria-label="total-time-display">
             {!error && workedMinutes - breakMinutes > 0 ? (
-              <span> {totalTimeWorked}</span>
+              <span>{totalTimeWorked}</span>
             ) : (
               <span>No records</span>
             )}
@@ -263,6 +263,7 @@ class DailyForm extends Component {
             fullWidth
             onClick={() => resetDailyData({ today, uid })}
             disabled={savingData || loadingData}
+            aria-label="reset-button"
           >
             RESET
           </Button>
