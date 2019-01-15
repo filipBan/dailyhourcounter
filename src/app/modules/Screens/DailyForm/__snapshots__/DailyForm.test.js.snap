@@ -82,10 +82,10 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
             />
           </button>
           <div
+            aria-label="top-bar-calendar"
             style="display: none;"
           >
             <div
-              aria-label="top-bar-calendar"
               class="MuiFormControl-root-231"
             >
               <div
