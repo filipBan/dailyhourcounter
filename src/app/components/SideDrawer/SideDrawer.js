@@ -36,6 +36,7 @@ class SideDrawer extends Component {
         onOpen={this.toggleSwipeDrawer(true)}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
+        aria-label="side-drawer"
       >
         <List>
           <ListItem

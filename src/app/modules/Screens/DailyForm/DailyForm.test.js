@@ -965,4 +965,26 @@ describe("Daily Form integration tests", () => {
 
     expect(getByLabelText("work-start").textContent).toBe("Start");
   });
+
+  it("Doesn't render the side drawer by default", () => {
+    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const { queryByLabelText } = renderWithRedux(
+      <ConnectedDailyForm fetchDailyData={() => {}} />,
+      store
+    );
+
+    expect(queryByLabelText("side-drawer")).toBeNull();
+  });
+
+  it("Opens the side drawer when the menu button is clicked", () => {
+    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const { getByLabelText } = renderWithRedux(
+      <ConnectedDailyForm fetchDailyData={() => {}} />,
+      store
+    );
+
+    fireEvent.click(getByLabelText("menu-toggle"));
+
+    expect(getByLabelText("side-drawer")).toBeTruthy();
+  });
 });

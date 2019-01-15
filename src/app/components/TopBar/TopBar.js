@@ -51,7 +51,7 @@ class TopBar extends Component {
         <StyledAppbar position="static">
           <IconButton
             color="inherit"
-            aria-label="Menu"
+            aria-label="menu-toggle"
             onClick={() => toggleDrawer(true)}
           >
             <MenuIcon />
@@ -61,12 +61,12 @@ class TopBar extends Component {
             <Calendar>
               <IconButton
                 color="inherit"
-                aria-label="Menu"
+                aria-label="calendar-toggle"
                 onClick={this.openPicker}
               >
                 <CalendarToday />
               </IconButton>
-              <div style={{ display: "none" }}>
+              <div style={{ display: "none" }} aria-label="top-bar-calendar">
                 <DatePicker
                   value={today}
                   onChange={this.changeCalendarDate}
