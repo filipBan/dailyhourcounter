@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
 
@@ -18,6 +19,17 @@ import {
 } from "../../../components/StyledComponents/LoginRegister";
 
 class RegisterPage extends Component {
+  static defaultProps = {
+    isLoggedIn: false,
+    loading: false,
+    error: null,
+    email: "",
+    password: "",
+    confirmPassword: "",
+    userName: "",
+    wages: ""
+  };
+
   submitForm(e) {
     e.preventDefault();
     const { userName, wages, email, password, confirmPassword } = this.props;
@@ -71,24 +83,28 @@ class RegisterPage extends Component {
                 value={userName}
                 onChange={(type, e) => this.handleInputChange(type, e)}
                 paddingtop="2rem"
+                aria-label="user-name-field"
               />
               <AuthInput
                 type="number"
                 value={wages}
                 onChange={(type, e) => this.handleInputChange("wages", e)}
                 paddingtop="2rem"
+                aria-label="wages-field"
               />
               <AuthInput
                 type="email"
                 value={email}
                 onChange={(type, e) => this.handleInputChange(type, e)}
                 paddingtop="2rem"
+                aria-label="email-field"
               />
               <AuthInput
                 type="password"
                 value={password}
                 onChange={(type, e) => this.handleInputChange(type, e)}
                 paddingtop="2rem"
+                aria-label="password-field"
               />
               <AuthInput
                 type="password"
@@ -97,6 +113,7 @@ class RegisterPage extends Component {
                   this.handleInputChange("confirmPassword", e)
                 }
                 paddingtop="2rem"
+                aria-label="confirm-password-field"
               />
               <Button
                 type="submit"
@@ -105,6 +122,7 @@ class RegisterPage extends Component {
                 fullWidth
                 style={{ marginTop: "2rem" }}
                 disabled={loading}
+                aria-label="register-submit-button"
               >
                 Register
               </Button>
