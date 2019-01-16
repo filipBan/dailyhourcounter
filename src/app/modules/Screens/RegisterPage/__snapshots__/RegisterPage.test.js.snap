@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Registration Page integration tests Should match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-ifAKCX jqsrVw"
+  >
+    <div
+      class="sc-EHOje fOdpYX"
+      font-size="4rem"
+    >
+      <span>
+        Daily
+      </span>
+      <span>
+        Hours
+      </span>
+    </div>
+    <div
+      class="sc-bZQynM dwLWXh"
+    >
+      <div
+        class="MuiPaper-root-103 MuiPaper-elevation1-106 MuiPaper-rounded-104 MuiCard-root-102 sc-gzVnrw cdSxro"
+      >
+        <div
+          class="sc-dnqmqq fUazxu"
+        />
+        <form
+          class="sc-htoDjs hSkATx"
+        >
+          <div
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              placeholder="userName"
+              required=""
+              type="userName"
+              value=""
+            />
+          </div>
+          <div
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              placeholder="current hourly wages"
+              required=""
+              type="number"
+              value=""
+            />
+          </div>
+          <div
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              placeholder="email"
+              required=""
+              type="email"
+              value=""
+            />
+          </div>
+          <div
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              placeholder="password"
+              required=""
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              placeholder="password"
+              required=""
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="sc-bdVaJa jsQcrn"
+          >
+            <button
+              class="MuiButtonBase-root-186 MuiButton-root-160 MuiButton-contained-171 MuiButton-containedPrimary-172 MuiButton-raised-174 MuiButton-raisedPrimary-175 MuiButton-fullWidth-185 sc-bwzfXH hjMHYi"
+              style="margin-top: 2rem;"
+              tabindex="0"
+              type="submit"
+            >
+              <span
+                class="MuiButton-label-161"
+              >
+                Register
+              </span>
+              <span
+                class="MuiTouchRipple-root-196"
+              />
+            </button>
+          </div>
+        </form>
+        <div
+          class="sc-gqjmRU bcCUVQ"
+        >
+          <span>
+            By registering you automatically accept the following:
+          </span>
+          <a
+            href="/register"
+          >
+            <span>
+              Terms and Conditions
+            </span>
+          </a>
+          <a
+            href="/register"
+          >
+            <span>
+              Privacy policy
+            </span>
+          </a>
+        </div>
+        <div
+          class="sc-gqjmRU bcCUVQ"
+        >
+          Already have an account?
+          <a
+            href="/"
+          >
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
