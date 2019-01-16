@@ -199,7 +199,7 @@ class DailyForm extends Component {
                   color="primary"
                   fullWidth
                   onClick={e => this.openPicker(e, this.breakStart)}
-                  disabled={!workEnd || processing}
+                  disabled={!(workStart && workEnd) || processing}
                   aria-label="break-start"
                 >
                   {breakStart ? format(breakStart, "HH:mm") : "Start"}
@@ -211,7 +211,7 @@ class DailyForm extends Component {
                   color="primary"
                   fullWidth
                   onClick={e => this.openPicker(e, this.breakEnd)}
-                  disabled={!(workEnd && breakStart) || processing}
+                  disabled={!(workStart && workEnd && breakStart) || processing}
                   aria-label="break-end"
                 >
                   {breakEnd ? format(breakEnd, "HH:mm") : "End"}

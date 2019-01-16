@@ -987,4 +987,76 @@ describe("Daily Form integration tests", () => {
 
     expect(getByLabelText("side-drawer")).toBeTruthy();
   });
+
+  it("Enables the workEnd button once workStart data is provided", () => {
+    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const { getByLabelText } = renderWithRedux(
+      <ConnectedDailyForm fetchDailyData={() => {}} />,
+      store
+    );
+
+    expect(getByLabelText("work-end").disabled).toBeTruthy();
+
+    store.dispatch({
+      type: "UPDATE_HOURS",
+      timeType: "workStart",
+      amount: "2019-01-10T08:00"
+    });
+
+    expect(getByLabelText("work-end").disabled).not.toBeTruthy();
+  });
+
+  it("Enables the breakStart button once workStart and workEnd data is provided", () => {
+    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const { getByLabelText } = renderWithRedux(
+      <ConnectedDailyForm fetchDailyData={() => {}} />,
+      store
+    );
+
+    expect(getByLabelText("break-start").disabled).toBeTruthy();
+
+    store.dispatch({
+      type: "UPDATE_HOURS",
+      timeType: "workStart",
+      amount: "2019-01-10T14:30"
+    });
+
+    store.dispatch({
+      type: "UPDATE_HOURS",
+      timeType: "workEnd",
+      amount: "2019-01-10T17:30"
+    });
+
+    expect(getByLabelText("break-start").disabled).not.toBeTruthy();
+  });
+
+  it("Enables the breakEnd button once workStart, workEnd and breakStart data is provided", () => {
+    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const { getByLabelText } = renderWithRedux(
+      <ConnectedDailyForm fetchDailyData={() => {}} />,
+      store
+    );
+
+    expect(getByLabelText("break-end").disabled).toBeTruthy();
+
+    store.dispatch({
+      type: "UPDATE_HOURS",
+      timeType: "workStart",
+      amount: "2019-01-10T14:30"
+    });
+
+    store.dispatch({
+      type: "UPDATE_HOURS",
+      timeType: "workEnd",
+      amount: "2019-01-10T17:30"
+    });
+
+    store.dispatch({
+      type: "UPDATE_BREAKS",
+      timeType: "breakStart",
+      amount: "2019-01-10T12:00"
+    });
+
+    expect(getByLabelText("break-end").disabled).not.toBeTruthy();
+  });
 });
