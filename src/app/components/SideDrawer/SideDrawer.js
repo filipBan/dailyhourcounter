@@ -6,7 +6,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import TrendingUp from "@material-ui/icons/TrendingUp";
-import Settings from "@material-ui/icons/Settings";
+import Today from "@material-ui/icons/Today";
+// import Settings from "@material-ui/icons/Settings";
 import Person from "@material-ui/icons/Person";
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -45,7 +46,7 @@ class SideDrawer extends Component {
             style={{ padding: "2rem" }}
           >
             <ListItemIcon>
-              <TrendingUp />
+              <Today />
             </ListItemIcon>
             <ListItemText
               primary={"Today"}
