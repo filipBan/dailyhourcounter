@@ -29,7 +29,8 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           class="sc-htoDjs hSkATx"
         >
           <div
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            aria-label="user-name-field"
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -42,7 +43,8 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             />
           </div>
           <div
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            aria-label="wages-field"
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -55,7 +57,8 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             />
           </div>
           <div
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            aria-label="email-field"
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -68,7 +71,8 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             />
           </div>
           <div
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            aria-label="password-field"
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -81,7 +85,8 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             />
           </div>
           <div
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 MuiInputBase-fullWidth-152 MuiInput-fullWidth-137 sc-iwsKbI fdnPLx"
+            aria-label="confirm-password-field"
+            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -97,6 +102,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             class="sc-bdVaJa jsQcrn"
           >
             <button
+              aria-label="register-submit-button"
               class="MuiButtonBase-root-186 MuiButton-root-160 MuiButton-contained-171 MuiButton-containedPrimary-172 MuiButton-raised-174 MuiButton-raisedPrimary-175 MuiButton-fullWidth-185 sc-bwzfXH hjMHYi"
               style="margin-top: 2rem;"
               tabindex="0"

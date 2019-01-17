@@ -144,7 +144,11 @@ class RegisterPage extends Component {
             </BottomLinks>
           </FormContainer>
         </FormSection>
-        <Snackbar error={error} onClose={clearAuthErrors} />
+        <Snackbar
+          error={error}
+          onClose={clearAuthErrors}
+          aria-label="register-error-snackbar"
+        />
       </Container>
     );
   }

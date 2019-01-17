@@ -107,4 +107,17 @@ describe("Registration Page integration tests", () => {
 
     expect(container).toMatchSnapshot();
   });
+
+  it("Should not allow to submit the form without filling out all required fields", () => {
+    const store = createStore(reducer, initialState);
+    const registerNewAccountMock = jest.fn();
+    const { getByLabelText } = renderWithRedux(
+      <ConnectedRegisterPage registerNewAccount={registerNewAccountMock} />,
+      store
+    );
+
+    fireEvent.click(getByLabelText("register-submit-button"));
+
+    expect(registerNewAccountMock).not.toHaveBeenCalled();
+  });
 });
