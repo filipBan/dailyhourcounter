@@ -11,7 +11,7 @@ const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
 const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
 const RegisterPage = React.lazy(() => import("../Screens/RegisterPage"));
 const ReportScreen = React.lazy(() => import("../Screens/ReportScreen"));
-const SettingsScreen = React.lazy(() => import("../Screens/SettingsScreen"));
+// const SettingsScreen = React.lazy(() => import("../Screens/SettingsScreen"));
 const VerifyPage = React.lazy(() => import("../Screens/VerifyPage"));
 
 function PrivateRoute({
@@ -50,6 +50,7 @@ class App extends Component {
 
   componentDidMount() {
     const { checkNotifications, saveLoggedUserSession } = this.props;
+    window.addEventListener("updates-available", e => {});
 
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if (user) {
