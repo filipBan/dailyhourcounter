@@ -2,7 +2,7 @@ import { UPDATE_WAGES_INPUT } from "./actions";
 import { UPDATE_USER_DATA } from "../auth/actions";
 
 const initialState = {
-  wages: ""
+  wages: 0
 };
 
 const settings = (state = initialState, action) => {
@@ -10,13 +10,13 @@ const settings = (state = initialState, action) => {
     case UPDATE_WAGES_INPUT:
       return {
         ...state,
-        wages: action.wages
+        wages: parseFloat(action.wages)
       };
 
     case UPDATE_USER_DATA:
       return {
         ...state,
-        wages: action.user.wages
+        wages: parseFloat(action.user.wages)
       };
     default:
       return state;

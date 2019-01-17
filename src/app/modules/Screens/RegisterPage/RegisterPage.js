@@ -27,7 +27,7 @@ class RegisterPage extends Component {
     password: "",
     confirmPassword: "",
     userName: "",
-    wages: ""
+    wages: null
   };
 
   submitForm(e) {

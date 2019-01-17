@@ -93,7 +93,7 @@ const addUserRecordToDb = async (uid, userName, wages) => {
       .set({
         uid,
         userName,
-        wages
+        wages: parseFloat(wages)
       });
   } catch (error) {
     throw new Error(error);
