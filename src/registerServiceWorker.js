@@ -69,7 +69,6 @@ function registerValidSW(swUrl) {
               const event = new CustomEvent("updates-available", {
                 isUpdateAvailable: true
               });
-              console.log("Firing a custom event");
               window.dispatchEvent(event);
             } else {
               // At this point, everything has been precached.
