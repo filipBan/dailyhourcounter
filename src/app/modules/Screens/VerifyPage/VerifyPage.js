@@ -41,10 +41,6 @@ const ButtonContainer = styled.div`
 `;
 
 const ErrorPage = props => {
-  if (props.checkingAuthState || !props.isLoggedIn) {
-    return <Redirect to="/" />;
-  }
-
   if (props.isLoggedIn && props.emailVerified && !props.checkingAuthState) {
     return <Redirect to="/today" />;
   }
