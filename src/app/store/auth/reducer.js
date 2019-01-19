@@ -18,7 +18,6 @@ const initialState = {
   uid: "",
   wages: 0,
   loading: false,
-  error: null,
   emailVerified: false,
   checkingAuthState: true,
   login: {
@@ -49,17 +48,13 @@ const auth = (state = initialState, action) => {
       };
       return { ...state, ...user };
     case AUTH_FAIL:
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false };
     case AUTH_LOGOUT:
       return {
         ...initialState,
         checkingAuthState: false
       };
-    case CLEAR_AUTH_ERRORS:
-      return {
-        ...state,
-        error: null
-      };
+
     case UPDATE_INPUT:
       return {
         ...state,

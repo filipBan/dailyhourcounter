@@ -8,11 +8,22 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import styled from "styled-components";
 
+const getBgColor = type => {
+  switch (type) {
+    case "error":
+      return "#f44336";
+    case "success":
+      return "#43a047";
+    default:
+      return "white";
+  }
+};
+
 const StyledSnackbarContent = styled(SnackbarContent)`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #f44336 !important;
+  background-color: ${({ type }) => getBgColor(type)} !important;
   flex-direction: row;
   border-radius: 0.5rem;
 
@@ -22,7 +33,7 @@ const StyledSnackbarContent = styled(SnackbarContent)`
     align-items: center;
     justify-content: space-between;
 
-    #error-message {
+    #message {
       margin-left: 1rem;
     }
   }
@@ -39,26 +50,27 @@ const StyledSnackbar = styled(Snackbar)`
   }
 `;
 
-const SnackbarWrapper = ({ onClose, error }) => {
+const SnackbarWrapper = ({ message, type, resetSnackbar }) => {
   return (
     <StyledSnackbar
-      open={Boolean(error)}
-      onClose={onClose}
+      open={Boolean(message)}
+      onClose={resetSnackbar}
       autoHideDuration={6000}
       aria-label="snackbar"
     >
       <StyledSnackbarContent
         aria-describedby="client-snackbar"
+        type={type}
         message={
-          error && (
+          message && (
             <div id="client-snackbar">
               <ErrorIcon />
-              <span id="error-message">{error}</span>
+              <span id="message">{message}</span>
               <IconButton
                 key="close"
                 aria-label="Close"
                 color="inherit"
-                onClick={onClose}
+                onClick={resetSnackbar}
               >
                 <CloseIcon />
               </IconButton>

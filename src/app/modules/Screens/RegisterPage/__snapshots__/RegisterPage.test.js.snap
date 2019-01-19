@@ -20,7 +20,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
       class="sc-bZQynM dwLWXh"
     >
       <div
-        class="MuiPaper-root-103 MuiPaper-elevation1-106 MuiPaper-rounded-104 MuiCard-root-102 sc-gzVnrw cdSxro"
+        class="MuiPaper-root-96 MuiPaper-elevation1-99 MuiPaper-rounded-97 MuiCard-root-95 sc-gzVnrw cdSxro"
       >
         <div
           class="sc-dnqmqq fUazxu"
@@ -30,12 +30,12 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
         >
           <div
             aria-label="user-name-field"
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
             <input
-              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="userName"
               required=""
               type="userName"
@@ -44,12 +44,12 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           </div>
           <div
             aria-label="wages-field"
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
             <input
-              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="current hourly wages"
               required=""
               type="number"
@@ -58,12 +58,12 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           </div>
           <div
             aria-label="email-field"
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
             <input
-              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="email"
               required=""
               type="email"
@@ -72,12 +72,12 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           </div>
           <div
             aria-label="password-field"
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
             <input
-              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="password"
               required=""
               type="password"
@@ -86,12 +86,12 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           </div>
           <div
             aria-label="confirm-password-field"
-            class="MuiInputBase-root-143 MuiInput-root-130 MuiInput-underline-134 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
             <input
-              class="MuiInputBase-input-153 MuiInput-input-138 MuiInputBase-inputType-156 MuiInput-inputType-141"
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="password"
               required=""
               type="password"
@@ -103,18 +103,18 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           >
             <button
               aria-label="register-submit-button"
-              class="MuiButtonBase-root-186 MuiButton-root-160 MuiButton-contained-171 MuiButton-containedPrimary-172 MuiButton-raised-174 MuiButton-raisedPrimary-175 MuiButton-fullWidth-185 sc-bwzfXH hjMHYi"
+              class="MuiButtonBase-root-179 MuiButton-root-153 MuiButton-contained-164 MuiButton-containedPrimary-165 MuiButton-raised-167 MuiButton-raisedPrimary-168 MuiButton-fullWidth-178 sc-bwzfXH hjMHYi"
               style="margin-top: 2rem;"
               tabindex="0"
               type="submit"
             >
               <span
-                class="MuiButton-label-161"
+                class="MuiButton-label-154"
               >
                 Register
               </span>
               <span
-                class="MuiTouchRipple-root-196"
+                class="MuiTouchRipple-root-182"
               />
             </button>
           </div>

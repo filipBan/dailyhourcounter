@@ -40,7 +40,7 @@ export const logInWithEmailAndPassword = (email, password) => dispatch => {
         return dispatch(fetchUserData(user.user.uid));
       }
     })
-    .catch(e => dispatch({ type: AUTH_FAIL, payload: e.message }));
+    .catch(e => dispatch({ type: AUTH_FAIL, error: e.message }));
 };
 
 export const logoutUser = () => async dispatch => {
@@ -48,7 +48,7 @@ export const logoutUser = () => async dispatch => {
     await firebase.auth().signOut();
     dispatch({ type: AUTH_LOGOUT });
   } catch (error) {
-    dispatch({ type: AUTH_FAIL, payload: error.message });
+    dispatch({ type: AUTH_FAIL, error: error.message });
   }
 };
 
@@ -120,10 +120,10 @@ export const registerNewAccount = props => async dispatch => {
 
     dispatch({ type: REGISTRATION_COMPLETE });
   } catch (error) {
-    dispatch({ type: AUTH_FAIL, payload: error.message });
+    dispatch({ type: AUTH_FAIL, error: error.message });
   }
 };
 
 export const clearAuthErrors = () => ({ type: CLEAR_AUTH_ERRORS });
 
-export const authError = error => ({ type: AUTH_FAIL, payload: error });
+export const authError = error => ({ type: AUTH_FAIL, error });

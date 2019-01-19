@@ -75,7 +75,6 @@ const today = (state = initialState, action) => {
     case ERROR_FETCHING_DAY_DATA:
       return {
         ...state,
-        error: action.error,
         loadingData: false
       };
     case UPDATE_HOURS:
@@ -123,8 +122,7 @@ const today = (state = initialState, action) => {
     case ERROR_SAVING_DAY_DATA:
       return {
         ...state,
-        savingData: false,
-        error: action.error
+        savingData: false
       };
     case CLEAR_ALL_TIMES:
       return {

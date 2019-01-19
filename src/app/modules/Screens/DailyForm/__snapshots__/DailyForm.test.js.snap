@@ -3,7 +3,7 @@
 exports[`Daily Form integration tests Should match the snapshot 1`] = `
 <div>
   <div
-    class="sc-gZMcBi SljQN"
+    class="sc-dnqmqq kJyICP"
   >
     <div
       class="MuiPrivateSwipeArea-root-313 MuiPrivateSwipeArea-anchorLeft-314"
@@ -106,14 +106,14 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
       </header>
     </div>
     <div
-      class="sc-jzJRlG iFFAeW"
+      class="sc-jTzLTM eYTvzx"
     />
     <div
-      class="sc-gqjmRU bsIMyw"
+      class="sc-iwsKbI eddggv"
     >
       <div
         aria-label="top-controls"
-        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-iwsKbI bvFwXD"
+        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-htoDjs duXPJJ"
       >
         <button
           aria-label="date-back"
@@ -178,16 +178,16 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
         </button>
       </div>
       <div
-        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-VigVT kXzkUW"
+        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-gZMcBi bUofGR"
       >
         <div>
           <div
-            class="sc-jTzLTM kbYNv"
+            class="sc-gqjmRU kCsuCD"
           >
             Hours
           </div>
           <div
-            class="sc-fjdhpX fiFGUa"
+            class="sc-VigVT eIqbpS"
           >
             <div
               class="sc-bdVaJa jsQcrn"
@@ -266,12 +266,12 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
         </div>
         <div>
           <div
-            class="sc-jTzLTM kbYNv"
+            class="sc-gqjmRU kCsuCD"
           >
             Breaks
           </div>
           <div
-            class="sc-fjdhpX fiFGUa"
+            class="sc-VigVT eIqbpS"
           >
             <div
               class="sc-bdVaJa jsQcrn"
@@ -348,7 +348,7 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
       </div>
       <div
         aria-label="total-time-display"
-        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-VigVT kXzkUW"
+        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-gZMcBi bUofGR"
       >
         <span>
           No records
@@ -356,7 +356,7 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-fjdhpX fiFGUa"
+      class="sc-VigVT eIqbpS"
     >
       <div
         class="sc-bdVaJa jsQcrn"

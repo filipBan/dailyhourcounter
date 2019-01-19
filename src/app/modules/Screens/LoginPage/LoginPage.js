@@ -14,7 +14,6 @@ import {
 } from "../../../components/StyledComponents/LoginRegister";
 
 import AuthInput from "../../../components/AuthInput";
-import Snackbar from "../../../components/Snackbar";
 
 class LoginPage extends Component {
   componentWillUnmount() {
@@ -37,7 +36,7 @@ class LoginPage extends Component {
       return <Redirect to="/today" />;
     }
 
-    const { email, password, error, loading, clearAuthErrors } = this.props;
+    const { email, password, loading } = this.props;
 
     return (
       <Container>
@@ -77,7 +76,6 @@ class LoginPage extends Component {
             </BottomLinks>
           </FormContainer>
         </FormSection>
-        <Snackbar error={error} onClose={clearAuthErrors} />
       </Container>
     );
   }

@@ -8,7 +8,6 @@ import styled from "styled-components";
 
 import Button from "../../../components/Button";
 import TopBar from "../../../components/TopBar";
-import Snackbar from "../../../components/Snackbar";
 
 import TopControls from "./TopControls";
 
@@ -250,7 +249,7 @@ class DailyForm extends Component {
             </div>
           </Section>
           <Section aria-label="total-time-display">
-            {!error && workedMinutes - breakMinutes > 0 ? (
+            {workedMinutes - breakMinutes > 0 ? (
               <span>{totalTimeWorked}</span>
             ) : (
               <span>No records</span>
@@ -279,7 +278,6 @@ class DailyForm extends Component {
           </Button>
         </ButtonContainer>
         <Notification />
-        {error && <Snackbar error={error} onClose={clearTodayErrors} />}
       </DailyFormContainer>
     );
   }

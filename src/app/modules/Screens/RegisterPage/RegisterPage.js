@@ -6,7 +6,6 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Button from "../../../components/Button";
 import AuthInput from "../../../components/AuthInput";
-import Snackbar from "../../../components/Snackbar";
 
 import {
   Container,
@@ -22,7 +21,6 @@ class RegisterPage extends Component {
   static defaultProps = {
     isLoggedIn: false,
     loading: false,
-    error: null,
     email: "",
     password: "",
     confirmPassword: "",
@@ -63,9 +61,7 @@ class RegisterPage extends Component {
       email,
       password,
       confirmPassword,
-      loading,
-      error,
-      clearAuthErrors
+      loading
     } = this.props;
 
     return (
@@ -144,11 +140,6 @@ class RegisterPage extends Component {
             </BottomLinks>
           </FormContainer>
         </FormSection>
-        <Snackbar
-          error={error}
-          onClose={clearAuthErrors}
-          aria-label="register-error-snackbar"
-        />
       </Container>
     );
   }

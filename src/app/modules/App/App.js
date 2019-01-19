@@ -6,6 +6,7 @@ import {
   Switch
 } from "react-router-dom";
 import firebase from "../../../firebaseConfig";
+import Snackbar from "../../components/Snackbar";
 
 const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
 const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
@@ -123,6 +124,7 @@ class App extends Component {
               />
             </Switch>
           </Suspense>
+          <Snackbar />
         </div>
       </Router>
     );
