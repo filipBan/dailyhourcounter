@@ -96,9 +96,7 @@ class DailyForm extends Component {
       today,
       handleCalendarChange,
       resetDailyData,
-      clearTodayErrors,
-      uid,
-      error
+      uid
     } = this.props;
 
     const workStart = hours[0].start;

@@ -31,12 +31,12 @@ function PrivateRoute({
   );
 }
 
-const CheckAuthState = props => {
-  if (!props.checkingAuthState && props.isLoggedIn) {
+const CheckAuthState = ({ checkingAuthState, isLoggedIn }) => {
+  if (!checkingAuthState && isLoggedIn) {
     return <Redirect to="/today" />;
   }
 
-  if (!props.checkingAuthState && !props.isLoggedIn) {
+  if (!checkingAuthState && !isLoggedIn) {
     return <Redirect to="/login" />;
   }
 
@@ -70,7 +70,12 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, emailVerified } = this.props.auth;
+    const {
+      isLoggedIn,
+      emailVerified,
+      checkingAuthState,
+      logoutUser
+    } = this.props;
     const canIAccessIt = isLoggedIn ? (emailVerified ? true : false) : false;
 
     const redirectPath = isLoggedIn ? (emailVerified ? "/" : "/error") : "/";
@@ -89,7 +94,12 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                render={() => <CheckAuthState {...this.props.auth} />}
+                render={() => (
+                  <CheckAuthState
+                    checkingAuthState={checkingAuthState}
+                    isLoggedIn={isLoggedIn}
+                  />
+                )}
               />
               <Route path="/login" render={() => <LoginPage />} />
               <Route path="/register" render={() => <RegisterPage />} />
@@ -116,8 +126,10 @@ class App extends Component {
                 render={props => {
                   const allProps = {
                     ...props,
-                    ...this.props.auth,
-                    logoutUser: this.props.logoutUser
+                    isLoggedIn,
+                    emailVerified,
+                    checkingAuthState,
+                    logoutUser
                   };
                   return <VerifyPage {...allProps} />;
                 }}

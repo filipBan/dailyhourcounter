@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import {
-  clearAuthErrors,
   logInWithEmailAndPassword,
   updateInput
 } from "../../../store/auth/actions";
@@ -18,8 +17,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   logInWithEmailAndPassword: (email, password) =>
     dispatch(logInWithEmailAndPassword(email, password)),
-  updateInput: (field, value) => dispatch(updateInput("login", field, value)),
-  clearAuthErrors: () => dispatch(clearAuthErrors())
+  updateInput: (field, value) => dispatch(updateInput("login", field, value))
 });
 
 export default withRouter(

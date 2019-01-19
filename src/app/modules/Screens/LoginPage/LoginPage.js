@@ -16,10 +16,6 @@ import {
 import AuthInput from "../../../components/AuthInput";
 
 class LoginPage extends Component {
-  componentWillUnmount() {
-    this.props.clearAuthErrors();
-  }
-
   submitForm(e) {
     e.preventDefault();
     const { email, password, logInWithEmailAndPassword } = this.props;

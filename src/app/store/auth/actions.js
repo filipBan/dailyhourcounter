@@ -7,12 +7,8 @@ export const AUTH_END = "AUTH_END";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const REGISTRATION_COMPLETE = "REGISTRATION_COMPLETE";
-
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
-
 export const UPDATE_INPUT = "UPDATE_INPUT";
-
-export const CLEAR_AUTH_ERRORS = "CLEAR_AUTH_ERRORS";
 
 export const fetchUserData = uid => async dispatch => {
   try {
@@ -123,7 +119,5 @@ export const registerNewAccount = props => async dispatch => {
     dispatch({ type: AUTH_FAIL, error: error.message });
   }
 };
-
-export const clearAuthErrors = () => ({ type: CLEAR_AUTH_ERRORS });
 
 export const authError = error => ({ type: AUTH_FAIL, error });

@@ -1,5 +1,3 @@
-import { getTime } from "date-fns";
-
 import {
   START_SAVING_DAY_DATA,
   FINISHED_SAVING_DAY_DATA,

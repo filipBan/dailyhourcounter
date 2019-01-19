@@ -34,4 +34,5 @@ const snackbar = (state = initialState, action) => {
       return state;
   }
 };
+
 export default snackbar;

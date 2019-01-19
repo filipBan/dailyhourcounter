@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import RegisterPage from "./RegisterPage";
 
 import {
-  clearAuthErrors,
   registerNewAccount,
   updateInput,
   authError
@@ -22,7 +21,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   registerNewAccount: props => dispatch(registerNewAccount(props)),
-  clearAuthErrors: () => dispatch(clearAuthErrors()),
   updateInput: (field, value) =>
     dispatch(updateInput("register", field, value)),
   authError: error => dispatch(authError(error))
