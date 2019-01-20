@@ -1,4 +1,4 @@
-import reducer from "./reducer";
+import reducer from "../reducer";
 
 const initialState = {
   today: new Date(),

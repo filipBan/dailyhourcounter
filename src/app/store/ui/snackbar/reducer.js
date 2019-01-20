@@ -7,27 +7,15 @@ const initialState = {
 
 const snackbar = (state = initialState, action) => {
   switch (action.type) {
+    case "AUTH_FAIL":
+    case "ERROR_FETCHING_DAY_DATA":
     case "ERROR_SAVING_DAY_DATA":
       return {
         message: action.error,
         type: "error"
       };
 
-    case "AUTH_FAIL":
-      return {
-        message: action.error,
-        type: "error"
-      };
-
-    case "ERROR_FETCHING_DAY_DATA":
-      return {
-        message: action.error,
-        type: "error"
-      };
-
     case "CLEAR_AUTH_ERRORS":
-      return initialState;
-
     case RESET_SNACKBAR:
       return initialState;
     default:

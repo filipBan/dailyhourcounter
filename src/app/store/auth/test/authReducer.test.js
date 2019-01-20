@@ -1,4 +1,4 @@
-import authReducer from "./reducer";
+import authReducer from "../reducer";
 
 const initialState = {
   isLoggedIn: false,
