@@ -38,7 +38,6 @@ const initialState = Object.freeze({
     workedMinutes: 0,
     breakMinutes: 0,
     savingData: false,
-    error: null,
     loadingData: false
   },
   auth: {

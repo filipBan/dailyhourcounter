@@ -11,8 +11,7 @@ const initialState = {
   reportStartDate: null,
   reportEndDate: null,
   reportData: null,
-  fetching: false,
-  error: null
+  fetching: false
 };
 
 const reports = (state = initialState, action) => {
@@ -41,7 +40,6 @@ const reports = (state = initialState, action) => {
     case ERROR_FETCHING_REPORT_DATA:
       return {
         ...state,
-        error: action.error,
         fetching: false
       };
     case CLEAR_REPORT_DATA:

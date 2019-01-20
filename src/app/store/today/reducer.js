@@ -9,7 +9,6 @@ import {
   UPDATE_HOURS,
   SET_TODAY_DATE,
   CLEAR_ALL_TIMES,
-  CLEAR_TODAY_ERRORS,
   REPLACE_DAY_DATA,
   RESET_DAY_DATA,
   calculateTimeWorked,
@@ -33,7 +32,6 @@ const initialState = {
   workedMinutes: 0,
   breakMinutes: 0,
   savingData: false,
-  error: null,
   loadingData: false
 };
 
@@ -58,7 +56,7 @@ const today = (state = initialState, action) => {
     case SET_TODAY_DATE:
       return {
         ...state,
-        today: action.date
+        today: action.date || state.today
       };
     case START_FETCHING_DAY_DATA:
       return {
@@ -145,12 +143,6 @@ const today = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload
-      };
-
-    case CLEAR_TODAY_ERRORS:
-      return {
-        ...state,
-        error: null
       };
 
     case RESET_DAY_DATA:

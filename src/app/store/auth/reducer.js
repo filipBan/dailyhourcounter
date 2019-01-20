@@ -14,6 +14,7 @@ import { UPDATE_WAGES } from "../settings/actions";
 const initialState = {
   isLoggedIn: false,
   name: "",
+  email: "",
   uid: "",
   wages: 0,
   loading: false,
@@ -31,6 +32,7 @@ const auth = (state = initialState, action) => {
     case AUTH_START:
       return { ...state, loading: true };
     case AUTH_END:
+    case AUTH_LOGOUT:
     case REGISTRATION_COMPLETE:
       return {
         ...initialState,
@@ -48,11 +50,6 @@ const auth = (state = initialState, action) => {
       return { ...state, ...user };
     case AUTH_FAIL:
       return { ...state, loading: false };
-    case AUTH_LOGOUT:
-      return {
-        ...initialState,
-        checkingAuthState: false
-      };
 
     case UPDATE_INPUT:
       return {

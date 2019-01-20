@@ -56,17 +56,15 @@ export const updateBreaks = (timeType, amount) => ({
 });
 
 export const calculateTimeWorked = (workStart, workEnd) => {
-  const result =
-    workStart && workEnd && differenceInMinutes(workEnd, workStart);
-
-  return result;
+  if (workStart && workEnd && getTime(workEnd) > getTime(workStart)) {
+    return differenceInMinutes(workEnd, workStart);
+  }
+  return 0;
 };
 
 export const calculateTotalBreaks = (breakStart, breakEnd) => {
-  if (getTime(breakEnd) > getTime(breakStart)) {
-    const result =
-      breakStart && breakEnd && differenceInMinutes(breakEnd, breakStart);
-    return result;
+  if (breakStart && breakEnd && getTime(breakEnd) > getTime(breakStart)) {
+    return differenceInMinutes(breakEnd, breakStart);
   }
   return 0;
 };
