@@ -6,7 +6,10 @@ import {
   AUTH_END,
   UPDATE_INPUT,
   UPDATE_USER_DATA,
-  REGISTRATION_COMPLETE
+  REGISTRATION_COMPLETE,
+  SENDING_VERIFICATION_EMAIL,
+  VERIFICATION_EMAIL_SENT,
+  VERIFICATION_EMAIL_ERROR
 } from "./actions";
 import { REPLACE_DAY_DATA } from "../today/actions";
 import { UPDATE_WAGES } from "../settings/actions";
@@ -74,6 +77,17 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         wages: action.wages
+      };
+    case SENDING_VERIFICATION_EMAIL:
+      return {
+        ...state,
+        loading: true
+      };
+    case VERIFICATION_EMAIL_SENT:
+    case VERIFICATION_EMAIL_ERROR:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;

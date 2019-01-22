@@ -1,1 +1,1 @@
-export { default } from "./VerifyPage";
+export { default } from "./container";

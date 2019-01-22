@@ -10,6 +10,10 @@ export const REGISTRATION_COMPLETE = "REGISTRATION_COMPLETE";
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 export const UPDATE_INPUT = "UPDATE_INPUT";
 
+export const SENDING_VERIFICATION_EMAIL = "SENDING_VERIFICATION_EMAIL";
+export const VERIFICATION_EMAIL_SENT = "VERIFICATION_EMAIL_SENT";
+export const VERIFICATION_EMAIL_ERROR = "VERIFICATION_EMAIL_ERROR";
+
 export const fetchUserData = uid => async dispatch => {
   try {
     const user = await firebase
@@ -41,6 +45,7 @@ export const logInWithEmailAndPassword = (email, password) => dispatch => {
 
 export const logoutUser = () => async dispatch => {
   try {
+    dispatch({ type: AUTH_START });
     await firebase.auth().signOut();
     dispatch({ type: AUTH_LOGOUT });
   } catch (error) {
@@ -121,3 +126,16 @@ export const registerNewAccount = props => async dispatch => {
 };
 
 export const authError = error => ({ type: AUTH_FAIL, error });
+
+export const sendEmailVerification = () => async dispatch => {
+  try {
+    dispatch({ type: SENDING_VERIFICATION_EMAIL });
+    await firebase.auth().currentUser.sendEmailVerification({
+      url: "https://record.dailyhours.app"
+    });
+    dispatch({ type: VERIFICATION_EMAIL_SENT });
+  } catch (err) {
+    console.error(err);
+    dispatch({ type: VERIFICATION_EMAIL_ERROR });
+  }
+};

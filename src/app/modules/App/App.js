@@ -70,15 +70,14 @@ class App extends Component {
   }
 
   render() {
-    const {
-      isLoggedIn,
-      emailVerified,
-      checkingAuthState,
-      logoutUser
-    } = this.props;
+    const { isLoggedIn, emailVerified, checkingAuthState } = this.props;
     const canIAccessIt = isLoggedIn ? (emailVerified ? true : false) : false;
 
-    const redirectPath = isLoggedIn ? (emailVerified ? "/" : "/error") : "/";
+    const redirectPath = isLoggedIn
+      ? emailVerified
+        ? "/"
+        : "/verify-email"
+      : "/";
 
     return (
       <Router>
@@ -121,19 +120,7 @@ class App extends Component {
                 canIAccessIt={canIAccessIt}
                 redirectPath={redirectPath}
               /> */}
-              <Route
-                path="/error"
-                render={props => {
-                  const allProps = {
-                    ...props,
-                    isLoggedIn,
-                    emailVerified,
-                    checkingAuthState,
-                    logoutUser
-                  };
-                  return <VerifyPage {...allProps} />;
-                }}
-              />
+              <Route path="/verify-email" component={VerifyPage} />
             </Switch>
           </Suspense>
           <Snackbar />
