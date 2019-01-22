@@ -14,6 +14,8 @@ const getBgColor = type => {
       return "#f44336";
     case "success":
       return "#43a047";
+    case "updates-available":
+      return "#272727";
     default:
       return "rgba(0, 0, 0, 0.2)";
   }
@@ -27,7 +29,8 @@ const StyledSnackbarContent = styled(SnackbarContent)`
   flex-direction: row;
   border-radius: 0.5rem;
 
-  #client-snackbar {
+  #client-snackbar,
+  #update-snackbar {
     font-size: 1.2rem;
     display: flex;
     align-items: center;
@@ -36,6 +39,11 @@ const StyledSnackbarContent = styled(SnackbarContent)`
     #message {
       margin-left: 1rem;
     }
+  }
+
+  #update-snackbar {
+    flex-direction: column;
+    justify-content: space-around;
   }
 `;
 
@@ -62,19 +70,26 @@ const SnackbarWrapper = ({ message, type, resetSnackbar }) => {
         aria-describedby="client-snackbar"
         type={type}
         message={
-          message && (
-            <div id="client-snackbar">
-              <ErrorIcon />
-              <span id="message">{message}</span>
-              <IconButton
-                key="close"
-                aria-label="Close"
-                color="inherit"
-                onClick={resetSnackbar}
-              >
-                <CloseIcon />
-              </IconButton>
+          type === "updates-available" ? (
+            <div id="update-snackbar" onClick={() => window.location.reload()}>
+              <span>Updates are available</span>
+              <span>Click here to reload the page</span>
             </div>
+          ) : (
+            message && (
+              <div id="client-snackbar">
+                <ErrorIcon />
+                <span id="message">{message}</span>
+                <IconButton
+                  key="close"
+                  aria-label="Close"
+                  color="inherit"
+                  onClick={resetSnackbar}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </div>
+            )
           )
         }
       />

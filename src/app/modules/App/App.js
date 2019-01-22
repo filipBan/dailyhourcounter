@@ -51,7 +51,9 @@ class App extends Component {
 
   componentDidMount() {
     const { checkNotifications, saveLoggedUserSession } = this.props;
-    window.addEventListener("updates-available", e => {});
+    window.addEventListener("updates-available", e => {
+      this.props.notifyAboutUpdates();
+    });
 
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if (user) {

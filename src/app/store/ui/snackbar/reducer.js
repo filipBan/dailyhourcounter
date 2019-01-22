@@ -1,4 +1,4 @@
-import { RESET_SNACKBAR } from "./actions";
+import { RESET_SNACKBAR, UPDATES_AVAILABLE } from "./actions";
 
 const initialState = {
   message: "",
@@ -24,6 +24,12 @@ const snackbar = (state = initialState, action) => {
     case "CLEAR_AUTH_ERRORS":
     case RESET_SNACKBAR:
       return initialState;
+
+    case UPDATES_AVAILABLE: {
+      return {
+        type: "updates-available"
+      };
+    }
     default:
       return state;
   }
