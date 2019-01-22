@@ -15,6 +15,12 @@ const snackbar = (state = initialState, action) => {
         type: "error"
       };
 
+    case "VERIFICATION_EMAIL_SENT":
+      return {
+        message: "Email sent",
+        type: "success"
+      };
+
     case "CLEAR_AUTH_ERRORS":
     case RESET_SNACKBAR:
       return initialState;

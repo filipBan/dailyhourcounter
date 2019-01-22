@@ -134,8 +134,8 @@ export const sendEmailVerification = () => async dispatch => {
       url: "https://record.dailyhours.app"
     });
     dispatch({ type: VERIFICATION_EMAIL_SENT });
-  } catch (err) {
-    console.error(err);
-    dispatch({ type: VERIFICATION_EMAIL_ERROR });
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: VERIFICATION_EMAIL_ERROR, error });
   }
 };

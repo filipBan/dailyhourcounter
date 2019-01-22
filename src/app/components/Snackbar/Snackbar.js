@@ -15,7 +15,7 @@ const getBgColor = type => {
     case "success":
       return "#43a047";
     default:
-      return "white";
+      return "rgba(0, 0, 0, 0.2)";
   }
 };
 
