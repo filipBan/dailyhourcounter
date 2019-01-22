@@ -30,6 +30,10 @@ const snackbar = (state = initialState, action) => {
         type: "updates-available"
       };
     }
+    case "AUTH_LOGOUT":
+      return {
+        ...initialState
+      };
     default:
       return state;
   }

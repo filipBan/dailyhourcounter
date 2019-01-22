@@ -42,6 +42,7 @@ const reports = (state = initialState, action) => {
         ...state,
         fetching: false
       };
+    case "AUTH_LOGOUT":
     case CLEAR_REPORT_DATA:
       return initialState;
     default:

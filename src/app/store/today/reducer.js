@@ -150,6 +150,11 @@ const today = (state = initialState, action) => {
         ...initialState,
         today: state.today
       };
+
+    case "AUTH_LOGOUT":
+      return {
+        ...initialState
+      };
     default:
       return state;
   }

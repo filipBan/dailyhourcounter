@@ -10,6 +10,11 @@ const sideDrawer = (state = initialState, action) => {
       return {
         visible: action.value
       };
+
+    case "AUTH_LOGOUT":
+      return {
+        ...initialState
+      };
     default:
       return state;
   }

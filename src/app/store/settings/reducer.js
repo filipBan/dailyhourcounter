@@ -18,6 +18,10 @@ const settings = (state = initialState, action) => {
         ...state,
         wages: parseFloat(action.user.wages)
       };
+    case "AUTH_LOGOUT":
+      return {
+        ...initialState
+      };
     default:
       return state;
   }
