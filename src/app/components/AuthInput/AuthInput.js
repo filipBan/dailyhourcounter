@@ -7,6 +7,7 @@ const AuthInput = ({ type, value, onChange, ...other }) => (
     value={value}
     onChange={e => onChange(type, e)}
     placeholder={type === "number" ? "current hourly wages" : type}
+    fullWidth
     required
     {...other}
   />
