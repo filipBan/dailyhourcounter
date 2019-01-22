@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Registration Page integration tests Should match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-ifAKCX jqsrVw"
+  >
+    <div
+      class="sc-EHOje fOdpYX"
+      font-size="4rem"
+    >
+      <span>
+        Daily
+      </span>
+      <span>
+        Hours
+      </span>
+    </div>
+    <div
+      class="sc-bZQynM dwLWXh"
+    >
+      <div
+        class="MuiPaper-root-96 MuiPaper-elevation1-99 MuiPaper-rounded-97 MuiCard-root-95 sc-gzVnrw cdSxro"
+      >
+        <div
+          class="sc-dnqmqq fUazxu"
+        />
+        <form
+          class="sc-htoDjs hSkATx"
+        >
+          <div
+            aria-label="user-name-field"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
+              placeholder="userName"
+              required=""
+              type="userName"
+              value=""
+            />
+          </div>
+          <div
+            aria-label="wages-field"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
+              placeholder="current hourly wages"
+              required=""
+              type="number"
+              value=""
+            />
+          </div>
+          <div
+            aria-label="email-field"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
+              placeholder="email"
+              required=""
+              type="email"
+              value=""
+            />
+          </div>
+          <div
+            aria-label="password-field"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
+              placeholder="password"
+              required=""
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            aria-label="confirm-password-field"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            paddingtop="2rem"
+            required=""
+          >
+            <input
+              class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
+              placeholder="password"
+              required=""
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="sc-bdVaJa jsQcrn"
+          >
+            <button
+              aria-label="register-submit-button"
+              class="MuiButtonBase-root-179 MuiButton-root-153 MuiButton-contained-164 MuiButton-containedPrimary-165 MuiButton-raised-167 MuiButton-raisedPrimary-168 MuiButton-fullWidth-178 sc-bwzfXH hjMHYi"
+              style="margin-top: 2rem;"
+              tabindex="0"
+              type="submit"
+            >
+              <span
+                class="MuiButton-label-154"
+              >
+                Register
+              </span>
+              <span
+                class="MuiTouchRipple-root-182"
+              />
+            </button>
+          </div>
+        </form>
+        <div
+          class="sc-gqjmRU bcCUVQ"
+        >
+          <span>
+            By registering you automatically accept the following:
+          </span>
+          <a
+            href="/register"
+          >
+            <span>
+              Terms and Conditions
+            </span>
+          </a>
+          <a
+            href="/register"
+          >
+            <span>
+              Privacy policy
+            </span>
+          </a>
+        </div>
+        <div
+          class="sc-gqjmRU bcCUVQ"
+        >
+          Already have an account?
+          <a
+            href="/"
+          >
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

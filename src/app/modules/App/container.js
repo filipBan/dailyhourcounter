@@ -1,20 +1,26 @@
 import { connect } from "react-redux";
-import { saveLoggedUserSession } from "../../modules/LoginPage/actions";
 import App from "./App";
 
-import { toggleDrawer } from "../SideDrawer/actions";
-import { handleCalendarChange, toggleCalendar } from "../DailyForm/actions";
+import {
+  saveLoggedUserSession,
+  logoutUser,
+  sendEmailVerification
+} from "../../store/auth/actions";
+import { notifyAboutUpdates } from "../../store/ui/snackbar/actions";
+import { checkNotifications } from "../../store/ui/notifications/actions";
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  ...state.today
+  isLoggedIn: state.auth.isLoggedIn,
+  emailVerified: state.auth.emailVerified,
+  checkingAuthState: state.auth.checkingAuthState
 });
 
 const mapDispatchToProps = dispatch => ({
   saveLoggedUserSession: user => dispatch(saveLoggedUserSession(user)),
-  toggleDrawer: () => dispatch(toggleDrawer()),
-  handleCalendarChange: date => dispatch(handleCalendarChange(date)),
-  toggleCalendar: () => dispatch(toggleCalendar())
+  logoutUser: () => dispatch(logoutUser()),
+  checkNotifications: uid => dispatch(checkNotifications(uid)),
+  sendEmailVerification: () => dispatch(sendEmailVerification()),
+  notifyAboutUpdates: () => dispatch(notifyAboutUpdates())
 });
 
 export default connect(

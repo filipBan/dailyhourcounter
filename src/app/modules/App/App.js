@@ -1,47 +1,66 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Loadable from "react-loadable";
-
-import SideDrawer from "../SideDrawer";
-import TopBar from "../TopBar";
-
+import React, { Component, Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from "react-router-dom";
 import firebase from "../../../firebaseConfig";
+import Snackbar from "../../components/Snackbar";
 
-import "./style.css";
+const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
+const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
+const RegisterPage = React.lazy(() => import("../Screens/RegisterPage"));
+const ReportScreen = React.lazy(() => import("../Screens/ReportScreen"));
+// const SettingsScreen = React.lazy(() => import("../Screens/SettingsScreen"));
+const VerifyPage = React.lazy(() => import("../Screens/VerifyPage"));
 
-const DailyFormAsync = Loadable({
-  loader: () => import("../DailyForm"),
-  loading: () => <div>Loading...</div>
-});
+function PrivateRoute({
+  path,
+  canIAccessIt,
+  redirectPath,
+  component: Component
+}) {
+  return (
+    <Route
+      path={path}
+      render={props =>
+        canIAccessIt ? <Component {...props} /> : <Redirect to={redirectPath} />
+      }
+    />
+  );
+}
 
-const LoginPageAsync = Loadable({
-  loader: () => import("../LoginPage"),
-  loading: () => <div>Loading...</div>
-});
+const CheckAuthState = ({ checkingAuthState, isLoggedIn }) => {
+  if (!checkingAuthState && isLoggedIn) {
+    return <Redirect to="/today" />;
+  }
 
-const ReportScreenAsync = Loadable({
-  loader: () => import("../ReportScreen"),
-  loading: () => <div>Loading...</div>
-});
+  if (!checkingAuthState && !isLoggedIn) {
+    return <Redirect to="/login" />;
+  }
 
-const SettingsScreenAsync = Loadable({
-  loader: () => import("../SettingsScreen"),
-  loading: () => <div>Loading...</div>
-});
+  return null;
+};
 
-// const TopBarAsync
 class App extends Component {
   constructor() {
     super();
     this.unsubscriber = null;
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    const { checkNotifications, saveLoggedUserSession } = this.props;
+    window.addEventListener("updates-available", e => {
+      this.props.notifyAboutUpdates();
+    });
+
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.props.saveLoggedUserSession(user);
+        saveLoggedUserSession(user);
+        checkNotifications(user.uid);
       } else {
-        console.log("No user/Logged out");
+        saveLoggedUserSession(null);
       }
     });
   }
@@ -52,30 +71,61 @@ class App extends Component {
     }
   }
 
-  changeCalendarDate = date => {
-    const { toggleCalendar, handleCalendarChange } = this.props;
-    handleCalendarChange(date);
-    toggleCalendar();
-  };
-
   render() {
-    const { calendarVisible, toggleDrawer, toggleCalendar } = this.props;
+    const { isLoggedIn, emailVerified, checkingAuthState } = this.props;
+    const canIAccessIt = isLoggedIn ? (emailVerified ? true : false) : false;
+
+    const redirectPath = isLoggedIn
+      ? emailVerified
+        ? "/"
+        : "/verify-email"
+      : "/";
+
     return (
       <Router>
-        <div className="main-app">
-          <SideDrawer />
-          <TopBar
-            calendarVisible={calendarVisible}
-            toggleDrawer={toggleDrawer}
-            toggleCalendar={toggleCalendar}
-            changeCalendarDate={this.changeCalendarDate}
-          />
-          <Switch>
-            <Route exact path="/" component={LoginPageAsync} />
-            <Route path="/today" component={DailyFormAsync} />
-            <Route path="/reports" component={ReportScreenAsync} />
-            <Route path="/settings" component={SettingsScreenAsync} />
-          </Switch>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start"
+          }}
+        >
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <CheckAuthState
+                    checkingAuthState={checkingAuthState}
+                    isLoggedIn={isLoggedIn}
+                  />
+                )}
+              />
+              <Route path="/login" render={() => <LoginPage />} />
+              <Route path="/register" render={() => <RegisterPage />} />
+              <PrivateRoute
+                path="/today"
+                component={DailyForm}
+                canIAccessIt={canIAccessIt}
+                redirectPath={redirectPath}
+              />
+              <PrivateRoute
+                path="/reports"
+                component={ReportScreen}
+                canIAccessIt={canIAccessIt}
+                redirectPath={redirectPath}
+              />
+              {/* <PrivateRoute
+                path="/settings"
+                component={SettingsScreen}
+                canIAccessIt={canIAccessIt}
+                redirectPath={redirectPath}
+              /> */}
+              <Route path="/verify-email" component={VerifyPage} />
+            </Switch>
+          </Suspense>
+          <Snackbar />
         </div>
       </Router>
     );

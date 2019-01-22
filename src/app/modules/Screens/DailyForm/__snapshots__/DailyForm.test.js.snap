@@ -1,0 +1,402 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Daily Form integration tests Should match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-dnqmqq kJyICP"
+  >
+    <div
+      class="MuiPrivateSwipeArea-root-313 MuiPrivateSwipeArea-anchorLeft-314"
+      style="width: 20px;"
+    />
+    <div
+      class="sc-ifAKCX kqqTha"
+    >
+      <header
+        class="MuiPaper-root-186 MuiPaper-elevation4-192 MuiAppBar-root-177 MuiAppBar-positionStatic-181 MuiAppBar-colorPrimary-184 sc-bZQynM sxEfW"
+      >
+        <button
+          aria-label="menu-toggle"
+          class="MuiButtonBase-root-219 MuiIconButton-root-213 MuiIconButton-colorInherit-214"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label-218"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root-222"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root-318"
+          />
+        </button>
+        <span
+          class="sc-EHOje fAAGRO"
+        >
+          Save hours
+        </span>
+        <div
+          class="sc-gzVnrw fZpTim"
+        >
+          <button
+            aria-label="calendar-toggle"
+            class="MuiButtonBase-root-219 MuiIconButton-root-213 MuiIconButton-colorInherit-214"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label-218"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root-222"
+                focusable="false"
+                role="presentation"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"
+                />
+                <path
+                  d="M0 0h24v24H0z"
+                  fill="none"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root-318"
+            />
+          </button>
+          <div
+            aria-label="top-bar-calendar"
+            style="display: none;"
+          >
+            <div
+              class="MuiFormControl-root-231"
+            >
+              <div
+                class="MuiInputBase-root-248 MuiInput-root-235 MuiInput-underline-239 MuiInputBase-formControl-249 MuiInput-formControl-236"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input-258 MuiInput-input-243"
+                  readonly=""
+                  type="text"
+                  value="January 10th"
+                />
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div
+      class="sc-jTzLTM eYTvzx"
+    />
+    <div
+      class="sc-iwsKbI eddggv"
+    >
+      <div
+        aria-label="top-controls"
+        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-htoDjs duXPJJ"
+      >
+        <button
+          aria-label="date-back"
+          class="MuiButtonBase-root-219 MuiIconButton-root-213 MuiIconButton-colorInherit-214"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label-218"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root-222"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+              />
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root-318"
+          />
+        </button>
+        <span>
+          Thursday 10th Jan 2019
+        </span>
+        <button
+          aria-label="date-forward"
+          class="MuiButtonBase-root-219 MuiIconButton-root-213 MuiIconButton-colorInherit-214"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label-218"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root-222"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+              />
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root-318"
+          />
+        </button>
+      </div>
+      <div
+        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-gZMcBi bUofGR"
+      >
+        <div>
+          <div
+            class="sc-gqjmRU kCsuCD"
+          >
+            Hours
+          </div>
+          <div
+            class="sc-VigVT eIqbpS"
+          >
+            <div
+              class="sc-bdVaJa jsQcrn"
+            >
+              <button
+                aria-label="work-start"
+                class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label-288"
+                >
+                  Start
+                </span>
+                <span
+                  class="MuiTouchRipple-root-318"
+                />
+              </button>
+            </div>
+            <div
+              class="sc-bdVaJa jsQcrn"
+            >
+              <button
+                aria-label="work-end"
+                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+                disabled=""
+                tabindex="-1"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label-288"
+                >
+                  End
+                </span>
+              </button>
+            </div>
+            <div
+              style="display: none;"
+            >
+              <div
+                aria-label="work-start-picker"
+                class="MuiFormControl-root-231"
+              >
+                <div
+                  class="MuiInputBase-root-248 MuiInput-root-235 MuiInput-underline-239 MuiInputBase-formControl-249 MuiInput-formControl-236"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input-258 MuiInput-input-243"
+                    readonly=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                
+              </div>
+              <div
+                class="MuiFormControl-root-231"
+              >
+                <div
+                  class="MuiInputBase-root-248 MuiInput-root-235 MuiInput-underline-239 MuiInputBase-formControl-249 MuiInput-formControl-236"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input-258 MuiInput-input-243"
+                    readonly=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            class="sc-gqjmRU kCsuCD"
+          >
+            Breaks
+          </div>
+          <div
+            class="sc-VigVT eIqbpS"
+          >
+            <div
+              class="sc-bdVaJa jsQcrn"
+            >
+              <button
+                aria-label="break-start"
+                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+                disabled=""
+                tabindex="-1"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label-288"
+                >
+                  Start
+                </span>
+              </button>
+            </div>
+            <div
+              class="sc-bdVaJa jsQcrn"
+            >
+              <button
+                aria-label="break-end"
+                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+                disabled=""
+                tabindex="-1"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label-288"
+                >
+                  End
+                </span>
+              </button>
+            </div>
+            <div
+              style="display: none;"
+            >
+              <div
+                class="MuiFormControl-root-231"
+              >
+                <div
+                  class="MuiInputBase-root-248 MuiInput-root-235 MuiInput-underline-239 MuiInputBase-formControl-249 MuiInput-formControl-236"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input-258 MuiInput-input-243"
+                    readonly=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                
+              </div>
+              <div
+                class="MuiFormControl-root-231"
+              >
+                <div
+                  class="MuiInputBase-root-248 MuiInput-root-235 MuiInput-underline-239 MuiInputBase-formControl-249 MuiInput-formControl-236"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input-258 MuiInput-input-243"
+                    readonly=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-label="total-time-display"
+        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-gZMcBi bUofGR"
+      >
+        <span>
+          No records
+        </span>
+      </div>
+    </div>
+    <div
+      class="sc-VigVT eIqbpS"
+    >
+      <div
+        class="sc-bdVaJa jsQcrn"
+      >
+        <button
+          aria-label="reset-button"
+          class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-outlined-295 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label-288"
+          >
+            RESET
+          </span>
+          <span
+            class="MuiTouchRipple-root-318"
+          />
+        </button>
+      </div>
+      <div
+        class="sc-bdVaJa jsQcrn"
+      >
+        <button
+          aria-label="day-form-save"
+          class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-contained-298 MuiButton-containedPrimary-299 MuiButton-raised-301 MuiButton-raisedPrimary-302 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label-288"
+          >
+            SAVE
+          </span>
+          <span
+            class="MuiTouchRipple-root-318"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
