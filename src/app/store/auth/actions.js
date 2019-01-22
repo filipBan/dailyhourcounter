@@ -117,7 +117,7 @@ export const registerNewAccount = props => async dispatch => {
 
     await addUserRecordToDb(uid, userName, wages);
 
-    await addWelcomeNotice(uid);
+    // await addWelcomeNotice(uid);
 
     dispatch({ type: REGISTRATION_COMPLETE });
   } catch (error) {
