@@ -54,6 +54,11 @@ class LoginPage extends Component {
                 value={password}
                 onChange={(type, e) => this.handleInputChange(type, e)}
               />
+              <BottomLinks>
+                <Link to="/forgot-password">
+                  <span>Forgot my password</span>
+                </Link>
+              </BottomLinks>
               <Button
                 type="submit"
                 color="primary"
@@ -64,6 +69,7 @@ class LoginPage extends Component {
                 Login
               </Button>
             </Form>
+
             <BottomLinks>
               <span>Don't have an account?</span>
               <Link to="/register">
