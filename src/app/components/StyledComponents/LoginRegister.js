@@ -42,7 +42,8 @@ export const FormContainer = styled(Card)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 30rem;
+  max-width: 35rem;
+  width: 95%;
   height: ${props => props.height};
   padding: 2rem;
   position: relative;
