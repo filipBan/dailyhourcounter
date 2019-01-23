@@ -13,7 +13,7 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,7 +24,7 @@ export const Logo = styled.div`
   font-size: ${props => (props.fontSize ? props.fontSize : "7rem")};
 `;
 
-export const FormSection = styled.div`
+export const FormSection = styled.main`
   flex: 3;
   width: 100%;
   display: flex;
@@ -90,7 +90,7 @@ export const TermsLinks = styled.div`
   }
 `;
 
-export const BottomLinks = styled.div`
+export const BottomLinks = styled.footer`
   display: flex;
   flex-direction: column;
   justify-content: center;

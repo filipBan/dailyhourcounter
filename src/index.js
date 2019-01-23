@@ -24,6 +24,11 @@ const theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiButton: {
+      containedPrimary: {
+        backgroundColor: blue["900"]
+      }
+    },
     MuiPickersToolbar: {
       toolbar: {
         backgroundColor: blue["500"]

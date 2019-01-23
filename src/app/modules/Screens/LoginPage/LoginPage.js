@@ -48,11 +48,13 @@ class LoginPage extends Component {
                 type="email"
                 value={email}
                 onChange={(type, e) => this.handleInputChange(type, e)}
+                label="email"
               />
               <AuthInput
                 type="password"
                 value={password}
                 onChange={(type, e) => this.handleInputChange(type, e)}
+                label="password"
               />
               <Button
                 type="submit"
