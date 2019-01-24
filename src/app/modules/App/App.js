@@ -59,7 +59,7 @@ class App extends Component {
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         saveLoggedUserSession(user);
-        checkNotifications(user.uid);
+        // checkNotifications(user.uid);
       } else {
         saveLoggedUserSession(null);
       }
