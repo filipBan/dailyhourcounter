@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { Link } from "react-router-dom";
 
 import {
   Container,
@@ -55,6 +56,7 @@ class ForgotPassword extends Component {
                 Send
               </Button>
             </Form>
+            <Link to="/">Back to Login page</Link>
           </FormContainer>
         </FormSection>
       </Container>
