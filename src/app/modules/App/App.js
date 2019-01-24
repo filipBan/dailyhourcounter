@@ -14,6 +14,7 @@ const RegisterPage = React.lazy(() => import("../Screens/RegisterPage"));
 const ReportScreen = React.lazy(() => import("../Screens/ReportScreen"));
 // const SettingsScreen = React.lazy(() => import("../Screens/SettingsScreen"));
 const VerifyPage = React.lazy(() => import("../Screens/VerifyPage"));
+const ForgotPassword = React.lazy(() => import("../Screens/ForgotPassword"));
 
 function PrivateRoute({
   path,
@@ -123,6 +124,7 @@ class App extends Component {
                 redirectPath={redirectPath}
               /> */}
               <Route path="/verify-email" component={VerifyPage} />
+              <Route path="/forgot-password" component={ForgotPassword} />
             </Switch>
           </Suspense>
           <Snackbar />
