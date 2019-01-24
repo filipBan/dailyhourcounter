@@ -19,6 +19,11 @@ class ForgotPassword extends Component {
     email: ""
   };
 
+  submitForm = e => {
+    e.preventDefault();
+    this.props.sendResetPasswordEmail(this.state.email);
+  };
+
   updateEmail = e => {
     this.setState({ email: e.target.value });
   };
@@ -33,7 +38,7 @@ class ForgotPassword extends Component {
         <FormSection>
           <FormContainer>
             <Progress>{this.props.loading && <LinearProgress />}</Progress>
-            <Form>
+            <Form onSubmit={this.submitForm}>
               <AuthInput
                 value={this.state.email}
                 onChange={(type, e) => this.updateEmail(e)}

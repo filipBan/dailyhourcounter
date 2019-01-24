@@ -14,6 +14,10 @@ export const SENDING_VERIFICATION_EMAIL = "SENDING_VERIFICATION_EMAIL";
 export const VERIFICATION_EMAIL_SENT = "VERIFICATION_EMAIL_SENT";
 export const VERIFICATION_EMAIL_ERROR = "VERIFICATION_EMAIL_ERROR";
 
+export const SENDING_PASSWORD_RESET_EMAIL = "SENDING_PASSWORD_RESET_EMAIL";
+export const PASSWORD_RESET_EMAIL_SENT = "PASSWORD_RESET_EMAIL_SENT";
+export const PASSWORD_RESET_EMAIL_ERROR = "PASSWORD_RESET_EMAIL_ERROR";
+
 export const fetchUserData = uid => async dispatch => {
   try {
     const user = await firebase
@@ -136,6 +140,16 @@ export const sendEmailVerification = () => async dispatch => {
     dispatch({ type: VERIFICATION_EMAIL_SENT });
   } catch (error) {
     console.error(error);
-    dispatch({ type: VERIFICATION_EMAIL_ERROR, error });
+    dispatch({ type: VERIFICATION_EMAIL_ERROR, error: error.message });
+  }
+};
+
+export const sendResetPasswordEmail = email => async dispatch => {
+  try {
+    dispatch({ type: SENDING_PASSWORD_RESET_EMAIL });
+    await firebase.auth().sendPasswordResetEmail(email);
+    dispatch({ type: PASSWORD_RESET_EMAIL_SENT });
+  } catch (error) {
+    dispatch({ type: PASSWORD_RESET_EMAIL_ERROR, error: error.message });
   }
 };

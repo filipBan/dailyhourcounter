@@ -10,12 +10,14 @@ const snackbar = (state = initialState, action) => {
     case "AUTH_FAIL":
     case "ERROR_FETCHING_DAY_DATA":
     case "ERROR_SAVING_DAY_DATA":
+    case "PASSWORD_RESET_EMAIL_ERROR":
       return {
         message: action.error,
         type: "error"
       };
 
     case "VERIFICATION_EMAIL_SENT":
+    case "PASSWORD_RESET_EMAIL_SENT":
       return {
         message: "Email sent",
         type: "success"

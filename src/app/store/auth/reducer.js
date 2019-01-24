@@ -9,7 +9,10 @@ import {
   REGISTRATION_COMPLETE,
   SENDING_VERIFICATION_EMAIL,
   VERIFICATION_EMAIL_SENT,
-  VERIFICATION_EMAIL_ERROR
+  VERIFICATION_EMAIL_ERROR,
+  SENDING_PASSWORD_RESET_EMAIL,
+  PASSWORD_RESET_EMAIL_SENT,
+  PASSWORD_RESET_EMAIL_ERROR
 } from "./actions";
 import { REPLACE_DAY_DATA } from "../today/actions";
 import { UPDATE_WAGES } from "../settings/actions";
@@ -27,12 +30,15 @@ const initialState = {
     email: "",
     password: ""
   },
-  register: {}
+  register: {},
+  resetEmail: ""
 };
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_START:
+    case SENDING_PASSWORD_RESET_EMAIL:
+    case SENDING_VERIFICATION_EMAIL:
       return { ...state, loading: true };
     case AUTH_END:
     case AUTH_LOGOUT:
@@ -50,7 +56,7 @@ const auth = (state = initialState, action) => {
         loading: false,
         checkingAuthState: false
       };
-      return { ...state, ...user };
+      return { ...state, ...user, login: {}, register: {} };
     case AUTH_FAIL:
       return { ...state, loading: false };
 
@@ -78,13 +84,10 @@ const auth = (state = initialState, action) => {
         ...state,
         wages: action.wages
       };
-    case SENDING_VERIFICATION_EMAIL:
-      return {
-        ...state,
-        loading: true
-      };
     case VERIFICATION_EMAIL_SENT:
     case VERIFICATION_EMAIL_ERROR:
+    case PASSWORD_RESET_EMAIL_SENT:
+    case PASSWORD_RESET_EMAIL_ERROR:
       return {
         ...state,
         loading: false
