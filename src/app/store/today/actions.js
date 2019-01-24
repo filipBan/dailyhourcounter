@@ -166,7 +166,7 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
     return dispatch({ type: FINISHED_SAVING_DAY_DATA });
   } catch (error) {
     console.log(error);
-    return dispatch({ type: ERROR_SAVING_DAY_DATA, error });
+    return dispatch({ type: ERROR_SAVING_DAY_DATA, error: error.message });
   }
 };
 
