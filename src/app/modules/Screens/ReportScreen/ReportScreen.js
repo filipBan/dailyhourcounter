@@ -82,6 +82,7 @@ const Progress = styled.div`
 `;
 
 // TODO - split this component up, it's too big
+// TODO - add day wage to the report details
 class ReportScreen extends Component {
   componentWillUnmount() {
     const { clearReportData } = this.props;

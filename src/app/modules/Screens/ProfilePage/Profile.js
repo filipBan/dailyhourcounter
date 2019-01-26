@@ -78,6 +78,8 @@ const StyledTextField = styled(TextField)`
   width: 6rem;
 `;
 
+// TODO - add date format change option
+
 class ProfilePage extends Component {
   handleChange = e => {
     this.setState({ currency: e.target.value });
