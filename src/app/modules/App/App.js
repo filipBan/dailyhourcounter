@@ -7,14 +7,15 @@ import {
 } from "react-router-dom";
 import firebase from "../../../firebaseConfig";
 import Snackbar from "../../components/Snackbar";
+import Fallback from "./Fallback";
 
 const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
 const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
 const RegisterPage = React.lazy(() => import("../Screens/RegisterPage"));
 const ReportScreen = React.lazy(() => import("../Screens/ReportScreen"));
-// const SettingsScreen = React.lazy(() => import("../Screens/SettingsScreen"));
 const VerifyPage = React.lazy(() => import("../Screens/VerifyPage"));
 const ForgotPassword = React.lazy(() => import("../Screens/ForgotPassword"));
+const ProfilePage = React.lazy(() => import("../Screens/ProfilePage"));
 
 function PrivateRoute({
   path,
@@ -91,7 +92,7 @@ class App extends Component {
             justifyContent: "flex-start"
           }}
         >
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Fallback />}>
             <Switch>
               <Route
                 exact
@@ -117,12 +118,12 @@ class App extends Component {
                 canIAccessIt={canIAccessIt}
                 redirectPath={redirectPath}
               />
-              {/* <PrivateRoute
-                path="/settings"
-                component={SettingsScreen}
+              <PrivateRoute
+                path="/profile"
+                component={ProfilePage}
                 canIAccessIt={canIAccessIt}
                 redirectPath={redirectPath}
-              /> */}
+              />
               <Route path="/verify-email" component={VerifyPage} />
               <Route path="/forgot-password" component={ForgotPassword} />
             </Switch>
