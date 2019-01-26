@@ -83,7 +83,9 @@ class ProfilePage extends Component {
       deleteUser,
       toggleConfirmationDialog,
       dialogOpen,
-      updateWagesInput
+      updateWagesInput,
+      saveWagesInDatabase,
+      uid
     } = this.props;
 
     return (
@@ -101,6 +103,9 @@ class ProfilePage extends Component {
                 value={wages}
                 onChange={e => updateWagesInput(e.target.value)}
               />
+              <Button onClick={() => saveWagesInDatabase(wages, uid)}>
+                Save
+              </Button>
             </p>
             <Divider />
             <p>Change currency?</p>

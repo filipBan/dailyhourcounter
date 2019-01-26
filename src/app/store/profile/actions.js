@@ -29,19 +29,6 @@ export const fetchUserData = uid => async dispatch => {
   }
 };
 
-export const updateWages = (wages, uid) => async dispatch => {
-  try {
-    await firebase
-      .database()
-      .ref(`users`)
-      .child(uid)
-      .update({ wages });
-    dispatch({ type: UPDATE_WAGES, wages });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export const updateWagesInput = wages => ({ type: UPDATE_WAGES_INPUT, wages });
 
 export const deleteUser = () => async dispatch => {
@@ -58,3 +45,19 @@ export const deleteUser = () => async dispatch => {
 export const toggleConfirmationDialog = () => ({
   type: TOGGLE_CONFIRMATION_DIALOG
 });
+
+export const saveWagesInDatabase = (wages, uid) => async dispatch => {
+  try {
+    dispatch({ type: SAVING_WAGES });
+    console.log({ wages });
+    await firebase
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .update({ wages });
+    dispatch({ type: SAVING_WAGES_SUCCESS });
+  } catch (error) {
+    dispatch({ type: SAVING_WAGES_ERROR });
+    console.error(error);
+  }
+};
