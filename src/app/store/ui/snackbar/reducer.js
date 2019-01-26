@@ -11,6 +11,9 @@ const snackbar = (state = initialState, action) => {
     case "ERROR_FETCHING_DAY_DATA":
     case "ERROR_SAVING_DAY_DATA":
     case "PASSWORD_RESET_EMAIL_ERROR":
+    case "SAVING_WAGES_ERROR":
+    case "USER_DELETE_ERROR":
+    case "UPDATE_USER_DATA_ERROR":
       return {
         message: action.error,
         type: "error"

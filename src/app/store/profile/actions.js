@@ -1,6 +1,7 @@
 import firebase from "../../../firebaseConfig";
 
 export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
+export const UPDATE_USER_DATA_ERROR = "UPDATE_USER_DATA_ERROR";
 export const UPDATE_WAGES = "UPDATE_WAGES";
 export const UPDATE_WAGES_INPUT = "UPDATE_WAGES_INPUT";
 
@@ -24,8 +25,9 @@ export const fetchUserData = uid => async dispatch => {
       .then(doc => doc.data());
 
     dispatch({ type: UPDATE_USER_DATA, user });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    dispatch({ type: UPDATE_USER_DATA_ERROR, error: error.message });
+    console.log(error);
   }
 };
 
@@ -37,7 +39,7 @@ export const deleteUser = () => async dispatch => {
     await firebase.auth().currentUser.delete();
     dispatch({ type: USER_DELETE_SUCCESS });
   } catch (error) {
-    dispatch({ type: USER_DELETE_ERROR });
+    dispatch({ type: USER_DELETE_ERROR, error: error.message });
     console.error(error);
   }
 };
@@ -57,7 +59,7 @@ export const saveWagesInDatabase = (wages, uid) => async dispatch => {
       .update({ wages });
     dispatch({ type: SAVING_WAGES_SUCCESS });
   } catch (error) {
-    dispatch({ type: SAVING_WAGES_ERROR });
+    dispatch({ type: SAVING_WAGES_ERROR, error: error.message });
     console.error(error);
   }
 };
