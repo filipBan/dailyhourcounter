@@ -132,6 +132,8 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
     uid
   } = dayData;
 
+  console.log(dayData);
+
   if (error) {
     return;
   }
@@ -156,7 +158,7 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
       .doc(getTime(startOfDay(today)).toString())
       .set({
         date: getTime(startOfDay(today)),
-        wages: wages || getState().settings.wages,
+        wages: wages || getState().profile.wages,
         hours,
         breaks,
         workedMinutes,

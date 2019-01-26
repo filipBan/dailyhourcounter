@@ -32,7 +32,8 @@ const initialState = {
   workedMinutes: 0,
   breakMinutes: 0,
   savingData: false,
-  loadingData: false
+  loadingData: false,
+  wages: null
 };
 
 const getMinutes = (hours, breaks, action) => {
@@ -142,7 +143,8 @@ const today = (state = initialState, action) => {
     case REPLACE_DAY_DATA:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        wages: action.payload.wages || 0
       };
 
     case RESET_DAY_DATA:

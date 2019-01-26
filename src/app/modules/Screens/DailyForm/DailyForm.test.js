@@ -57,7 +57,7 @@ const initialState = Object.freeze({
     }
   },
   reports: {},
-  settings: {}
+  profile: { name: "", email: "", wages: 0 }
 });
 
 const mapStateToProps = state => ({
