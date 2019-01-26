@@ -7,7 +7,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import TrendingUp from "@material-ui/icons/TrendingUp";
 import Today from "@material-ui/icons/Today";
-// import Settings from "@material-ui/icons/Settings";
+import Settings from "@material-ui/icons/Settings";
 import Person from "@material-ui/icons/Person";
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -68,19 +68,19 @@ class SideDrawer extends Component {
             />
           </ListItem>
 
-          {/* <ListItem
+          <ListItem
             button
-            onClick={() => this.handleRedirect("/settings")}
+            onClick={() => this.handleRedirect("/profile")}
             style={{ padding: "2rem" }}
           >
             <ListItemIcon>
               <Settings />
             </ListItemIcon>
             <ListItemText
-              primary={"Settings"}
+              primary={"Profile"}
               primaryTypographyProps={{ variant: "h5" }}
             />
-          </ListItem> */}
+          </ListItem>
 
           <ListItem
             button
