@@ -1,5 +1,6 @@
 import {
   UPDATE_USER_DATA,
+  UPDATE_WAGES_INPUT,
   USER_DELETE_SUCCESS,
   USER_DELETE_ERROR,
   STARTING_USER_DELETE,
@@ -26,6 +27,12 @@ const profile = (state = initialState, action) => {
         ...state,
         name: action.user.userName,
         wages: parseFloat(action.user.wages)
+      };
+
+    case UPDATE_WAGES_INPUT:
+      return {
+        ...state,
+        wages: parseFloat(action.wages)
       };
 
     case "SENDING_PASSWORD_RESET_EMAIL":

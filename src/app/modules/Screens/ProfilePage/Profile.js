@@ -82,7 +82,8 @@ class ProfilePage extends Component {
       sendResetPasswordEmail,
       deleteUser,
       toggleConfirmationDialog,
-      dialogOpen
+      dialogOpen,
+      updateWagesInput
     } = this.props;
 
     return (
@@ -93,7 +94,13 @@ class ProfilePage extends Component {
             <Progress>{loading && <LinearProgress />}</Progress>
             <p>{name ? `Hi ${name}` : " "}</p>
             <p>
-              Wages: <StyledInput label="wages" type="number" value={wages} />
+              Wages:{" "}
+              <StyledInput
+                label="wages"
+                type="number"
+                value={wages}
+                onChange={e => updateWagesInput(e.target.value)}
+              />
             </p>
             <Divider />
             <p>Change currency?</p>

@@ -4,7 +4,8 @@ import ProfilePage from "./Profile";
 import { sendResetPasswordEmail } from "../../../store/auth/actions";
 import {
   deleteUser,
-  toggleConfirmationDialog
+  toggleConfirmationDialog,
+  updateWagesInput
 } from "../../../store/profile/actions";
 
 const mapStateToProps = state => ({
@@ -14,7 +15,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   sendResetPasswordEmail: email => dispatch(sendResetPasswordEmail(email)),
   deleteUser: () => dispatch(deleteUser()),
-  toggleConfirmationDialog: () => dispatch(toggleConfirmationDialog())
+  toggleConfirmationDialog: () => dispatch(toggleConfirmationDialog()),
+  updateWagesInput: value => dispatch(updateWagesInput(value))
 });
 
 export default connect(

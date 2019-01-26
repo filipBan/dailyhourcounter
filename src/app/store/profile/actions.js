@@ -10,6 +10,10 @@ export const USER_DELETE_ERROR = "USER_DELETE_ERROR";
 
 export const TOGGLE_CONFIRMATION_DIALOG = "TOGGLE_CONFIRMATION_DIALOG";
 
+export const SAVING_WAGES = "SAVING_WAGES";
+export const SAVING_WAGES_SUCCESS = "SAVING_WAGES_SUCCESS";
+export const SAVING_WAGES_ERROR = "SAVING_WAGES_ERROR";
+
 export const fetchUserData = uid => async dispatch => {
   try {
     const user = await firebase
