@@ -38,7 +38,8 @@ const initialState = Object.freeze({
     workedMinutes: 0,
     breakMinutes: 0,
     savingData: false,
-    loadingData: false
+    loadingData: false,
+    wages: null
   },
   auth: {
     uid: "test-uid-string"

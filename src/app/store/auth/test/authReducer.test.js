@@ -2,10 +2,7 @@ import authReducer from "../reducer";
 
 const initialState = {
   isLoggedIn: false,
-  name: "",
   uid: "",
-  email: "",
-  wages: 0,
   loading: false,
   emailVerified: false,
   checkingAuthState: true,
@@ -38,7 +35,6 @@ describe("Auth reducer", () => {
       ...initialState,
       isLoggedIn: true,
       emailVerified: true,
-      email: "test@test.com",
       uid: "123123123",
       loading: false,
       checkingAuthState: false
@@ -220,21 +216,21 @@ describe("Auth reducer", () => {
     });
   });
 
-  it("Should handle UPDATE_USER_DATA", () => {
-    const action = {
-      type: "UPDATE_USER_DATA",
-      user: {
-        userName: "Tester",
-        wages: 12
-      }
-    };
+  // it("Should handle UPDATE_USER_DATA", () => {
+  //   const action = {
+  //     type: "UPDATE_USER_DATA",
+  //     user: {
+  //       userName: "Tester",
+  //       wages: 12
+  //     }
+  //   };
 
-    expect(authReducer({ ...initialState }, action)).toEqual({
-      ...initialState,
-      name: "Tester",
-      wages: 12
-    });
-  });
+  //   expect(authReducer({ ...initialState }, action)).toEqual({
+  //     ...initialState,
+  //     name: "Tester",
+  //     wages: 12
+  //   });
+  // });
 
   it("Should handle REGISTRATION_COMPLETE", () => {
     const action = { type: "REGISTRATION_COMPLETE" };
@@ -247,43 +243,43 @@ describe("Auth reducer", () => {
     });
   });
 
-  it("Should handle REPLACE_DAY_DATA when wages are NOT provided", () => {
-    const action = {
-      type: "REPLACE_DAY_DATA",
-      payload: {
-        wages: 0
-      }
-    };
+  // it("Should handle REPLACE_DAY_DATA when wages are NOT provided", () => {
+  //   const action = {
+  //     type: "REPLACE_DAY_DATA",
+  //     payload: {
+  //       wages: 0
+  //     }
+  //   };
 
-    expect(authReducer({ ...initialState, wages: 10 }, action)).toEqual({
-      ...initialState,
-      wages: 10
-    });
-  });
+  //   expect(authReducer({ ...initialState, wages: 10 }, action)).toEqual({
+  //     ...initialState,
+  //     wages: 10
+  //   });
+  // });
 
-  it("Should handle REPLACE_DAY_DATA when wages are provided", () => {
-    const action = {
-      type: "REPLACE_DAY_DATA",
-      payload: {
-        wages: 10
-      }
-    };
+  // it("Should handle REPLACE_DAY_DATA when wages are provided", () => {
+  //   const action = {
+  //     type: "REPLACE_DAY_DATA",
+  //     payload: {
+  //       wages: 10
+  //     }
+  //   };
 
-    expect(authReducer({ ...initialState, wages: 0 }, action)).toEqual({
-      ...initialState,
-      wages: 10
-    });
-  });
+  //   expect(authReducer({ ...initialState, wages: 0 }, action)).toEqual({
+  //     ...initialState,
+  //     wages: 10
+  //   });
+  // });
 
-  it("Should handle UPDATE_WAGES", () => {
-    const action = {
-      type: "UPDATE_WAGES",
-      wages: 10
-    };
+  // it("Should handle UPDATE_WAGES", () => {
+  //   const action = {
+  //     type: "UPDATE_WAGES",
+  //     wages: 10
+  //   };
 
-    expect(authReducer({ ...initialState, wages: 0 }, action)).toEqual({
-      ...initialState,
-      wages: 10
-    });
-  });
+  //   expect(authReducer({ ...initialState, wages: 0 }, action)).toEqual({
+  //     ...initialState,
+  //     wages: 10
+  //   });
+  // });
 });

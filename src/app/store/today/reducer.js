@@ -144,7 +144,7 @@ const today = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload,
-        wages: action.payload.wages || 0
+        wages: action.payload.wages || null
       };
 
     case RESET_DAY_DATA:
