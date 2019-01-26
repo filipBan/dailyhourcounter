@@ -7,7 +7,7 @@ import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
-import green from "@material-ui/core/colors/green";
+import red from "@material-ui/core/colors/red";
 
 import App from "./app/modules/App";
 import store from "./app/store";
@@ -24,6 +24,11 @@ const theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiDialogContentText: {
+      root: {
+        fontSize: " 1.6rem"
+      }
+    },
     MuiButton: {
       containedPrimary: {
         backgroundColor: blue["900"]
@@ -59,7 +64,7 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: blue,
-    secondary: green
+    secondary: red
   }
 });
 

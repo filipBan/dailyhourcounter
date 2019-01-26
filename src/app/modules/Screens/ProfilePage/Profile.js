@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 
+import ConfirmationDialog from "./ConfirmationDialog";
 import TopBar from "../../../components/TopBar";
 
 const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
@@ -73,9 +74,17 @@ const StyledInput = styled(Input)`
 
 class ProfilePage extends Component {
   render() {
-    const { name, wages, email, loading, sendResetPasswordEmail } = this.props;
+    const {
+      name,
+      wages,
+      email,
+      loading,
+      sendResetPasswordEmail,
+      deleteUser,
+      toggleConfirmationDialog,
+      dialogOpen
+    } = this.props;
 
-    console.log({ name, wages, email });
     return (
       <Container>
         <TopBar title="Profile" />
@@ -93,10 +102,16 @@ class ProfilePage extends Component {
               Reset password
             </Button>
             <Divider />
-            <Button>Delete account</Button>
+            <Button onClick={() => toggleConfirmationDialog()}>
+              Delete account
+            </Button>
           </Content>
         </InnerContainer>
-
+        <ConfirmationDialog
+          open={dialogOpen}
+          onClose={toggleConfirmationDialog}
+          deleteUser={deleteUser}
+        />
         <SideDrawer />
       </Container>
     );

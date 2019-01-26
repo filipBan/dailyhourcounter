@@ -23,7 +23,6 @@ const snackbar = (state = initialState, action) => {
       };
 
     case "PASSWORD_RESET_EMAIL_SENT":
-      console.log(action);
       return {
         message: `Password reset email sent to ${action.email}`,
         type: "success"

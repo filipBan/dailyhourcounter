@@ -1,10 +1,17 @@
-import { UPDATE_USER_DATA } from "./actions";
+import {
+  UPDATE_USER_DATA,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_ERROR,
+  STARTING_USER_DELETE,
+  TOGGLE_CONFIRMATION_DIALOG
+} from "./actions";
 
 const initialState = {
   name: "",
   email: "",
   wages: 0,
-  loading: false
+  loading: false,
+  dialogOpen: false
 };
 
 const profile = (state = initialState, action) => {
@@ -22,6 +29,7 @@ const profile = (state = initialState, action) => {
       };
 
     case "SENDING_PASSWORD_RESET_EMAIL":
+    case STARTING_USER_DELETE:
       return {
         ...state,
         loading: true
@@ -29,9 +37,17 @@ const profile = (state = initialState, action) => {
 
     case "PASSWORD_RESET_EMAIL_SENT":
     case "PASSWORD_RESET_EMAIL_ERROR":
+    case USER_DELETE_SUCCESS:
+    case USER_DELETE_ERROR:
       return {
         ...state,
         loading: false
+      };
+
+    case TOGGLE_CONFIRMATION_DIALOG:
+      return {
+        ...state,
+        dialogOpen: !state.dialogOpen
       };
 
     default:
