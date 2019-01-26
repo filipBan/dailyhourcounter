@@ -7,13 +7,15 @@ import {
   TOGGLE_CONFIRMATION_DIALOG,
   SAVING_WAGES,
   SAVING_WAGES_SUCCESS,
-  SAVING_WAGES_ERROR
+  SAVING_WAGES_ERROR,
+  CHANGE_CURRENCY
 } from "./actions";
 
 const initialState = {
   name: "",
   email: "",
   wages: 0,
+  currency: "",
   loading: false,
   dialogOpen: false
 };
@@ -29,7 +31,8 @@ const profile = (state = initialState, action) => {
       return {
         ...state,
         name: action.user.userName,
-        wages: parseFloat(action.user.wages)
+        wages: parseFloat(action.user.wages),
+        currency: action.user.currency
       };
 
     case UPDATE_WAGES_INPUT:
@@ -61,6 +64,12 @@ const profile = (state = initialState, action) => {
       return {
         ...state,
         dialogOpen: !state.dialogOpen
+      };
+
+    case CHANGE_CURRENCY:
+      return {
+        ...state,
+        currency: action.currency
       };
 
     default:

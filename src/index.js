@@ -29,6 +29,11 @@ const theme = createMuiTheme({
         fontSize: " 1.6rem"
       }
     },
+    MuiInput: {
+      root: {
+        fontSize: " 1.6rem"
+      }
+    },
     MuiButton: {
       containedPrimary: {
         backgroundColor: blue["900"]

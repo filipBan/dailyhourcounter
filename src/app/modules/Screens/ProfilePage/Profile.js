@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import Card from "@material-ui/core/Card";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Paper from "@material-ui/core/Paper";
-import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 import ConfirmationDialog from "./ConfirmationDialog";
 import TopBar from "../../../components/TopBar";
 
 const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
+
+const currencies = {
+  USD: "$",
+  EUR: "€",
+  GBP: "£"
+};
 
 const Container = styled.div`
   width: 100%;
@@ -19,19 +24,6 @@ const Container = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
-`;
-
-const Section = styled(Card)`
-  margin-bottom: 1rem;
-  min-height: 5rem;
-  padding: 2rem 0;
-  text-align: center;
-`;
-
-const SectionContainer = styled.div`
-  width: 100%;
-  max-width: 40rem;
-  padding: 0 1rem;
 `;
 
 const Progress = styled.div`
@@ -64,15 +56,32 @@ const Content = styled(Paper)`
   }
 `;
 
-const StyledInput = styled(Input)`
-  input {
-    width: 6rem;
-    font-size: 1.6rem;
-    text-align: center;
-  }
+const StyledButton = styled(Button)`
+  text-transform: none !important;
+`;
+
+const Row = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+`;
+
+const Title = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  padding: 1rem 0 2rem 0;
+`;
+
+const StyledTextField = styled(TextField)`
+  width: 6rem;
 `;
 
 class ProfilePage extends Component {
+  handleChange = e => {
+    this.setState({ currency: e.target.value });
+  };
   render() {
     const {
       name,
@@ -85,7 +94,9 @@ class ProfilePage extends Component {
       dialogOpen,
       updateWagesInput,
       saveWagesInDatabase,
-      uid
+      uid,
+      currency,
+      changeCurrency
     } = this.props;
 
     return (
@@ -94,29 +105,51 @@ class ProfilePage extends Component {
         <InnerContainer>
           <Content>
             <Progress>{loading && <LinearProgress />}</Progress>
-            <p>{name ? `Hi ${name}` : " "}</p>
-            <p>
-              Wages:{" "}
-              <StyledInput
-                label="wages"
+            <Title>{name ? `Hi ${name}` : " "}</Title>
+            <Row>
+              <p>Hourly wage</p>
+              <StyledTextField
+                id="standard-select-currency-native"
+                select
+                value={currency}
+                onChange={e => changeCurrency(e.target.value)}
+                SelectProps={{
+                  native: true
+                }}
+                margin="normal"
+              >
+                {Object.values(currencies).map(curr => (
+                  <option key={curr} value={curr}>
+                    {curr}
+                  </option>
+                ))}
+              </StyledTextField>
+              <StyledTextField
+                label=" "
                 type="number"
                 value={wages}
                 onChange={e => updateWagesInput(e.target.value)}
               />
-              <Button onClick={() => saveWagesInDatabase(wages, uid)}>
+              <StyledButton
+                variant="outlined"
+                color="primary"
+                onClick={() => saveWagesInDatabase(wages, currency, uid)}
+              >
                 Save
-              </Button>
-            </p>
+              </StyledButton>
+            </Row>
             <Divider />
-            <p>Change currency?</p>
+            <Row>
+              <StyledButton onClick={() => sendResetPasswordEmail(email)}>
+                Reset password
+              </StyledButton>
+            </Row>
             <Divider />
-            <Button onClick={() => sendResetPasswordEmail(email)}>
-              Reset password
-            </Button>
-            <Divider />
-            <Button onClick={() => toggleConfirmationDialog()}>
-              Delete account
-            </Button>
+            <Row>
+              <StyledButton onClick={() => toggleConfirmationDialog()}>
+                Delete account
+              </StyledButton>
+            </Row>
           </Content>
         </InnerContainer>
         <ConfirmationDialog

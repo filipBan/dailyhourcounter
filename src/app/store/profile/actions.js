@@ -15,6 +15,8 @@ export const SAVING_WAGES = "SAVING_WAGES";
 export const SAVING_WAGES_SUCCESS = "SAVING_WAGES_SUCCESS";
 export const SAVING_WAGES_ERROR = "SAVING_WAGES_ERROR";
 
+export const CHANGE_CURRENCY = "CHANGE_CURRENCY";
+
 export const fetchUserData = uid => async dispatch => {
   try {
     const user = await firebase
@@ -48,18 +50,19 @@ export const toggleConfirmationDialog = () => ({
   type: TOGGLE_CONFIRMATION_DIALOG
 });
 
-export const saveWagesInDatabase = (wages, uid) => async dispatch => {
+export const saveWagesInDatabase = (wages, currency, uid) => async dispatch => {
   try {
     dispatch({ type: SAVING_WAGES });
-    console.log({ wages });
     await firebase
       .firestore()
       .collection("users")
       .doc(uid)
-      .update({ wages });
+      .update({ wages, currency });
     dispatch({ type: SAVING_WAGES_SUCCESS });
   } catch (error) {
     dispatch({ type: SAVING_WAGES_ERROR, error: error.message });
     console.error(error);
   }
 };
+
+export const changeCurrency = currency => ({ type: CHANGE_CURRENCY, currency });

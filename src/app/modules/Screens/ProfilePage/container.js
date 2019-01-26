@@ -6,7 +6,8 @@ import {
   deleteUser,
   toggleConfirmationDialog,
   updateWagesInput,
-  saveWagesInDatabase
+  saveWagesInDatabase,
+  changeCurrency
 } from "../../../store/profile/actions";
 
 const mapStateToProps = state => ({
@@ -19,7 +20,9 @@ const mapDispatchToProps = dispatch => ({
   deleteUser: () => dispatch(deleteUser()),
   toggleConfirmationDialog: () => dispatch(toggleConfirmationDialog()),
   updateWagesInput: value => dispatch(updateWagesInput(value)),
-  saveWagesInDatabase: (wages, uid) => dispatch(saveWagesInDatabase(wages, uid))
+  saveWagesInDatabase: (wages, currency, uid) =>
+    dispatch(saveWagesInDatabase(wages, currency, uid)),
+  changeCurrency: currency => dispatch(changeCurrency(currency))
 });
 
 export default connect(
