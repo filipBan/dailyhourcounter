@@ -56,7 +56,12 @@ const auth = (state = initialState, action) => {
         loading: false,
         checkingAuthState: false
       };
-      return { ...state, ...user, login: {}, register: {} };
+      return {
+        ...state,
+        ...user,
+        login: initialState.login,
+        register: initialState.register
+      };
     case AUTH_FAIL:
       return { ...state, loading: false };
 

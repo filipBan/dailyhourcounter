@@ -13,7 +13,8 @@ const initialState = {
     email: "",
     password: ""
   },
-  register: {}
+  register: {},
+  resetEmail: ""
 };
 
 describe("Auth reducer", () => {
