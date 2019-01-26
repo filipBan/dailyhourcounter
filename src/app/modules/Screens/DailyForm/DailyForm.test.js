@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { applyMiddleware, createStore } from "redux";
 import { Provider, connect } from "react-redux";
-import { render, fireEvent, cleanup, prettyDOM } from "react-testing-library";
+import { render, fireEvent, cleanup } from "react-testing-library";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
@@ -38,7 +38,8 @@ const initialState = Object.freeze({
     workedMinutes: 0,
     breakMinutes: 0,
     savingData: false,
-    loadingData: false
+    loadingData: false,
+    wages: null
   },
   auth: {
     uid: "test-uid-string"
@@ -57,7 +58,7 @@ const initialState = Object.freeze({
     }
   },
   reports: {},
-  settings: {}
+  profile: { name: "", email: "", wages: 0 }
 });
 
 const mapStateToProps = state => ({

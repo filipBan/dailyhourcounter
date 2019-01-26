@@ -63,6 +63,7 @@ const Progress = styled.div`
 `;
 
 // TODO - split this component up, it's too big
+// TODO -- add a section to show wages for that day only (changable)
 class DailyForm extends Component {
   componentDidMount() {
     const { uid, today, fetchDailyData } = this.props;
@@ -96,7 +97,8 @@ class DailyForm extends Component {
       today,
       handleCalendarChange,
       resetDailyData,
-      uid
+      uid,
+      wages
     } = this.props;
 
     const workStart = hours[0].start;
@@ -107,7 +109,7 @@ class DailyForm extends Component {
 
     const totalTimeWorked = `${Math.floor(
       (workedMinutes - breakMinutes) / 60
-    )}h ${(workedMinutes - breakMinutes) % 60}min total`;
+    )}h ${(workedMinutes - breakMinutes) % 60}min`;
 
     return (
       <DailyFormContainer>
@@ -264,6 +266,7 @@ class DailyForm extends Component {
           >
             RESET
           </Button>
+          {/* TODO -- DON'T PASS ALL THIS.PROPS to the savefunction stupid */}
           <Button
             onClick={() => saveHoursAndBreaksToFirebase(this.props)}
             fullWidth

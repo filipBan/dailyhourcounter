@@ -14,7 +14,6 @@ import {
 
 const mapStateToProps = state => ({
   ...state.today,
-  wages: state.auth.wages,
   uid: state.auth.uid,
   auth: state.auth,
   notificationOpen: state.ui.notification.modalOpen

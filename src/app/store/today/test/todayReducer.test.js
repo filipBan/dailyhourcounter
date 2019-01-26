@@ -17,7 +17,8 @@ const initialState = {
   workedMinutes: 0,
   breakMinutes: 0,
   savingData: false,
-  loadingData: false
+  loadingData: false,
+  wages: null
 };
 
 describe("Today Reducer", () => {

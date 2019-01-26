@@ -5,7 +5,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
   <div
     class="sc-ifAKCX jqsrVw"
   >
-    <div
+    <header
       class="sc-EHOje fOdpYX"
       font-size="4rem"
     >
@@ -15,12 +15,12 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
       <span>
         Hours
       </span>
-    </div>
-    <div
+    </header>
+    <main
       class="sc-bZQynM dwLWXh"
     >
       <div
-        class="MuiPaper-root-96 MuiPaper-elevation1-99 MuiPaper-rounded-97 MuiCard-root-95 sc-gzVnrw cdSxro"
+        class="MuiPaper-root-96 MuiPaper-elevation1-99 MuiPaper-rounded-97 MuiCard-root-95 sc-gzVnrw dpBank"
       >
         <div
           class="sc-dnqmqq fUazxu"
@@ -30,7 +30,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
         >
           <div
             aria-label="user-name-field"
-            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 MuiInputBase-fullWidth-145 MuiInput-fullWidth-130 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -44,7 +44,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           </div>
           <div
             aria-label="wages-field"
-            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 MuiInputBase-fullWidth-145 MuiInput-fullWidth-130 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -58,7 +58,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           </div>
           <div
             aria-label="email-field"
-            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 MuiInputBase-fullWidth-145 MuiInput-fullWidth-130 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -72,7 +72,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           </div>
           <div
             aria-label="password-field"
-            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 MuiInputBase-fullWidth-145 MuiInput-fullWidth-130 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -86,7 +86,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           </div>
           <div
             aria-label="confirm-password-field"
-            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 sc-iwsKbI fdnPLx"
+            class="MuiInputBase-root-136 MuiInput-root-123 MuiInput-underline-127 MuiInputBase-fullWidth-145 MuiInput-fullWidth-130 sc-iwsKbI fdnPLx"
             paddingtop="2rem"
             required=""
           >
@@ -119,7 +119,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             </button>
           </div>
         </form>
-        <div
+        <footer
           class="sc-gqjmRU bcCUVQ"
         >
           <span>
@@ -139,8 +139,8 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
               Privacy policy
             </span>
           </a>
-        </div>
-        <div
+        </footer>
+        <footer
           class="sc-gqjmRU bcCUVQ"
         >
           Already have an account?
@@ -149,9 +149,9 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           >
             Login
           </a>
-        </div>
+        </footer>
       </div>
-    </div>
+    </main>
   </div>
 </div>
 `;

@@ -17,6 +17,12 @@ import Button from "../../../components/Button";
 
 const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
 
+const currencies = {
+  USD: "$",
+  EUR: "€",
+  GBP: "£"
+};
+
 const StyledTable = styled(Table)`
   th {
     font-size: 1.4rem;
@@ -76,6 +82,7 @@ const Progress = styled.div`
 `;
 
 // TODO - split this component up, it's too big
+// TODO - add day wage to the report details
 class ReportScreen extends Component {
   componentWillUnmount() {
     const { clearReportData } = this.props;
@@ -142,14 +149,13 @@ class ReportScreen extends Component {
   };
 
   render() {
-    const { fetchDateRangeData } = this.props;
+    const { fetchDateRangeData, currency, uid } = this.props;
     const {
       reportStartDate,
       reportEndDate,
       reportData,
       fetching
     } = this.props.reports;
-    const { uid } = this.props.auth;
 
     const reportSummary = this.calculateReportSummary(reportData);
 
@@ -239,7 +245,7 @@ class ReportScreen extends Component {
                       {reportSummary.payable}
                     </TableCell>
                     <TableCell padding="dense" align="left">
-                      {reportSummary.toBePaid}
+                      {`${currency} ${reportSummary.toBePaid}`}
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -276,7 +282,7 @@ class ReportScreen extends Component {
                           {this.formatMinutesToHours(row.breakMinutes)}
                         </TableCell>
                         <TableCell padding="none" align="left">
-                          {this.getDayPayment(row).toFixed(2)}
+                          {`${currency} ${this.getDayPayment(row).toFixed(2)}`}
                         </TableCell>
                       </TableRow>
                     );

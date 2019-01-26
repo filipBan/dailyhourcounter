@@ -10,8 +10,9 @@ import {
 } from "../../../store/reports/actions";
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  reports: state.reports
+  uid: state.auth.uid,
+  reports: state.reports,
+  currency: state.profile.currency
 });
 
 const mapDispatchToProps = dispatch => ({

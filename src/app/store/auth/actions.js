@@ -1,4 +1,5 @@
 import firebase from "../../../firebaseConfig";
+import { fetchUserData } from "../profile/actions";
 
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
@@ -7,7 +8,6 @@ export const AUTH_END = "AUTH_END";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const REGISTRATION_COMPLETE = "REGISTRATION_COMPLETE";
-export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
 export const UPDATE_INPUT = "UPDATE_INPUT";
 
 export const SENDING_VERIFICATION_EMAIL = "SENDING_VERIFICATION_EMAIL";
@@ -17,21 +17,6 @@ export const VERIFICATION_EMAIL_ERROR = "VERIFICATION_EMAIL_ERROR";
 export const SENDING_PASSWORD_RESET_EMAIL = "SENDING_PASSWORD_RESET_EMAIL";
 export const PASSWORD_RESET_EMAIL_SENT = "PASSWORD_RESET_EMAIL_SENT";
 export const PASSWORD_RESET_EMAIL_ERROR = "PASSWORD_RESET_EMAIL_ERROR";
-
-export const fetchUserData = uid => async dispatch => {
-  try {
-    const user = await firebase
-      .firestore()
-      .collection("users")
-      .doc(uid)
-      .get()
-      .then(doc => doc.data());
-
-    dispatch({ type: UPDATE_USER_DATA, user });
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export const logInWithEmailAndPassword = (email, password) => dispatch => {
   dispatch({ type: AUTH_START });
@@ -142,7 +127,7 @@ export const sendResetPasswordEmail = email => async dispatch => {
   try {
     dispatch({ type: SENDING_PASSWORD_RESET_EMAIL });
     await firebase.auth().sendPasswordResetEmail(email);
-    dispatch({ type: PASSWORD_RESET_EMAIL_SENT });
+    dispatch({ type: PASSWORD_RESET_EMAIL_SENT, email });
   } catch (error) {
     dispatch({ type: PASSWORD_RESET_EMAIL_ERROR, error: error.message });
   }
