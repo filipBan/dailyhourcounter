@@ -246,6 +246,7 @@ class DailyForm extends Component {
               </ButtonContainer>
             </div>
           </Section>
+          {/* TODO -- add a section to show wages for that day only (changable) */}
           <Section aria-label="total-time-display">
             {workedMinutes - breakMinutes > 0 ? (
               <span>{totalTimeWorked}</span>
@@ -264,6 +265,7 @@ class DailyForm extends Component {
           >
             RESET
           </Button>
+          {/* TODO -- DON'T PASS ALL THIS.PROPS to the savefunction stupid */}
           <Button
             onClick={() => saveHoursAndBreaksToFirebase(this.props)}
             fullWidth

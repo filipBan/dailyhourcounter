@@ -1,9 +1,15 @@
 import { connect } from "react-redux";
 import ProfilePage from "./Profile";
 
-const mapStateToProps = state => ({});
+import { sendResetPasswordEmail } from "../../../store/auth/actions";
 
-const mapDispatchToProps = dispatch => ({});
+const mapStateToProps = state => ({
+  ...state.profile
+});
+
+const mapDispatchToProps = dispatch => ({
+  sendResetPasswordEmail: email => dispatch(sendResetPasswordEmail(email))
+});
 
 export default connect(
   mapStateToProps,

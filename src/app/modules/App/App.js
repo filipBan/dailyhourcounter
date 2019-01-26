@@ -35,7 +35,7 @@ function PrivateRoute({
 
 const CheckAuthState = ({ checkingAuthState, isLoggedIn }) => {
   if (!checkingAuthState && isLoggedIn) {
-    return <Redirect to="/today" />;
+    return <Redirect to="/profile" />;
   }
 
   if (!checkingAuthState && !isLoggedIn) {

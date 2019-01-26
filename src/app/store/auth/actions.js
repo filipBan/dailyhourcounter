@@ -127,7 +127,8 @@ export const sendResetPasswordEmail = email => async dispatch => {
   try {
     dispatch({ type: SENDING_PASSWORD_RESET_EMAIL });
     await firebase.auth().sendPasswordResetEmail(email);
-    dispatch({ type: PASSWORD_RESET_EMAIL_SENT });
+    console.log({ email });
+    dispatch({ type: PASSWORD_RESET_EMAIL_SENT, email });
   } catch (error) {
     dispatch({ type: PASSWORD_RESET_EMAIL_ERROR, error: error.message });
   }
