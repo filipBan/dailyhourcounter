@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { DatePicker } from "material-ui-pickers";
 
@@ -33,56 +34,71 @@ const Calendar = styled.div`
   justify-content: flex-end;
 `;
 
-class TopBar extends Component {
-  changeCalendarDate = date => {
-    const { handleCalendarChange } = this.props;
+const TopBar = ({
+  handleCalendarChange,
+  toggleDrawer,
+  today,
+  title,
+  showCalendar
+}) => {
+  const changeCalendarDate = date => {
     handleCalendarChange(date);
   };
 
-  openPicker = e => {
-    this.picker.open(e);
+  const openPicker = e => {
+    picker.open(e);
   };
 
-  render() {
-    const { toggleDrawer, today, title, showCalendar } = this.props;
+  let picker = null;
 
-    return (
-      <Container>
-        <StyledAppbar position="static">
-          <IconButton
-            color="inherit"
-            aria-label="menu-toggle"
-            onClick={() => toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-          {title && <Title>{title}</Title>}
-          {showCalendar && (
-            <Calendar>
-              <IconButton
-                color="inherit"
-                aria-label="calendar-toggle"
-                onClick={this.openPicker}
-              >
-                <CalendarToday />
-              </IconButton>
-              <div style={{ display: "none" }} aria-label="top-bar-calendar">
-                <DatePicker
-                  value={today}
-                  onChange={this.changeCalendarDate}
-                  animateYearScrolling
-                  showTodayButton
-                  ref={node => {
-                    this.picker = node;
-                  }}
-                />
-              </div>
-            </Calendar>
-          )}
-        </StyledAppbar>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <StyledAppbar position="static">
+        <IconButton
+          color="inherit"
+          aria-label="menu-toggle"
+          onClick={() => toggleDrawer(true)}
+        >
+          <MenuIcon />
+        </IconButton>
+        {title && <Title>{title}</Title>}
+        {showCalendar && (
+          <Calendar>
+            <IconButton
+              color="inherit"
+              aria-label="calendar-toggle"
+              onClick={openPicker}
+            >
+              <CalendarToday />
+            </IconButton>
+            <div style={{ display: "none" }} aria-label="top-bar-calendar">
+              <DatePicker
+                value={today}
+                onChange={changeCalendarDate}
+                animateYearScrolling
+                showTodayButton
+                ref={node => {
+                  picker = node;
+                }}
+              />
+            </div>
+          </Calendar>
+        )}
+      </StyledAppbar>
+    </Container>
+  );
+};
+
+TopBar.propTypes = {
+  handleCalendarChange: PropTypes.func.isRequired,
+  toggleDrawer: PropTypes.func.isRequired,
+  today: PropTypes.instanceOf(Date).isRequired,
+  title: PropTypes.string.isRequired,
+  showCalendar: PropTypes.bool
+};
+
+TopBar.defaultProps = {
+  showCalendar: false
+};
 
 export default TopBar;

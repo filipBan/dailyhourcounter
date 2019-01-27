@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -95,6 +96,12 @@ const SnackbarWrapper = ({ message, type, resetSnackbar }) => {
       />
     </StyledSnackbar>
   );
+};
+
+SnackbarWrapper.propTypes = {
+  message: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  resetSnackbar: PropTypes.func.isRequired
 };
 
 export default SnackbarWrapper;

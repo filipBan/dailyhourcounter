@@ -47,26 +47,26 @@ export const saveLoggedUserSession = user => dispatch => {
 export const updateInput = (screen, field, value) => dispatch =>
   dispatch({ type: UPDATE_INPUT, payload: { screen, field, value } });
 
-const addWelcomeNotice = async uid => {
-  try {
-    await firebase
-      .firestore()
-      .collection("notifications")
-      .doc(uid)
-      .collection("notices")
-      .add({
-        content:
-          "You now have access to a 14 day full trial. After it's over you can get the premium account from your profile page. (It's in the top left menu)",
-        footer: "Enjoy :)",
-        header: "Great to see you!",
-        read: false,
-        subheader: "Thanks for subscribing!",
-        type: "welcome"
-      });
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+// const addWelcomeNotice = async uid => {
+//   try {
+//     await firebase
+//       .firestore()
+//       .collection("notifications")
+//       .doc(uid)
+//       .collection("notices")
+//       .add({
+//         content:
+//           "You now have access to a 14 day full trial. After it's over you can get the premium account from your profile page. (It's in the top left menu)",
+//         footer: "Enjoy :)",
+//         header: "Great to see you!",
+//         read: false,
+//         subheader: "Thanks for subscribing!",
+//         type: "welcome"
+//       });
+//   } catch (error) {
+//     throw new Error(error);
+//   }
+// };
 
 const addUserRecordToDb = async (uid, userName, wages) => {
   try {

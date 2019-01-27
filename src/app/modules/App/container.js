@@ -1,11 +1,7 @@
 import { connect } from "react-redux";
 import App from "./App";
 
-import {
-  saveLoggedUserSession,
-  logoutUser,
-  sendEmailVerification
-} from "../../store/auth/actions";
+import { saveLoggedUserSession } from "../../store/auth/actions";
 import { notifyAboutUpdates } from "../../store/ui/snackbar/actions";
 import { checkNotifications } from "../../store/ui/notifications/actions";
 
@@ -17,9 +13,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   saveLoggedUserSession: user => dispatch(saveLoggedUserSession(user)),
-  logoutUser: () => dispatch(logoutUser()),
   checkNotifications: uid => dispatch(checkNotifications(uid)),
-  sendEmailVerification: () => dispatch(sendEmailVerification()),
   notifyAboutUpdates: () => dispatch(notifyAboutUpdates())
 });
 

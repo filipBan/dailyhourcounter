@@ -17,12 +17,6 @@ import Button from "../../../components/Button";
 
 const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
 
-const currencies = {
-  USD: "$",
-  EUR: "€",
-  GBP: "£"
-};
-
 const StyledTable = styled(Table)`
   th {
     font-size: 1.4rem;

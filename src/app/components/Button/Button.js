@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import Button from "@material-ui/core/Button";
 
@@ -43,18 +44,32 @@ const DisabledBadge = styled(DeleteBadge)`
   color: #ddd;
 `;
 
-const SharedButton = ({ onDelete, deleteBadge, ...other }) => {
+const SharedButton = ({ onDelete, deleteBadge, disabled, ...other }) => {
   return (
     <Container>
-      {deleteBadge && !other.disabled && (
+      {deleteBadge && !disabled && (
         <DeleteBadge onClick={onDelete} aria-label="delete-badge">
           x
         </DeleteBadge>
       )}
-      {deleteBadge && other.disabled && <DisabledBadge>x</DisabledBadge>}
-      <StyledButton {...other}>{other.children}</StyledButton>
+      {deleteBadge && disabled && <DisabledBadge>x</DisabledBadge>}
+      <StyledButton {...other} disabled={disabled}>
+        {other.children}
+      </StyledButton>
     </Container>
   );
+};
+
+SharedButton.propTypes = {
+  onDelete: PropTypes.func,
+  deleteBadge: PropTypes.bool,
+  disabled: PropTypes.bool
+};
+
+SharedButton.defaultProps = {
+  onDelete: () => {},
+  deleteBadge: false,
+  disabled: false
 };
 
 export default SharedButton;
