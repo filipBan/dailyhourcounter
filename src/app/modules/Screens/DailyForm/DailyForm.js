@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import { startOfMinute, addDays, format } from "date-fns";
 import { DateTimePicker } from "material-ui-pickers";
 
@@ -65,6 +67,48 @@ const Progress = styled.div`
 // TODO - split this component up, it's too big
 // TODO -- add a section to show wages for that day only (changable)
 class DailyForm extends Component {
+  static propTypes = {
+    uid: PropTypes.string.isRequired,
+    today: PropTypes.instanceOf(Date).isRequired,
+    fetchDailyData: PropTypes.func.isRequired,
+    hours: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: PropTypes.instanceOf(Date),
+        end: PropTypes.instanceOf(Date)
+      })
+    ),
+    breaks: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: PropTypes.instanceOf(Date),
+        end: PropTypes.instanceOf(Date)
+      })
+    ),
+    workedMinutes: PropTypes.number.isRequired,
+    breakMinutes: PropTypes.number.isRequired,
+    updateBreaks: PropTypes.func.isRequired,
+    updateHours: PropTypes.func.isRequired,
+    saveHoursAndBreaksToFirebase: PropTypes.func.isRequired,
+    savingData: PropTypes.bool.isRequired,
+    loadingData: PropTypes.bool.isRequired,
+    today: PropTypes.instanceOf(Date).isRequired,
+    handleCalendarChange: PropTypes.func.isRequired,
+    resetDailyData: PropTypes.func.isRequired,
+    uid: PropTypes.string.isRequired,
+    wages: PropTypes.number
+  };
+
+  static defaultProps = {
+    hours: {
+      start: null,
+      end: null
+    },
+    breaks: {
+      start: null,
+      end: null
+    },
+    wages: null
+  };
+
   componentDidMount() {
     const { uid, today, fetchDailyData } = this.props;
     if (uid) {
