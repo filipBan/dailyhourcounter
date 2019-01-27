@@ -802,9 +802,7 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-10T19:00"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe(
-      "8h 0min total"
-    );
+    expect(getByLabelText("total-time-display").textContent).toBe("8h 0min");
   });
 
   it("Displays a correct time calculation when only work times are given (fraction hours)", () => {
@@ -825,9 +823,7 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-10T18:47"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe(
-      "7h 23min total"
-    );
+    expect(getByLabelText("total-time-display").textContent).toBe("7h 23min");
   });
 
   it("Displays a correct time calculation when only work times are given (overnight)", () => {
@@ -848,9 +844,7 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-11T03:47"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe(
-      "8h 23min total"
-    );
+    expect(getByLabelText("total-time-display").textContent).toBe("8h 23min");
   });
 
   it("Displays a correct time calculation for work hours and breaks", () => {
@@ -882,9 +876,7 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-10T13:00"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe(
-      "8h 30min total"
-    );
+    expect(getByLabelText("total-time-display").textContent).toBe("8h 30min");
   });
 
   it("Disables all buttons when data is saving and enables them when it's finished", () => {

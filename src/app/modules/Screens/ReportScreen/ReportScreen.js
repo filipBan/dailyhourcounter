@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { format } from "date-fns";
 import styled from "styled-components";
+
 import Card from "@material-ui/core/Card";
 import LinearProgress from "@material-ui/core/LinearProgress";
-
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -16,12 +17,6 @@ import TopBar from "../../../components/TopBar";
 import Button from "../../../components/Button";
 
 const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
-
-const currencies = {
-  USD: "$",
-  EUR: "€",
-  GBP: "£"
-};
 
 const StyledTable = styled(Table)`
   th {
@@ -84,9 +79,25 @@ const Progress = styled.div`
 // TODO - split this component up, it's too big
 // TODO - add day wage to the report details
 class ReportScreen extends Component {
+  static propTypes = {
+    clearReportData: PropTypes.func.isRequired,
+    reportData: PropTypes.instanceOf(Array),
+    fetchDateRangeData: PropTypes.func.isRequired,
+    currency: PropTypes.string.isRequired,
+    uid: PropTypes.string.isRequired,
+    reportStartDate: PropTypes.instanceOf(Date),
+    reportEndDate: PropTypes.instanceOf(Date),
+    fetching: PropTypes.bool.isRequired
+  };
+
+  static defaultProps = {
+    reportData: null,
+    reportStartDate: null,
+    reportEndDate: null
+  };
+
   componentWillUnmount() {
-    const { clearReportData } = this.props;
-    const { reportData } = this.props.reports;
+    const { clearReportData, reportData } = this.props;
     if (reportData && !reportData.length) {
       clearReportData();
     }
@@ -149,13 +160,15 @@ class ReportScreen extends Component {
   };
 
   render() {
-    const { fetchDateRangeData, currency, uid } = this.props;
     const {
+      fetchDateRangeData,
+      currency,
+      uid,
       reportStartDate,
       reportEndDate,
       reportData,
       fetching
-    } = this.props.reports;
+    } = this.props;
 
     const reportSummary = this.calculateReportSummary(reportData);
 

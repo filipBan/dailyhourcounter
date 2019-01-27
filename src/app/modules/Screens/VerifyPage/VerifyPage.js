@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Redirect } from "react-router-dom";
 import Card from "@material-ui/core/Card";
@@ -55,15 +56,25 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const VerifyPage = props => {
-  const { loading } = props;
-  if (props.isLoggedIn && props.emailVerified && !props.checkingAuthState) {
+const VerifyPage = ({
+  loading,
+  checkingAuthState,
+  isLoggedIn,
+  emailVerified,
+  logoutUser,
+  history,
+  sendEmailVerification
+}) => {
+  if (checkingAuthState) {
+    return <Redirect to="/" />;
+  }
+  if (isLoggedIn && emailVerified && !checkingAuthState) {
     return <Redirect to="/today" />;
   }
 
   const logOut = async () => {
-    await props.logoutUser();
-    return props.history.push("/");
+    await logoutUser();
+    return history.push("/");
   };
 
   return (
@@ -105,13 +116,23 @@ const VerifyPage = props => {
         <Button
           disabled={loading}
           variant="outlined"
-          onClick={props.sendEmailVerification}
+          onClick={sendEmailVerification}
         >
           Send a new email
         </Button>
       </StyledCard>
     </Container>
   );
+};
+
+VerifyPage.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  checkingAuthState: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  emailVerified: PropTypes.bool.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  sendEmailVerification: PropTypes.func.isRequired
 };
 
 export default VerifyPage;

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-
+import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import Modal from "@material-ui/core/Modal";
@@ -44,43 +44,60 @@ const StyledButton = styled(Button)`
   font-size: 1.6rem;
 `;
 
-class Notification extends Component {
-  closeModal = () => {
-    const { closeNotificationModal, notification, userId } = this.props;
-
+const Notification = ({
+  closeNotificationModal,
+  notification,
+  userId,
+  modalOpen
+}) => {
+  const closeModal = () => {
     closeNotificationModal(userId, notification.id);
   };
 
-  render() {
-    const { modalOpen, notification } = this.props;
-    const { header, subheader, content, footer } = notification;
-    return (
-      <StyledModal open={modalOpen}>
-        <Content>
-          <h2>{header}</h2>
-          <p>{subheader}</p>
-          <span>{content}</span>
-          <p>{footer}</p>
-          <CloseButton>
-            <IconButton
-              color="inherit"
-              aria-label="Close"
-              onClick={this.closeModal}
-            >
-              <Close />
-            </IconButton>
-          </CloseButton>
-          <StyledButton
-            color="secondary"
-            variant="contained"
-            onClick={this.closeModal}
-          >
-            Let's go
-          </StyledButton>
-        </Content>
-      </StyledModal>
-    );
+  const { header, subheader, content, footer } = notification;
+  return (
+    <StyledModal open={modalOpen}>
+      <Content>
+        <h2>{header}</h2>
+        <p>{subheader}</p>
+        <span>{content}</span>
+        <p>{footer}</p>
+        <CloseButton>
+          <IconButton color="inherit" aria-label="Close" onClick={closeModal}>
+            <Close />
+          </IconButton>
+        </CloseButton>
+        <StyledButton
+          color="secondary"
+          variant="contained"
+          onClick={closeModal}
+        >
+          Let's go
+        </StyledButton>
+      </Content>
+    </StyledModal>
+  );
+};
+
+Notification.propTypes = {
+  closeNotificationModal: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
+  modalOpen: PropTypes.bool.isRequired,
+  notification: PropTypes.shape({
+    header: PropTypes.string,
+    subheader: PropTypes.string,
+    content: PropTypes.string,
+    footer: PropTypes.string
+  })
+};
+
+Notification.defaultProps = {
+  notification: {
+    header: "",
+    subheader: "",
+    content: "",
+    footer: ""
   }
-}
+};
 
 export default Notification;

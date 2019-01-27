@@ -5,6 +5,8 @@ import {
   Route,
   Switch
 } from "react-router-dom";
+import PropTypes from "prop-types";
+
 import firebase from "../../../firebaseConfig";
 import Snackbar from "../../components/Snackbar";
 import Fallback from "./Fallback";
@@ -35,7 +37,7 @@ function PrivateRoute({
 
 const CheckAuthState = ({ checkingAuthState, isLoggedIn }) => {
   if (!checkingAuthState && isLoggedIn) {
-    return <Redirect to="/today" />;
+    return <Redirect to="/reports" />;
   }
 
   if (!checkingAuthState && !isLoggedIn) {
@@ -46,6 +48,15 @@ const CheckAuthState = ({ checkingAuthState, isLoggedIn }) => {
 };
 
 class App extends Component {
+  static propTypes = {
+    checkNotifications: PropTypes.func.isRequired,
+    saveLoggedUserSession: PropTypes.func.isRequired,
+    notifyAboutUpdates: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
+    emailVerified: PropTypes.bool.isRequired,
+    checkingAuthState: PropTypes.bool.isRequired
+  };
+
   constructor() {
     super();
     this.unsubscriber = null;
@@ -124,8 +135,11 @@ class App extends Component {
                 canIAccessIt={canIAccessIt}
                 redirectPath={redirectPath}
               />
-              <Route path="/verify-email" component={VerifyPage} />
-              <Route path="/forgot-password" component={ForgotPassword} />
+              <Route path="/verify-email" render={() => <VerifyPage />} />
+              <Route
+                path="/forgot-password"
+                render={() => <ForgotPassword />}
+              />
             </Switch>
           </Suspense>
           <Snackbar />

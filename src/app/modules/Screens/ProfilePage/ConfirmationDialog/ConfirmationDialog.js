@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -18,43 +19,40 @@ const Content = styled.p`
   margin: none;
 `;
 
-class ConfirmationDialog extends React.Component {
-  handleClose = () => {
-    this.props.onClose();
+const ConfirmationDialog = ({ open, onClose, deleteUser }) => {
+  const handleClose = () => {
+    onClose();
   };
 
-  handleUserDelete = () => {
-    this.props.deleteUser();
-    this.props.onClose();
-  };
+  return (
+    <Dialog
+      onClose={handleClose}
+      aria-labelledby="simple-dialog-title"
+      open={open}
+    >
+      <Title>Are you sure?</Title>
+      <DialogContent>
+        <Content>
+          If you delete your account all your data will be irreversibly lost.
+          There will be no way to restore any of it.
+        </Content>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={deleteUser} color="secondary" variant="outlined">
+            Delete
+          </Button>
+        </DialogActions>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
-  render() {
-    const { open, deleteUser } = this.props;
-
-    return (
-      <Dialog
-        onClose={this.handleClose}
-        aria-labelledby="simple-dialog-title"
-        open={open}
-      >
-        <Title>Are you sure?</Title>
-        <DialogContent>
-          <Content>
-            If you delete your account all your data will be irreversibly lost.
-            There will be no way to restore any of it.
-          </Content>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={deleteUser} color="secondary" variant="outlined">
-              Delete
-            </Button>
-          </DialogActions>
-        </DialogContent>
-      </Dialog>
-    );
-  }
-}
+ConfirmationDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired
+};
 
 export default ConfirmationDialog;

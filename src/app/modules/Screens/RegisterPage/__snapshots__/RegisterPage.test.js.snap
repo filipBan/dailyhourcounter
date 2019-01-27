@@ -35,6 +35,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             required=""
           >
             <input
+              aria-label=""
               class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="userName"
               required=""
@@ -49,6 +50,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             required=""
           >
             <input
+              aria-label=""
               class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="current hourly wages"
               required=""
@@ -63,6 +65,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             required=""
           >
             <input
+              aria-label=""
               class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="email"
               required=""
@@ -77,6 +80,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             required=""
           >
             <input
+              aria-label=""
               class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="password"
               required=""
@@ -91,6 +95,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             required=""
           >
             <input
+              aria-label=""
               class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
               placeholder="password"
               required=""

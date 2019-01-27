@@ -43,8 +43,7 @@ const initialState = Object.freeze({
       visible: false
     }
   },
-  reports: {},
-  settings: {}
+  reports: {}
 });
 
 const mapStateToProps = state => ({

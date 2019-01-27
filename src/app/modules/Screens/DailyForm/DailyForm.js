@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import { startOfMinute, addDays, format } from "date-fns";
 import { DateTimePicker } from "material-ui-pickers";
 
@@ -65,6 +67,46 @@ const Progress = styled.div`
 // TODO - split this component up, it's too big
 // TODO -- add a section to show wages for that day only (changable)
 class DailyForm extends Component {
+  static propTypes = {
+    uid: PropTypes.string.isRequired,
+    today: PropTypes.instanceOf(Date).isRequired,
+    fetchDailyData: PropTypes.func.isRequired,
+    hours: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: PropTypes.instanceOf(Date),
+        end: PropTypes.instanceOf(Date)
+      })
+    ),
+    breaks: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: PropTypes.instanceOf(Date),
+        end: PropTypes.instanceOf(Date)
+      })
+    ),
+    workedMinutes: PropTypes.number.isRequired,
+    breakMinutes: PropTypes.number.isRequired,
+    updateBreaks: PropTypes.func.isRequired,
+    updateHours: PropTypes.func.isRequired,
+    saveHoursAndBreaksToFirebase: PropTypes.func.isRequired,
+    savingData: PropTypes.bool.isRequired,
+    loadingData: PropTypes.bool.isRequired,
+    handleCalendarChange: PropTypes.func.isRequired,
+    resetDailyData: PropTypes.func.isRequired,
+    wages: PropTypes.number
+  };
+
+  static defaultProps = {
+    hours: {
+      start: null,
+      end: null
+    },
+    breaks: {
+      start: null,
+      end: null
+    },
+    wages: null
+  };
+
   componentDidMount() {
     const { uid, today, fetchDailyData } = this.props;
     if (uid) {
@@ -131,7 +173,7 @@ class DailyForm extends Component {
               <SectionTitle>Hours</SectionTitle>
               <ButtonContainer>
                 <Button
-                  deleteBadge={workStart}
+                  deleteBadge={Boolean(workStart)}
                   onDelete={() => updateHours("workStart", null)}
                   variant="outlined"
                   color="primary"
@@ -143,7 +185,7 @@ class DailyForm extends Component {
                   {workStart ? format(workStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
-                  deleteBadge={workEnd}
+                  deleteBadge={Boolean(workEnd)}
                   onDelete={() => updateHours("workEnd", null)}
                   variant="outlined"
                   color="primary"
@@ -192,7 +234,7 @@ class DailyForm extends Component {
               <SectionTitle>Breaks</SectionTitle>
               <ButtonContainer>
                 <Button
-                  deleteBadge={breakStart}
+                  deleteBadge={Boolean(breakStart)}
                   onDelete={() => updateBreaks("breakStart", null)}
                   variant="outlined"
                   color="primary"
@@ -204,7 +246,7 @@ class DailyForm extends Component {
                   {breakStart ? format(breakStart, "HH:mm") : "Start"}
                 </Button>
                 <Button
-                  deleteBadge={breakEnd}
+                  deleteBadge={Boolean(breakEnd)}
                   onDelete={() => updateBreaks("breakEnd", null)}
                   variant="outlined"
                   color="primary"
