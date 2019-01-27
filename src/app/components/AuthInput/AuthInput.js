@@ -17,9 +17,14 @@ const AuthInput = ({ type, value, onChange, label, ...other }) => (
 
 AuthInput.propTypes = {
   type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string
+};
+
+AuthInput.defaultProps = {
+  label: "",
+  value: null
 };
 
 export default AuthInput;

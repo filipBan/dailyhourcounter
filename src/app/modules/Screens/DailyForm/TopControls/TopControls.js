@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { addDays, format, subDays } from "date-fns";
 
 import Card from "@material-ui/core/Card";
@@ -39,6 +40,11 @@ const TopControls = ({ handleCalendarChange, today }) => {
       </IconButton>
     </Container>
   );
+};
+
+TopControls.propTypes = {
+  handleCalendarChange: PropTypes.func.isRequired,
+  today: PropTypes.instanceOf(Date).isRequired
 };
 
 export default TopControls;

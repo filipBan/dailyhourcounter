@@ -77,15 +77,20 @@ const addUserRecordToDb = async (uid, userName, wages) => {
       .set({
         uid,
         userName,
-        wages: parseFloat(wages)
+        wages: parseFloat(wages),
+        currency: "GBP"
       });
   } catch (error) {
     throw new Error(error);
   }
 };
 
-export const registerNewAccount = props => async dispatch => {
-  const { email, password, userName, wages } = props;
+export const registerNewAccount = ({
+  email,
+  password,
+  userName,
+  wages
+}) => async dispatch => {
   try {
     dispatch({ type: AUTH_START });
     const user = await firebase

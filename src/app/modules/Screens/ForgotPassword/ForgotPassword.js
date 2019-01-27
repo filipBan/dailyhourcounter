@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { Link } from "react-router-dom";
 
@@ -16,6 +17,11 @@ import Button from "../../../components/Button";
 import AuthInput from "../../../components/AuthInput";
 
 class ForgotPassword extends Component {
+  static propTypes = {
+    sendResetPasswordEmail: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
+  };
+
   state = {
     email: ""
   };

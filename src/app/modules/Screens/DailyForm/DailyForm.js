@@ -90,10 +90,8 @@ class DailyForm extends Component {
     saveHoursAndBreaksToFirebase: PropTypes.func.isRequired,
     savingData: PropTypes.bool.isRequired,
     loadingData: PropTypes.bool.isRequired,
-    today: PropTypes.instanceOf(Date).isRequired,
     handleCalendarChange: PropTypes.func.isRequired,
     resetDailyData: PropTypes.func.isRequired,
-    uid: PropTypes.string.isRequired,
     wages: PropTypes.number
   };
 

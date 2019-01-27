@@ -10,8 +10,8 @@ import {
 } from "../../../store/reports/actions";
 
 const mapStateToProps = state => ({
+  ...state.reports,
   uid: state.auth.uid,
-  reports: state.reports,
   currency: state.profile.currency
 });
 

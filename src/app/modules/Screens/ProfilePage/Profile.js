@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -80,89 +81,98 @@ const StyledTextField = styled(TextField)`
 
 // TODO - add date format change option
 
-class ProfilePage extends Component {
-  handleChange = e => {
-    this.setState({ currency: e.target.value });
-  };
-  render() {
-    const {
-      name,
-      wages,
-      email,
-      loading,
-      sendResetPasswordEmail,
-      deleteUser,
-      toggleConfirmationDialog,
-      dialogOpen,
-      updateWagesInput,
-      saveWagesInDatabase,
-      uid,
-      currency,
-      changeCurrency
-    } = this.props;
+const ProfilePage = ({
+  name,
+  wages,
+  email,
+  loading,
+  sendResetPasswordEmail,
+  deleteUser,
+  toggleConfirmationDialog,
+  dialogOpen,
+  updateWagesInput,
+  saveWagesInDatabase,
+  uid,
+  currency,
+  changeCurrency
+}) => {
+  return (
+    <Container>
+      <TopBar title="Profile" />
+      <InnerContainer>
+        <Content>
+          <Progress>{loading && <LinearProgress />}</Progress>
+          <Title>{name ? `Hi ${name}` : " "}</Title>
+          <Row>
+            <p>Hourly wage</p>
+            <StyledTextField
+              id="standard-select-currency-native"
+              select
+              value={currency}
+              onChange={e => changeCurrency(e.target.value)}
+              SelectProps={{
+                native: true
+              }}
+              margin="normal"
+            >
+              {Object.values(currencies).map(curr => (
+                <option key={curr} value={curr}>
+                  {curr}
+                </option>
+              ))}
+            </StyledTextField>
+            <StyledTextField
+              label=" "
+              type="number"
+              value={wages}
+              onChange={e => updateWagesInput(e.target.value)}
+            />
+            <StyledButton
+              variant="outlined"
+              color="primary"
+              onClick={() => saveWagesInDatabase(wages, currency, uid)}
+            >
+              Save
+            </StyledButton>
+          </Row>
+          <Divider />
+          <Row>
+            <StyledButton onClick={() => sendResetPasswordEmail(email)}>
+              Reset password
+            </StyledButton>
+          </Row>
+          <Divider />
+          <Row>
+            <StyledButton onClick={() => toggleConfirmationDialog()}>
+              Delete account
+            </StyledButton>
+          </Row>
+        </Content>
+      </InnerContainer>
+      <ConfirmationDialog
+        open={dialogOpen}
+        onClose={toggleConfirmationDialog}
+        deleteUser={deleteUser}
+      />
+      <SideDrawer />
+    </Container>
+  );
+};
 
-    return (
-      <Container>
-        <TopBar title="Profile" />
-        <InnerContainer>
-          <Content>
-            <Progress>{loading && <LinearProgress />}</Progress>
-            <Title>{name ? `Hi ${name}` : " "}</Title>
-            <Row>
-              <p>Hourly wage</p>
-              <StyledTextField
-                id="standard-select-currency-native"
-                select
-                value={currency}
-                onChange={e => changeCurrency(e.target.value)}
-                SelectProps={{
-                  native: true
-                }}
-                margin="normal"
-              >
-                {Object.values(currencies).map(curr => (
-                  <option key={curr} value={curr}>
-                    {curr}
-                  </option>
-                ))}
-              </StyledTextField>
-              <StyledTextField
-                label=" "
-                type="number"
-                value={wages}
-                onChange={e => updateWagesInput(e.target.value)}
-              />
-              <StyledButton
-                variant="outlined"
-                color="primary"
-                onClick={() => saveWagesInDatabase(wages, currency, uid)}
-              >
-                Save
-              </StyledButton>
-            </Row>
-            <Divider />
-            <Row>
-              <StyledButton onClick={() => sendResetPasswordEmail(email)}>
-                Reset password
-              </StyledButton>
-            </Row>
-            <Divider />
-            <Row>
-              <StyledButton onClick={() => toggleConfirmationDialog()}>
-                Delete account
-              </StyledButton>
-            </Row>
-          </Content>
-        </InnerContainer>
-        <ConfirmationDialog
-          open={dialogOpen}
-          onClose={toggleConfirmationDialog}
-          deleteUser={deleteUser}
-        />
-        <SideDrawer />
-      </Container>
-    );
-  }
-}
+ProfilePage.propTypes = {
+  name: PropTypes.string.isRequired,
+  wages: PropTypes.number.isRequired,
+  email: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  sendResetPasswordEmail: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
+  toggleConfirmationDialog: PropTypes.func.isRequired,
+  dialogOpen: PropTypes.bool.isRequired,
+  updateWagesInput: PropTypes.func.isRequired,
+  saveWagesInDatabase: PropTypes.func.isRequired,
+  uid: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired,
+  changeCurrency: PropTypes.func.isRequired
+};
 
 export default ProfilePage;
