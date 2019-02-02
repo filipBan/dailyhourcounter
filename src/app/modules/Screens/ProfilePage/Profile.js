@@ -80,6 +80,7 @@ const StyledTextField = styled(TextField)`
 `;
 
 // TODO - add date format change option
+// TODO - fix mobile layout - set up max-width same as daily form
 
 const ProfilePage = ({
   name,
