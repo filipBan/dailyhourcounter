@@ -26,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy-staging": "react-scripts build && firebase use dailyhourcounter-staging && firebase deploy",
+    "deploy-prod": "NODE_ENV=production react-scripts build && firebase use dailyhourcounter && firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
