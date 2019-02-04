@@ -1,4 +1,6 @@
 import { differenceInMinutes, startOfDay, getTime } from "date-fns";
+import localforage from "localforage";
+
 import firebase from "../../../firebaseConfig";
 
 export const SET_TODAY_DATE = "SET_TODAY_DATE";
@@ -26,34 +28,25 @@ export const RESET_DAY_DATA = "RESET_DAY_DATA";
 // local memory if it's there. Will also affect generating reports, as they also should ask
 // local memory first
 
-export const resetDailyData = ({ today, uid }) => dispatch => {
+export const resetDailyData = ({ today, uid }) => async dispatch => {
   dispatch({ type: START_SAVING_DAY_DATA });
-  console.error("Start resetting");
-  firebase
-    .firestore()
-    .collection("dates")
-    .doc(uid)
-    .collection("records")
-    .doc(getTime(startOfDay(today)).toString())
-    .delete()
-    .then(() => console.error("Finished resetting"))
-    .catch(err => console.error("Error resetting", err));
 
-  // try {
-  //   await firebase
-  //     .firestore()
-  //     .collection("dates")
-  //     .doc(uid)
-  //     .collection("records")
-  //     .doc(getTime(startOfDay(today)).toString())
-  //     .delete()
-  //     .catch(err => console.error("Error resetting", err));
+  try {
+    await localforage.removeItem(getTime(startOfDay(today)).toString());
 
-  //   return dispatch({ type: RESET_DAY_DATA });
-  // } catch (error) {
-  //   console.error("Error resetting", error);
-  //   return dispatch({ type: ERROR_SAVING_DAY_DATA, error: error.message });
-  // }
+    firebase
+      .firestore()
+      .collection("dates")
+      .doc(uid)
+      .collection("records")
+      .doc(getTime(startOfDay(today)).toString())
+      .delete();
+
+    return dispatch({ type: RESET_DAY_DATA });
+  } catch (error) {
+    console.error("Error resetting", error);
+    return dispatch({ type: ERROR_SAVING_DAY_DATA, error: error.message });
+  }
 };
 
 export const updateHours = (timeType, amount) => ({
@@ -130,6 +123,10 @@ const checkForErrors = (hours, breaks) => {
   return null;
 };
 
+//TODO - rethink how documents are called in database - maybe better to use
+// formatted dates like '20190130' instaed of Unix strings? Will that be more
+// forgiving when changing timezones? Do I need to care?
+
 export const saveHoursAndBreaksToFirebase = dayData => async (
   dispatch,
   getState
@@ -144,8 +141,6 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
     wages,
     uid
   } = dayData;
-
-  console.log(dayData);
 
   if (error) {
     return;
@@ -163,20 +158,24 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
   try {
     dispatch({ type: START_SAVING_DAY_DATA });
 
-    await firebase
+    const newRecord = {
+      date: getTime(startOfDay(today)),
+      wages: wages || getState().profile.wages,
+      hours,
+      breaks,
+      workedMinutes,
+      breakMinutes
+    };
+
+    await localforage.setItem(getTime(startOfDay(today)).toString(), newRecord);
+
+    firebase
       .firestore()
       .collection("dates")
       .doc(uid)
       .collection("records")
       .doc(getTime(startOfDay(today)).toString())
-      .set({
-        date: getTime(startOfDay(today)),
-        wages: wages || getState().profile.wages,
-        hours,
-        breaks,
-        workedMinutes,
-        breakMinutes
-      });
+      .set(newRecord);
 
     return dispatch({ type: FINISHED_SAVING_DAY_DATA });
   } catch (error) {
@@ -193,6 +192,27 @@ export const handleCalendarChange = date => dispatch => {
 export const fetchDailyData = ({ uid, today }) => async dispatch => {
   dispatch({ type: START_FETCHING_DAY_DATA });
   try {
+    const localData = await localforage.getItem(
+      getTime(startOfDay(today)).toString()
+    );
+
+    if (localData) {
+      const result = {
+        ...localData,
+        hours: localData.hours.map(item => ({
+          start: item.start ? item.start : null,
+          end: item.end ? item.end : null
+        })),
+        breaks: localData.breaks.map(item => ({
+          start: item.start ? item.start : null,
+          end: item.end ? item.end : null
+        }))
+      };
+
+      dispatch({ type: FINISH_FETCHING_DAY_DATA });
+      return dispatch({ type: REPLACE_DAY_DATA, payload: result });
+    }
+
     const data = await firebase
       .firestore()
       .collection("dates")
@@ -215,6 +235,11 @@ export const fetchDailyData = ({ uid, today }) => async dispatch => {
           }))
         }
       : {};
+
+    localforage.setItem(
+      getTime(startOfDay(today)).toString(),
+      data ? result : null
+    );
 
     dispatch({ type: FINISH_FETCHING_DAY_DATA });
     return dispatch({ type: REPLACE_DAY_DATA, payload: result });
