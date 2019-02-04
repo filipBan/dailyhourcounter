@@ -26,21 +26,34 @@ export const RESET_DAY_DATA = "RESET_DAY_DATA";
 // local memory if it's there. Will also affect generating reports, as they also should ask
 // local memory first
 
-export const resetDailyData = ({ today, uid }) => async dispatch => {
+export const resetDailyData = ({ today, uid }) => dispatch => {
   dispatch({ type: START_SAVING_DAY_DATA });
-  try {
-    await firebase
-      .firestore()
-      .collection("dates")
-      .doc(uid)
-      .collection("records")
-      .doc(getTime(startOfDay(today)).toString())
-      .delete();
+  console.error("Start resetting");
+  firebase
+    .firestore()
+    .collection("dates")
+    .doc(uid)
+    .collection("records")
+    .doc(getTime(startOfDay(today)).toString())
+    .delete()
+    .then(() => console.error("Finished resetting"))
+    .catch(err => console.error("Error resetting", err));
 
-    return dispatch({ type: RESET_DAY_DATA });
-  } catch (err) {
-    console.error(err);
-  }
+  // try {
+  //   await firebase
+  //     .firestore()
+  //     .collection("dates")
+  //     .doc(uid)
+  //     .collection("records")
+  //     .doc(getTime(startOfDay(today)).toString())
+  //     .delete()
+  //     .catch(err => console.error("Error resetting", err));
+
+  //   return dispatch({ type: RESET_DAY_DATA });
+  // } catch (error) {
+  //   console.error("Error resetting", error);
+  //   return dispatch({ type: ERROR_SAVING_DAY_DATA, error: error.message });
+  // }
 };
 
 export const updateHours = (timeType, amount) => ({
