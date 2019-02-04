@@ -109,20 +109,22 @@ const RegisterPage = ({
             >
               Register
             </Button>
+            <BottomLinks marginBottom="2rem" paddingTop="2rem">
+              <span>
+                By registering you automatically accept the following:
+              </span>
+              <Link to="/register">
+                <span>Terms and Conditions</span>
+              </Link>
+              <Link to="/register">
+                <span>Privacy policy</span>
+              </Link>
+            </BottomLinks>
+            <BottomLinks marginBottom="2rem">
+              Already have an account?
+              <Link to="/">Login</Link>
+            </BottomLinks>
           </Form>
-          <BottomLinks marginBottom="2rem">
-            <span>By registering you automatically accept the following:</span>
-            <Link to="/register">
-              <span>Terms and Conditions</span>
-            </Link>
-            <Link to="/register">
-              <span>Privacy policy</span>
-            </Link>
-          </BottomLinks>
-          <BottomLinks marginBottom="2rem">
-            Already have an account?
-            <Link to="/">Login</Link>
-          </BottomLinks>
         </FormContainer>
       </FormSection>
     </Container>

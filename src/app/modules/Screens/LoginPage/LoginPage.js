@@ -75,14 +75,13 @@ const LoginPage = ({
             >
               Login
             </Button>
+            <BottomLinks>
+              <span>Don't have an account?</span>
+              <Link to="/register">
+                <span>Register here.</span>
+              </Link>
+            </BottomLinks>
           </Form>
-
-          <BottomLinks>
-            <span>Don't have an account?</span>
-            <Link to="/register">
-              <span>Register here.</span>
-            </Link>
-          </BottomLinks>
         </FormContainer>
       </FormSection>
     </Container>

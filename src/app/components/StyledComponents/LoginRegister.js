@@ -47,16 +47,20 @@ export const FormContainer = styled(Card)`
   height: ${props => props.height};
   padding: 2rem;
   position: relative;
+
+  a {
+    font-size: 1.4rem;
+  }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
   height: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: ${props => props.marginBottom};
   padding: 0 2rem;
 `;
 
@@ -72,7 +76,7 @@ export const Progress = styled.div`
 export const StyledInput = styled(Input)`
   input {
     font-size: 1.6rem;
-    padding-top: ${props => props.paddingtop};
+    padding-top: ${props => props.paddingtop || "0"};
   }
 `;
 
@@ -97,9 +101,6 @@ export const BottomLinks = styled.footer`
   align-items: center;
   font-size: 1.4rem;
   text-align: center;
-  margin-bottom: ${props => props.marginBottom};
-
-  a {
-    margin-top: 1rem;
-  }
+  margin-bottom: ${props => props.marginBottom || "1rem"};
+  padding-top: ${props => props.paddingTop};
 `;

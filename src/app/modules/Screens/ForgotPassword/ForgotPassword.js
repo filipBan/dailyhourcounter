@@ -45,7 +45,7 @@ class ForgotPassword extends Component {
         <FormSection>
           <FormContainer>
             <Progress>{this.props.loading && <LinearProgress />}</Progress>
-            <Form onSubmit={this.submitForm}>
+            <Form onSubmit={this.submitForm} marginBottom="2rem">
               <AuthInput
                 value={this.state.email}
                 onChange={(type, e) => this.updateEmail(e)}
