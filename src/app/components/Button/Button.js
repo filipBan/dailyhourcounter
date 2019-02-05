@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import CloseIcon from "@material-ui/icons/CloseOutlined";
 
 import Button from "@material-ui/core/Button";
 
@@ -13,27 +14,28 @@ const Container = styled.div`
 
 const StyledButton = styled(Button)`
   font-size: 1.6rem;
+  height: 4.5rem;
 
   background-color: ${props => props.coloroverride};
 `;
 
 const DeleteBadge = styled.div`
   position: absolute;
-  top: -0.5rem;
-  right: -1rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: white;
+  top: 0rem;
+  right: 0rem;
+  width: 2.6rem;
+  height: 4.5rem;
+  border: 1px solid #ffcdd2;
   z-index: 2;
-  border-radius: 50%;
-  border: 1px solid red;
-  color: red;
+  border-top-right-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
+  color: #e57373;
+  margin: 0 !important;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  align-items: center;
 
   &:active {
-    background-color: red;
+    background-color: #e57373;
     transition: background-color 0.3s;
     transition-timing-function: ease-out;
   }
@@ -49,10 +51,14 @@ const SharedButton = ({ onDelete, deleteBadge, disabled, ...other }) => {
     <Container>
       {deleteBadge && !disabled && (
         <DeleteBadge onClick={onDelete} aria-label="delete-badge">
-          x
+          <CloseIcon />
         </DeleteBadge>
       )}
-      {deleteBadge && disabled && <DisabledBadge>x</DisabledBadge>}
+      {deleteBadge && disabled && (
+        <DisabledBadge>
+          <CloseIcon />
+        </DisabledBadge>
+      )}
       <StyledButton {...other} disabled={disabled}>
         {other.children}
       </StyledButton>

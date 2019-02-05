@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import firebase from "../../../firebaseConfig";
 import Snackbar from "../../components/Snackbar";
 import Fallback from "./Fallback";
+import Spinner from "./Spinner";
 
 const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
 const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
@@ -44,7 +45,7 @@ const CheckAuthState = ({ checkingAuthState, isLoggedIn }) => {
     return <Redirect to="/login" />;
   }
 
-  return null;
+  return <Spinner />;
 };
 
 class App extends Component {

@@ -35,8 +35,11 @@ const HoursContainer = styled.div`
 const Section = styled(Card)`
   margin-bottom: 1rem;
   min-height: 5rem;
-  padding: 2rem 0;
   text-align: center;
+`;
+
+const Summary = styled(Section)`
+  line-height: 5rem;
 `;
 
 const SectionTitle = styled.div`
@@ -290,13 +293,13 @@ class DailyForm extends Component {
               </ButtonContainer>
             </div>
           </Section>
-          <Section aria-label="total-time-display">
-            {workedMinutes - breakMinutes > 0 ? (
+          <Summary aria-label="total-time-display">
+            {processing ? null : workedMinutes - breakMinutes > 0 ? (
               <span>{totalTimeWorked}</span>
             ) : (
               <span>No records</span>
             )}
-          </Section>
+          </Summary>
         </HoursContainer>
         <ButtonContainer>
           <Button

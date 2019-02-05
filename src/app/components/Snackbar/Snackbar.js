@@ -36,6 +36,7 @@ const StyledSnackbarContent = styled(SnackbarContent)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 
     #message {
       margin-left: 1rem;
