@@ -14,6 +14,7 @@ const Container = styled.div`
 
 const StyledButton = styled(Button)`
   font-size: 1.6rem;
+  height: 4.5rem;
 
   background-color: ${props => props.coloroverride};
 `;
@@ -23,9 +24,11 @@ const DeleteBadge = styled.div`
   top: 0rem;
   right: 0rem;
   width: 2.6rem;
-  height: 3.7rem;
+  height: 4.5rem;
+  border: 1px solid #ffcdd2;
   z-index: 2;
-  border-radius: 0.5rem;
+  border-top-right-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
   color: #e57373;
   margin: 0 !important;
   display: flex;
@@ -51,7 +54,11 @@ const SharedButton = ({ onDelete, deleteBadge, disabled, ...other }) => {
           <CloseIcon />
         </DeleteBadge>
       )}
-      {deleteBadge && disabled && <DisabledBadge>x</DisabledBadge>}
+      {deleteBadge && disabled && (
+        <DisabledBadge>
+          <CloseIcon />
+        </DisabledBadge>
+      )}
       <StyledButton {...other} disabled={disabled}>
         {other.children}
       </StyledButton>

@@ -23,16 +23,13 @@ export const TOGGLE_CALENDAR = "TOGGLE_CALENDAR";
 
 export const RESET_DAY_DATA = "RESET_DAY_DATA";
 
-//TODO - save daily data to localforage first and then load from local memory first.
-// If item is not in local memory then attempt to fetch from database and add to
-// local memory if it's there. Will also affect generating reports, as they also should ask
-// local memory first
-
 export const resetDailyData = ({ today, uid }) => async dispatch => {
   dispatch({ type: START_SAVING_DAY_DATA });
 
   try {
-    await localforage.removeItem(getTime(startOfDay(today)).toString());
+    await localforage.removeItem(
+      `${getTime(startOfDay(today)).toString()}-${uid}`
+    );
 
     firebase
       .firestore()
@@ -167,7 +164,10 @@ export const saveHoursAndBreaksToFirebase = dayData => async (
       breakMinutes
     };
 
-    await localforage.setItem(getTime(startOfDay(today)).toString(), newRecord);
+    await localforage.setItem(
+      `${getTime(startOfDay(today)).toString()}-${uid}`,
+      newRecord
+    );
 
     firebase
       .firestore()
@@ -193,7 +193,7 @@ export const fetchDailyData = ({ uid, today }) => async dispatch => {
   dispatch({ type: START_FETCHING_DAY_DATA });
   try {
     const localData = await localforage.getItem(
-      getTime(startOfDay(today)).toString()
+      `${getTime(startOfDay(today)).toString()}-${uid}`
     );
 
     if (localData) {
@@ -236,10 +236,12 @@ export const fetchDailyData = ({ uid, today }) => async dispatch => {
         }
       : {};
 
-    localforage.setItem(
-      getTime(startOfDay(today)).toString(),
-      data ? result : null
-    );
+    if (data) {
+      localforage.setItem(
+        `${getTime(startOfDay(today)).toString()}-${uid}`,
+        result
+      );
+    }
 
     dispatch({ type: FINISH_FETCHING_DAY_DATA });
     return dispatch({ type: REPLACE_DAY_DATA, payload: result });

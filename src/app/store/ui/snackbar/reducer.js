@@ -33,6 +33,12 @@ const snackbar = (state = initialState, action) => {
         message: "New wages saved!",
         type: "success"
       };
+    case "RESET_DAY_DATA":
+    case "FINISHED_SAVING_DAY_DATA":
+      return {
+        message: "Done!",
+        type: "success"
+      };
     case "CLEAR_AUTH_ERRORS":
     case RESET_SNACKBAR:
       return initialState;

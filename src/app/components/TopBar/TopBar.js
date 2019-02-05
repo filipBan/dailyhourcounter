@@ -12,6 +12,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
+  height: 7rem;
 `;
 
 const Title = styled.span`
@@ -26,6 +27,7 @@ const StyledAppbar = styled(AppBar)`
   justify-content: flex-start;
   align-items: center;
   padding: 0.3rem 1rem;
+  height: 6rem;
 `;
 
 const Calendar = styled.div`
