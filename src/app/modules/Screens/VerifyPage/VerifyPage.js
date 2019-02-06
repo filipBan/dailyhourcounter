@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { withRouter } from "react-router-dom";
+
 import { Redirect } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import styled from "styled-components";
-import Button from "../../../components/Button";
+import Button from "@material-ui/core/Button";
 
 const Container = styled.div`
   width: 100%;
@@ -22,7 +24,6 @@ const Container = styled.div`
 const StyledCard = styled(Card)`
   max-width: 40rem;
   padding: 2rem;
-  text-align: center;
   position: relative;
 `;
 
@@ -48,11 +49,12 @@ const Logo = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
+  flex-direction: row;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   button {
-    margin: 1rem;
+    margin-left: 1rem;
   }
 `;
 
@@ -95,31 +97,23 @@ const VerifyPage = ({
           in with provided details whenever you have a moment.
         </p>
         <ButtonContainer>
+          <Button disabled={loading} onClick={logOut}>
+            Try later
+          </Button>
           <Button
             disabled={loading}
-            fullWidth
             variant="outlined"
             onClick={() => window.location.reload()}
           >
             Refresh
           </Button>
-          <Button
-            disabled={loading}
-            fullWidth
-            variant="outlined"
-            onClick={logOut}
-          >
-            Logout
-          </Button>
         </ButtonContainer>
         <p>If you have not received the email, click here to send a new one.</p>
-        <Button
-          disabled={loading}
-          variant="outlined"
-          onClick={sendEmailVerification}
-        >
-          Send a new email
-        </Button>
+        <ButtonContainer>
+          <Button disabled={loading} onClick={sendEmailVerification}>
+            Send a new email
+          </Button>
+        </ButtonContainer>
       </StyledCard>
     </Container>
   );
@@ -135,4 +129,4 @@ VerifyPage.propTypes = {
   sendEmailVerification: PropTypes.func.isRequired
 };
 
-export default VerifyPage;
+export default withRouter(VerifyPage);
