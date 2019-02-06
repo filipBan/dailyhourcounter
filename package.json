@@ -20,11 +20,12 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.1.3"
+    "styled-components": "^4.1.3",
+    "webpack-bundle-analyzer": "^3.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build --stats && webpack-bundle-analyzer build/bundle-stats.json -m server",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy-staging": "NODE_ENV=staging react-scripts build && firebase use dailyhourcounter-staging && firebase deploy",
