@@ -69,6 +69,7 @@ const RegisterPage = ({
               onChange={(type, e) => handleInputChange(type, e)}
               paddingtop="2rem"
               aria-label="user-name-field"
+              placeholder="user name"
             />
             <AuthInput
               type="number"
@@ -76,6 +77,7 @@ const RegisterPage = ({
               onChange={(type, e) => handleInputChange("wages", e)}
               paddingtop="2rem"
               aria-label="wages-field"
+              placeholder="current wages"
             />
             <AuthInput
               type="email"
@@ -83,6 +85,7 @@ const RegisterPage = ({
               onChange={(type, e) => handleInputChange(type, e)}
               paddingtop="2rem"
               aria-label="email-field"
+              placeholder="email"
             />
             <AuthInput
               type="password"
@@ -90,6 +93,7 @@ const RegisterPage = ({
               onChange={(type, e) => handleInputChange(type, e)}
               paddingtop="2rem"
               aria-label="password-field"
+              placeholder="password"
             />
             <AuthInput
               type="password"
@@ -97,6 +101,7 @@ const RegisterPage = ({
               onChange={(type, e) => handleInputChange("confirmPassword", e)}
               paddingtop="2rem"
               aria-label="confirm-password-field"
+              placeholder="confirm password"
             />
             <Button
               type="submit"

@@ -7,7 +7,6 @@ const AuthInput = ({ type, value, onChange, label, ...other }) => (
     type={type}
     value={value}
     onChange={e => onChange(type, e)}
-    placeholder={type === "number" ? "current hourly wages" : type}
     fullWidth
     required
     inputProps={{ "aria-label": label }}

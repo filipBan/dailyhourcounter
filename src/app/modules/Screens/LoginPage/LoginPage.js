@@ -54,12 +54,14 @@ const LoginPage = ({
               value={email}
               onChange={(type, e) => handleInputChange(type, e)}
               label="email"
+              placeholder="email"
             />
             <AuthInput
               type="password"
               value={password}
               onChange={(type, e) => handleInputChange(type, e)}
               label="password"
+              placeholder="password"
             />
             <BottomLinks>
               <Link to="/forgot-password">
