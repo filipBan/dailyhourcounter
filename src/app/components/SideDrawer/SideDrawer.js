@@ -46,10 +46,7 @@ const SideDrawer = ({ toggleDrawer, logoutUser, history, visible }) => {
           <ListItemIcon>
             <Today />
           </ListItemIcon>
-          <ListItemText
-            primary={"Today"}
-            primaryTypographyProps={{ variant: "h5" }}
-          />
+          <ListItemText primary={"Today"} disableTypography />
         </ListItem>
 
         <ListItem
@@ -60,10 +57,7 @@ const SideDrawer = ({ toggleDrawer, logoutUser, history, visible }) => {
           <ListItemIcon>
             <TrendingUp />
           </ListItemIcon>
-          <ListItemText
-            primary={"Reports"}
-            primaryTypographyProps={{ variant: "h5" }}
-          />
+          <ListItemText primary={"Reports"} disableTypography />
         </ListItem>
 
         <ListItem
@@ -74,10 +68,7 @@ const SideDrawer = ({ toggleDrawer, logoutUser, history, visible }) => {
           <ListItemIcon>
             <Person />
           </ListItemIcon>
-          <ListItemText
-            primary={"Profile"}
-            primaryTypographyProps={{ variant: "h5" }}
-          />
+          <ListItemText primary={"Profile"} disableTypography />
         </ListItem>
 
         <ListItem
@@ -88,10 +79,7 @@ const SideDrawer = ({ toggleDrawer, logoutUser, history, visible }) => {
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>
-          <ListItemText
-            primary={"Log out"}
-            primaryTypographyProps={{ variant: "h5" }}
-          />
+          <ListItemText primary={"Log out"} disableTypography />
         </ListItem>
       </List>
     </SwipeableDrawer>
