@@ -75,6 +75,10 @@ const isInWebAppChrome = window.matchMedia("(display-mode: standalone)")
 const isChrome =
   !!window.chrome &&
   (!!window.chrome.webstore || !!window.chrome.runtime);
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test(userAgent);
+};
 
 // TODO - split this component up, it's too big
 // TODO -- add a section to show wages for that day only (changable)
@@ -127,7 +131,7 @@ class DailyForm extends Component {
       toggleInstallPrompt
     } = this.props;
 
-    if (!isChrome && !isInWebAppChrome && !isInWebAppiOS) {
+    if (!isChrome && !isInWebAppChrome && !isInWebAppiOS && isIos()) {
       setTimeout(() => toggleInstallPrompt(), 2000);
     }
 
