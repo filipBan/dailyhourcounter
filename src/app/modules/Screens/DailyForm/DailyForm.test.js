@@ -45,6 +45,10 @@ const initialState = Object.freeze({
     uid: "test-uid-string"
   },
   ui: {
+    install: {
+      installInstructionsOpen: false,
+      installPromptOpen: false
+    },
     notification: {
       modalOpen: false,
       notification: {}
@@ -53,8 +57,8 @@ const initialState = Object.freeze({
       visible: false
     },
     snackbar: {
-      message: "",
-      type: ""
+      message: "Done!",
+      type: "success"
     }
   },
   reports: {},
@@ -70,8 +74,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBreaks: (timeType, amount) => dispatch(updateBreaks(timeType, amount)),
-  updateHours: (timeType, amount) => dispatch(updateHours(timeType, amount)),
+  updateBreaks: (timeType, amount) =>
+    dispatch(updateBreaks(timeType, amount)),
+  updateHours: (timeType, amount) =>
+    dispatch(updateHours(timeType, amount)),
   saveHoursAndBreaksToFirebase: dayData =>
     dispatch(saveHoursAndBreaksToFirebase(dayData)),
   fetchDailyData: props => dispatch(fetchDailyData(props)),
@@ -99,7 +105,9 @@ function renderWithRedux(ui, store) {
     ...render(
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Provider store={store}>
-          <Router history={createMemoryHistory({ initialEntries: ["/"] })}>
+          <Router
+            history={createMemoryHistory({ initialEntries: ["/"] })}
+          >
             <Suspense fallback={<div>Loading</div>}>{ui}</Suspense>
           </Router>
         </Provider>
@@ -116,7 +124,10 @@ function renderWithRedux(ui, store) {
 describe("Daily Form integration tests", () => {
   it("Can render with redux with defaults", () => {
     const store = createStore(reducer, initialState);
-    renderWithRedux(<ConnectedDailyForm fetchDailyData={() => {}} />, store);
+    renderWithRedux(
+      <ConnectedDailyForm fetchDailyData={() => {}} />,
+      store
+    );
   });
 
   it("Should match the snapshot", () => {
@@ -143,7 +154,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Has correct default date displayed in the top controls", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -154,7 +169,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Displays a correct date when forward button is clicked in top controls", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -168,7 +187,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Displays a correct date when back button is clicked in top controls", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -196,7 +219,11 @@ describe("Daily Form integration tests", () => {
   // });
 
   it("Displays correct work start time when a date is changed", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -222,7 +249,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Displays correct work end time when a date is changed", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -240,7 +271,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Displays correct break start time when a date is changed", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -258,7 +293,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Displays correct break end time when a date is changed", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -276,7 +315,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("All picker buttons except workStart to be disabled when none have data", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -589,7 +632,11 @@ describe("Daily Form integration tests", () => {
   // =============================================
 
   it("Shows a loading bar when data fetching starts", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const mockFetchFunction = jest.fn();
     const { queryByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={mockFetchFunction} />,
@@ -605,7 +652,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Hides the loading bar when data fetching stops", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { queryByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -618,7 +669,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Shows a loading progress bar when saving data", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const mockSaveFunction = jest.fn();
 
     const { queryByLabelText } = renderWithRedux(
@@ -639,7 +694,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Hides the loading bar when data saving stops", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const mockSaveFunction = jest.fn();
 
     const { queryByLabelText } = renderWithRedux(
@@ -662,7 +721,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Calls the correct save function when saving the form", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const mockSaveFunction = jest.fn();
 
     const { queryByLabelText } = renderWithRedux(
@@ -723,17 +786,27 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Displays 'No records' in the result card if no times are given", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
     );
 
-    expect(getByLabelText("total-time-display").textContent).toBe("No records");
+    expect(getByLabelText("total-time-display").textContent).toBe(
+      "No records"
+    );
   });
 
   it("Displays 'No records' in the result card if invalid work times are given", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -750,11 +823,17 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-10T11:00"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe("No records");
+    expect(getByLabelText("total-time-display").textContent).toBe(
+      "No records"
+    );
   });
 
   it("Displays 'No records' in the result card if invalid break times are given", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -781,11 +860,17 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-10T18:00"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe("No records");
+    expect(getByLabelText("total-time-display").textContent).toBe(
+      "No records"
+    );
   });
 
   it("Displays a correct time calculation when only work times are given (full hours)", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -802,11 +887,17 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-10T19:00"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe("8h 0min");
+    expect(getByLabelText("total-time-display").textContent).toBe(
+      "8h 0min"
+    );
   });
 
   it("Displays a correct time calculation when only work times are given (fraction hours)", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -823,11 +914,17 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-10T18:47"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe("7h 23min");
+    expect(getByLabelText("total-time-display").textContent).toBe(
+      "7h 23min"
+    );
   });
 
   it("Displays a correct time calculation when only work times are given (overnight)", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -844,11 +941,17 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-11T03:47"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe("8h 23min");
+    expect(getByLabelText("total-time-display").textContent).toBe(
+      "8h 23min"
+    );
   });
 
   it("Displays a correct time calculation for work hours and breaks", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -876,11 +979,17 @@ describe("Daily Form integration tests", () => {
       amount: "2019-01-10T13:00"
     });
 
-    expect(getByLabelText("total-time-display").textContent).toBe("8h 30min");
+    expect(getByLabelText("total-time-display").textContent).toBe(
+      "8h 30min"
+    );
   });
 
   it("Disables all buttons when data is saving and enables them when it's finished", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -906,7 +1015,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Disables all buttons when data is loading and enables them when it's finished", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -932,7 +1045,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Doesn't display a delete badge on empty date pickers", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { queryByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -963,7 +1080,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Doesn't render the side drawer by default", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { queryByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -973,7 +1094,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Opens the side drawer when the menu button is clicked", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -985,7 +1110,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Enables the workEnd button once workStart data is provided", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -1003,7 +1132,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Enables the breakStart button once workStart and workEnd data is provided", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store
@@ -1027,7 +1160,11 @@ describe("Daily Form integration tests", () => {
   });
 
   it("Enables the breakEnd button once workStart, workEnd and breakStart data is provided", () => {
-    const store = createStore(reducer, initialState, applyMiddleware(thunk));
+    const store = createStore(
+      reducer,
+      initialState,
+      applyMiddleware(thunk)
+    );
     const { getByLabelText } = renderWithRedux(
       <ConnectedDailyForm fetchDailyData={() => {}} />,
       store

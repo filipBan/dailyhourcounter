@@ -10,10 +10,10 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
       style="width: 20px;"
     />
     <div
-      class="sc-ifAKCX kqqTha"
+      class="sc-ifAKCX jTpkwA"
     >
       <header
-        class="MuiPaper-root-186 MuiPaper-elevation4-192 MuiAppBar-root-177 MuiAppBar-positionStatic-181 MuiAppBar-colorPrimary-184 sc-bZQynM sxEfW"
+        class="MuiPaper-root-186 MuiPaper-elevation4-192 MuiAppBar-root-177 MuiAppBar-positionStatic-181 MuiAppBar-colorPrimary-184 sc-bZQynM bpSaiY"
       >
         <button
           aria-label="menu-toggle"
@@ -106,7 +106,7 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
       </header>
     </div>
     <div
-      class="sc-jTzLTM eYTvzx"
+      class="sc-fjdhpX caGznj"
     />
     <div
       class="sc-iwsKbI eddggv"
@@ -178,23 +178,23 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
         </button>
       </div>
       <div
-        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-gZMcBi bUofGR"
+        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-gZMcBi cYapjR"
       >
         <div>
           <div
-            class="sc-gqjmRU kCsuCD"
+            class="sc-VigVT iHylWN"
           >
             Hours
           </div>
           <div
-            class="sc-VigVT eIqbpS"
+            class="sc-jTzLTM fVMdnK"
           >
             <div
               class="sc-bdVaJa jsQcrn"
             >
               <button
                 aria-label="work-start"
-                class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+                class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-fullWidth-312 sc-bwzfXH eRNSoX"
                 tabindex="0"
                 type="button"
               >
@@ -213,7 +213,7 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
             >
               <button
                 aria-label="work-end"
-                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH eRNSoX"
                 disabled=""
                 tabindex="-1"
                 type="button"
@@ -266,19 +266,19 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
         </div>
         <div>
           <div
-            class="sc-gqjmRU kCsuCD"
+            class="sc-VigVT iHylWN"
           >
             Breaks
           </div>
           <div
-            class="sc-VigVT eIqbpS"
+            class="sc-jTzLTM fVMdnK"
           >
             <div
               class="sc-bdVaJa jsQcrn"
             >
               <button
                 aria-label="break-start"
-                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH eRNSoX"
                 disabled=""
                 tabindex="-1"
                 type="button"
@@ -295,7 +295,7 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
             >
               <button
                 aria-label="break-end"
-                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+                class="MuiButtonBase-root-219 MuiButtonBase-disabled-220 MuiButton-root-287 MuiButton-outlined-295 MuiButton-outlinedPrimary-296 MuiButton-disabled-307 MuiButton-fullWidth-312 sc-bwzfXH eRNSoX"
                 disabled=""
                 tabindex="-1"
                 type="button"
@@ -348,7 +348,7 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
       </div>
       <div
         aria-label="total-time-display"
-        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-gZMcBi bUofGR"
+        class="MuiPaper-root-186 MuiPaper-elevation1-189 MuiPaper-rounded-187 MuiCard-root-286 sc-gZMcBi sc-gqjmRU frnNRr"
       >
         <span>
           No records
@@ -356,14 +356,14 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-VigVT eIqbpS"
+      class="sc-jTzLTM fVMdnK"
     >
       <div
         class="sc-bdVaJa jsQcrn"
       >
         <button
           aria-label="reset-button"
-          class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-outlined-295 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+          class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-outlined-295 MuiButton-fullWidth-312 sc-bwzfXH eRNSoX"
           tabindex="0"
           type="button"
         >
@@ -382,7 +382,7 @@ exports[`Daily Form integration tests Should match the snapshot 1`] = `
       >
         <button
           aria-label="day-form-save"
-          class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-contained-298 MuiButton-containedPrimary-299 MuiButton-raised-301 MuiButton-raisedPrimary-302 MuiButton-fullWidth-312 sc-bwzfXH hjMHYi"
+          class="MuiButtonBase-root-219 MuiButton-root-287 MuiButton-contained-298 MuiButton-containedPrimary-299 MuiButton-raised-301 MuiButton-raisedPrimary-302 MuiButton-fullWidth-312 sc-bwzfXH eRNSoX"
           tabindex="0"
           type="button"
         >

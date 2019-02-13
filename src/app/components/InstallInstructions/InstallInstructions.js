@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-console.log(window.navigator.userAgent);
-
 const Container = styled.div`
   position: fixed;
   bottom: 0;

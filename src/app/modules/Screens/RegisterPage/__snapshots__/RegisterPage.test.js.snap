@@ -20,13 +20,13 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
       class="sc-bZQynM dwLWXh"
     >
       <div
-        class="MuiPaper-root-96 MuiPaper-elevation1-99 MuiPaper-rounded-97 MuiCard-root-95 sc-gzVnrw dpBank"
+        class="MuiPaper-root-96 MuiPaper-elevation1-99 MuiPaper-rounded-97 MuiCard-root-95 sc-gzVnrw gdbKgF"
       >
         <div
           class="sc-dnqmqq fUazxu"
         />
         <form
-          class="sc-htoDjs hSkATx"
+          class="sc-htoDjs kcChki"
         >
           <div
             aria-label="user-name-field"
@@ -37,7 +37,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             <input
               aria-label=""
               class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
-              placeholder="userName"
+              placeholder="user name"
               required=""
               type="userName"
               value=""
@@ -52,7 +52,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             <input
               aria-label=""
               class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
-              placeholder="current hourly wages"
+              placeholder="current wages"
               required=""
               type="number"
               value=""
@@ -97,7 +97,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
             <input
               aria-label=""
               class="MuiInputBase-input-146 MuiInput-input-131 MuiInputBase-inputType-149 MuiInput-inputType-134"
-              placeholder="password"
+              placeholder="confirm password"
               required=""
               type="password"
               value=""
@@ -108,7 +108,7 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
           >
             <button
               aria-label="register-submit-button"
-              class="MuiButtonBase-root-179 MuiButton-root-153 MuiButton-contained-164 MuiButton-containedPrimary-165 MuiButton-raised-167 MuiButton-raisedPrimary-168 MuiButton-fullWidth-178 sc-bwzfXH hjMHYi"
+              class="MuiButtonBase-root-179 MuiButton-root-153 MuiButton-contained-164 MuiButton-containedPrimary-165 MuiButton-raised-167 MuiButton-raisedPrimary-168 MuiButton-fullWidth-178 sc-bwzfXH eRNSoX"
               style="margin-top: 2rem;"
               tabindex="0"
               type="submit"
@@ -123,38 +123,38 @@ exports[`Registration Page integration tests Should match the snapshot 1`] = `
               />
             </button>
           </div>
+          <footer
+            class="sc-gqjmRU vqrqS"
+          >
+            <span>
+              By registering you automatically accept the following:
+            </span>
+            <a
+              href="/register"
+            >
+              <span>
+                Terms and Conditions
+              </span>
+            </a>
+            <a
+              href="/register"
+            >
+              <span>
+                Privacy policy
+              </span>
+            </a>
+          </footer>
+          <footer
+            class="sc-gqjmRU fAqClA"
+          >
+            Already have an account?
+            <a
+              href="/"
+            >
+              Login
+            </a>
+          </footer>
         </form>
-        <footer
-          class="sc-gqjmRU bcCUVQ"
-        >
-          <span>
-            By registering you automatically accept the following:
-          </span>
-          <a
-            href="/register"
-          >
-            <span>
-              Terms and Conditions
-            </span>
-          </a>
-          <a
-            href="/register"
-          >
-            <span>
-              Privacy policy
-            </span>
-          </a>
-        </footer>
-        <footer
-          class="sc-gqjmRU bcCUVQ"
-        >
-          Already have an account?
-          <a
-            href="/"
-          >
-            Login
-          </a>
-        </footer>
       </div>
     </main>
   </div>

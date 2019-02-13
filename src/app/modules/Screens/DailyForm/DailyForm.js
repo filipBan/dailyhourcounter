@@ -70,8 +70,9 @@ const Progress = styled.div`
 `;
 
 const isInWebAppiOS = window.navigator.standalone == true;
-const isInWebAppChrome = window.matchMedia("(display-mode: standalone)")
-  .matches;
+const isInWebAppChrome =
+  window.matchMedia &&
+  window.matchMedia("(display-mode: standalone)").matches;
 const isChrome =
   !!window.chrome &&
   (!!window.chrome.webstore || !!window.chrome.runtime);
