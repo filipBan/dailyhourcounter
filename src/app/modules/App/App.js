@@ -11,6 +11,8 @@ import firebase from "../../../firebaseConfig";
 import Snackbar from "../../components/Snackbar";
 import Fallback from "./Fallback";
 import Spinner from "./Spinner";
+import InstallPrompt from "../../components/InstallPrompt";
+import InstallInstructions from "../../components/InstallInstructions";
 
 const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
 const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
@@ -19,6 +21,12 @@ const ReportScreen = React.lazy(() => import("../Screens/ReportScreen"));
 const VerifyPage = React.lazy(() => import("../Screens/VerifyPage"));
 const ForgotPassword = React.lazy(() => import("../Screens/ForgotPassword"));
 const ProfilePage = React.lazy(() => import("../Screens/ProfilePage"));
+
+const isInWebAppiOS = window.navigator.standalone == true;
+const isInWebAppChrome = window.matchMedia("(display-mode: standalone)")
+  .matches;
+const isChrome =
+  !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
 
 function PrivateRoute({
   path,
@@ -64,10 +72,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { checkNotifications, saveLoggedUserSession } = this.props;
-    window.addEventListener("updates-available", e => {
-      this.props.notifyAboutUpdates();
-    });
+    const {
+      checkNotifications,
+      saveLoggedUserSession,
+      toggleInstallPrompt
+    } = this.props;
+
+    if (!isChrome && !isInWebAppChrome && !isInWebAppiOS) {
+      setTimeout(() => toggleInstallPrompt(), 2000);
+    }
 
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -101,7 +114,8 @@ class App extends Component {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-start"
+            justifyContent: "flex-start",
+            height: "100vh"
           }}
         >
           <Suspense fallback={<Fallback />}>
@@ -144,6 +158,7 @@ class App extends Component {
             </Switch>
           </Suspense>
           <Snackbar />
+          <InstallPrompt />
         </div>
       </Router>
     );

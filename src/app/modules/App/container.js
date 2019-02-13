@@ -4,6 +4,7 @@ import App from "./App";
 import { saveLoggedUserSession } from "../../store/auth/actions";
 import { notifyAboutUpdates } from "../../store/ui/snackbar/actions";
 import { checkNotifications } from "../../store/ui/notifications/actions";
+import { toggleInstallPrompt } from "../../store/ui/installPrompt/actions";
 
 const mapStateToProps = state => ({
   isLoggedIn: state.auth.isLoggedIn,
@@ -14,7 +15,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   saveLoggedUserSession: user => dispatch(saveLoggedUserSession(user)),
   checkNotifications: uid => dispatch(checkNotifications(uid)),
-  notifyAboutUpdates: () => dispatch(notifyAboutUpdates())
+  notifyAboutUpdates: () => dispatch(notifyAboutUpdates()),
+  toggleInstallPrompt: () => dispatch(toggleInstallPrompt())
 });
 
 export default connect(
