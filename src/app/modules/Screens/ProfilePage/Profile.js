@@ -46,11 +46,10 @@ const InnerContainer = styled.div`
 
 const Content = styled(Paper)`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   p {
     min-height: 3rem;

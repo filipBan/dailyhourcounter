@@ -11,13 +11,21 @@ import firebase from "../../../firebaseConfig";
 import Snackbar from "../../components/Snackbar";
 import Fallback from "./Fallback";
 import Spinner from "./Spinner";
+import InstallPrompt from "../../components/InstallPrompt";
+import InstallInstructions from "../../components/InstallInstructions";
 
 const DailyForm = React.lazy(() => import("../Screens/DailyForm"));
 const LoginPage = React.lazy(() => import("../Screens/LoginPage"));
-const RegisterPage = React.lazy(() => import("../Screens/RegisterPage"));
-const ReportScreen = React.lazy(() => import("../Screens/ReportScreen"));
+const RegisterPage = React.lazy(() =>
+  import("../Screens/RegisterPage")
+);
+const ReportScreen = React.lazy(() =>
+  import("../Screens/ReportScreen")
+);
 const VerifyPage = React.lazy(() => import("../Screens/VerifyPage"));
-const ForgotPassword = React.lazy(() => import("../Screens/ForgotPassword"));
+const ForgotPassword = React.lazy(() =>
+  import("../Screens/ForgotPassword")
+);
 const ProfilePage = React.lazy(() => import("../Screens/ProfilePage"));
 
 function PrivateRoute({
@@ -30,7 +38,11 @@ function PrivateRoute({
     <Route
       path={path}
       render={props =>
-        canIAccessIt ? <Component {...props} /> : <Redirect to={redirectPath} />
+        canIAccessIt ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={redirectPath} />
+        )
       }
     />
   );
@@ -65,9 +77,6 @@ class App extends Component {
 
   componentDidMount() {
     const { checkNotifications, saveLoggedUserSession } = this.props;
-    window.addEventListener("updates-available", e => {
-      this.props.notifyAboutUpdates();
-    });
 
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -87,7 +96,11 @@ class App extends Component {
 
   render() {
     const { isLoggedIn, emailVerified, checkingAuthState } = this.props;
-    const canIAccessIt = isLoggedIn ? (emailVerified ? true : false) : false;
+    const canIAccessIt = isLoggedIn
+      ? emailVerified
+        ? true
+        : false
+      : false;
 
     const redirectPath = isLoggedIn
       ? emailVerified
@@ -101,7 +114,8 @@ class App extends Component {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-start"
+            justifyContent: "flex-start",
+            height: "100vh"
           }}
         >
           <Suspense fallback={<Fallback />}>
@@ -136,7 +150,10 @@ class App extends Component {
                 canIAccessIt={canIAccessIt}
                 redirectPath={redirectPath}
               />
-              <Route path="/verify-email" render={() => <VerifyPage />} />
+              <Route
+                path="/verify-email"
+                render={() => <VerifyPage />}
+              />
               <Route
                 path="/forgot-password"
                 render={() => <ForgotPassword />}
@@ -144,6 +161,8 @@ class App extends Component {
             </Switch>
           </Suspense>
           <Snackbar />
+          <InstallPrompt />
+          <InstallInstructions />
         </div>
       </Router>
     );
