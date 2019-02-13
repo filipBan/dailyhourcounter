@@ -11,14 +11,19 @@ import {
   handleCalendarChange
 } from "../../../store/today/actions";
 
+import { toggleInstallPrompt } from "../../../store/ui/install/actions";
+
 const mapStateToProps = state => ({
   ...state.today,
   uid: state.auth.uid
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBreaks: (timeType, amount) => dispatch(updateBreaks(timeType, amount)),
-  updateHours: (timeType, amount) => dispatch(updateHours(timeType, amount)),
+  toggleInstallPrompt: () => dispatch(toggleInstallPrompt()),
+  updateBreaks: (timeType, amount) =>
+    dispatch(updateBreaks(timeType, amount)),
+  updateHours: (timeType, amount) =>
+    dispatch(updateHours(timeType, amount)),
   saveHoursAndBreaksToFirebase: dayData =>
     dispatch(saveHoursAndBreaksToFirebase(dayData)),
   fetchDailyData: props => dispatch(fetchDailyData(props)),

@@ -42,7 +42,7 @@ const ImageContainer = styled.div`
 `;
 
 const StyledSnackbar = styled(Snackbar)`
-  margin: 0 2rem;
+  margin: 2rem;
   max-width: 35rem;
   @media only screen and (min-width: 800px) {
     & {
@@ -50,6 +50,9 @@ const StyledSnackbar = styled(Snackbar)`
     }
   }
 `;
+
+// TODO - that should be one with the snackbar component, it should
+// become the hub for all messages etc, more customizable etc
 
 const InstallPrompt = ({
   installPromptOpen,

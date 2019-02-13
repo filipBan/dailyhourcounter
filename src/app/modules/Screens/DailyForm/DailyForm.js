@@ -13,7 +13,9 @@ import TopBar from "../../../components/TopBar";
 
 import TopControls from "./TopControls";
 
-const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
+const SideDrawer = React.lazy(() =>
+  import("../../../components/SideDrawer")
+);
 const Notification = React.lazy(() => import("../../Notification"));
 
 const DailyFormContainer = styled.div`
@@ -67,6 +69,13 @@ const Progress = styled.div`
   height: 1rem;
 `;
 
+const isInWebAppiOS = window.navigator.standalone == true;
+const isInWebAppChrome = window.matchMedia("(display-mode: standalone)")
+  .matches;
+const isChrome =
+  !!window.chrome &&
+  (!!window.chrome.webstore || !!window.chrome.runtime);
+
 // TODO - split this component up, it's too big
 // TODO -- add a section to show wages for that day only (changable)
 class DailyForm extends Component {
@@ -111,7 +120,17 @@ class DailyForm extends Component {
   };
 
   componentDidMount() {
-    const { uid, today, fetchDailyData } = this.props;
+    const {
+      uid,
+      today,
+      fetchDailyData,
+      toggleInstallPrompt
+    } = this.props;
+
+    if (!isChrome && !isInWebAppChrome && !isInWebAppiOS) {
+      setTimeout(() => toggleInstallPrompt(), 2000);
+    }
+
     if (uid) {
       fetchDailyData({ uid, today });
     }
@@ -257,7 +276,8 @@ class DailyForm extends Component {
                     fullWidth
                     onClick={e => this.openPicker(e, this.breakEnd)}
                     disabled={
-                      !(workStart && workEnd && breakStart) || processing
+                      !(workStart && workEnd && breakStart) ||
+                      processing
                     }
                     aria-label="break-end"
                   >

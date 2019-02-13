@@ -1,16 +1,19 @@
 const initialState = {
-  installPromptOpen: true
+  installPromptOpen: false,
+  installInstructionsOpen: false
 };
 
 const install = (state = {}, action) => {
   switch (action.type) {
     case "TOGGLE_INSTALL_PROMPT":
       return {
-        installPromptOpen: !state.installPromptOpen
+        installPromptOpen: !state.installPromptOpen,
+        installInstructionsOpen: false
       };
     case "SHOW_INSTALL_INSTRUCTIONS":
       return {
-        installPromptOpen: false
+        installPromptOpen: false,
+        installInstructionsOpen: true
       };
     default:
       return initialState;
