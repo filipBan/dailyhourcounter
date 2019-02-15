@@ -7,6 +7,7 @@
     "@material-ui/core": "^3.7.1",
     "@material-ui/icons": "^3.0.1",
     "date-fns": "^2.0.0-alpha.25",
+    "env-cmd": "^8.0.2",
     "firebase": "^5.7.1",
     "jest-dom": "^3.0.0",
     "localforage": "^1.7.3",
@@ -28,8 +29,8 @@
     "build": "react-scripts build --stats && webpack-bundle-analyzer build/bundle-stats.json -m server",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy-staging": "NODE_ENV=staging react-scripts build && firebase use dailyhourcounter-staging && firebase deploy",
-    "deploy-prod": "NODE_ENV=production react-scripts build && firebase use dailyhourcounter && firebase deploy"
+    "deploy-staging": "env-cmd .env.staging react-scripts build && firebase use dailyhourcounter-staging && firebase deploy",
+    "deploy-prod": "env-cmd .env react-scripts build && firebase use dailyhourcounter && firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
