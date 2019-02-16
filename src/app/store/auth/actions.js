@@ -14,11 +14,15 @@ export const SENDING_VERIFICATION_EMAIL = "SENDING_VERIFICATION_EMAIL";
 export const VERIFICATION_EMAIL_SENT = "VERIFICATION_EMAIL_SENT";
 export const VERIFICATION_EMAIL_ERROR = "VERIFICATION_EMAIL_ERROR";
 
-export const SENDING_PASSWORD_RESET_EMAIL = "SENDING_PASSWORD_RESET_EMAIL";
+export const SENDING_PASSWORD_RESET_EMAIL =
+  "SENDING_PASSWORD_RESET_EMAIL";
 export const PASSWORD_RESET_EMAIL_SENT = "PASSWORD_RESET_EMAIL_SENT";
 export const PASSWORD_RESET_EMAIL_ERROR = "PASSWORD_RESET_EMAIL_ERROR";
 
-export const logInWithEmailAndPassword = (email, password) => dispatch => {
+export const logInWithEmailAndPassword = (
+  email,
+  password
+) => dispatch => {
   dispatch({ type: AUTH_START });
   firebase
     .auth()
@@ -78,7 +82,7 @@ const addUserRecordToDb = async (uid, userName, wages) => {
         uid,
         userName,
         wages: parseFloat(wages),
-        currency: "GBP"
+        currency: "£"
       });
   } catch (error) {
     throw new Error(error);
@@ -134,6 +138,9 @@ export const sendResetPasswordEmail = email => async dispatch => {
     await firebase.auth().sendPasswordResetEmail(email);
     dispatch({ type: PASSWORD_RESET_EMAIL_SENT, email });
   } catch (error) {
-    dispatch({ type: PASSWORD_RESET_EMAIL_ERROR, error: error.message });
+    dispatch({
+      type: PASSWORD_RESET_EMAIL_ERROR,
+      error: error.message
+    });
   }
 };

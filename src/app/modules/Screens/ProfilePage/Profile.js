@@ -10,13 +10,11 @@ import TextField from "@material-ui/core/TextField";
 import ConfirmationDialog from "./ConfirmationDialog";
 import TopBar from "../../../components/TopBar";
 
-const SideDrawer = React.lazy(() => import("../../../components/SideDrawer"));
+const SideDrawer = React.lazy(() =>
+  import("../../../components/SideDrawer")
+);
 
-const currencies = {
-  USD: "$",
-  EUR: "€",
-  GBP: "£"
-};
+const currencies = ["$", "€", "£"];
 
 const Container = styled.div`
   width: 100%;
@@ -80,7 +78,6 @@ const StyledTextField = styled(TextField)`
 `;
 
 // TODO - add date format change option
-// TODO - fix mobile layout - set up max-width same as daily form
 
 const ProfilePage = ({
   name,
@@ -116,7 +113,7 @@ const ProfilePage = ({
               }}
               margin="normal"
             >
-              {Object.values(currencies).map(curr => (
+              {currencies.map(curr => (
                 <option key={curr} value={curr}>
                   {curr}
                 </option>
